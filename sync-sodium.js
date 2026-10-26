@@ -1,5 +1,6 @@
 // sync-sodium.js — SodiumController Daily Scraper for Bursley Dining Hall
 const fs = require('fs');
+const puppeteer = require('puppeteer');
 
 function getAnnArborDate() {
   return new Intl.DateTimeFormat('en-CA', {
@@ -30,7 +31,7 @@ function parseBursleyHtml(html) {
   const items = [];
   let idCounter = 1;
 
-  const mealRegex = /<h3[^>]*>\s*(Breakfast|Lunch|Dinner|Brunch)\s*<\/h3>\s*<div class="courses">([\s\S]*?)(?=<h3[^>]*>\s*(?:Breakfast|Lunch|Dinner|Brunch)|<div id="mdining-hours"|$)/gi;
+  const mealRegex = /<h3[^>]*>[\s\S]*?(Breakfast|Lunch|Dinner|Brunch)[\s\S]*?<\/h3>\s*<div[^>]*class="courses"[^>]*>([\s\S]*?)(?=<h3[^>]*>[\s\S]*?(?:Breakfast|Lunch|Dinner|Brunch)[\s\S]*?<\/h3>|<div id="mdining-hours"|$)/gi;
   let mealMatch;
 
   while ((mealMatch = mealRegex.exec(html)) !== null) {
@@ -47,10 +48,10 @@ function parseBursleyHtml(html) {
       const stationName = stripHtml(stationBlock.slice(0, stationEndIdx));
       const stationBody = stationBlock.slice(stationEndIdx + 5);
 
-      const dishBlocks = stationBody.split(/<div class="item-name">/i);
+      const dishBlocks = stationBody.split(/<span class="item-name">/i);
       for (let j = 1; j < dishBlocks.length; j++) {
         const block = dishBlocks[j];
-        const nameEndIdx = block.indexOf('</div>');
+        const nameEndIdx = block.indexOf('</span>');
         if (nameEndIdx === -1) continue;
 
         const dishName = stripHtml(block.slice(0, nameEndIdx));
@@ -111,19 +112,26 @@ async function runSodiumControllerSync() {
   console.log(`[SodiumController] Source: ${targetUrl}`);
 
   try {
-    const res = await fetch(targetUrl, {
-      method: 'GET',
-      headers: {
-        'User-Agent': 'python-requests/2.32.3',
-        'Accept': '*/*'
-      }
+    const browser = await puppeteer.launch({
+      args: ['--no-sandbox', '--disable-setuid-sandbox']
     });
+    const page = await browser.newPage();
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64)');
 
-    if (!res.ok) {
-      throw new Error(`HTTP ${res.status} (${res.statusText})`);
+    const response = await page.goto(targetUrl, { waitUntil: 'networkidle2' });
+
+    if (!response.ok()) {
+      console.warn(`[SodiumController WARNING] Page returned ${response.status()} ${response.statusText()}`);
     }
 
-    const html = await res.text();
+    // Wait for the meal headers to appear, meaning the JS has loaded the menu
+    await page.waitForSelector('h3', { timeout: 15000 }).catch(() => {
+      console.log('[SodiumController] Timeout waiting for menu elements. Continuing with current HTML.');
+    });
+
+    const html = await page.content();
+    await browser.close();
+
     const items = parseBursleyHtml(html);
 
     console.log(`[SodiumController] Parsed ${items.length} items from Bursley Dining Hall.`);
