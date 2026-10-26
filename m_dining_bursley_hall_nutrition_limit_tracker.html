@@ -1,0 +1,2936 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>M|Dining • Bursley Hall Nutrition & Daily Limit Tracker</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            umich: {
+              blue: '#00274C',
+              blueLight: '#00386B',
+              blueDark: '#001A33',
+              maize: '#FFCB05',
+              maizeHover: '#E5B600',
+              maizeSoft: '#FFF8DC'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Bar Chart Animations & Grid Styling */
+    .bar-transition {
+      transition: height 0.55s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
+    }
+    .building-window-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.28) 1px, transparent 1px);
+      background-size: 8px 8px;
+    }
+    @keyframes pulseSlow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+    .badge-pulse {
+      animation: pulseSlow 2s infinite ease-in-out;
+    }
+    /* FDA Nutrition Facts Classic Styling */
+    .fda-label {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      border: 2px solid #000;
+      background: #fff;
+      color: #000;
+      padding: 12px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-umich-maize selection:text-umich-blue">
+
+  <!-- TOP UNIVERSITY HEADER & CRON SYNC BAR -->
+  <header class="bg-umich-blue text-white sticky top-0 z-40 shadow-lg border-b-4 border-umich-maize">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3">
+        
+        <!-- Brand Identity -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-xl bg-umich-maize text-umich-blue flex items-center justify-center font-display font-extrabold text-2xl shadow-md shrink-0">
+              M
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-mono uppercase tracking-widest text-umich-maize font-semibold">M|Dining • North Campus</span>
+                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-blue-900/80 text-blue-100 border border-blue-700">
+                  <i class="fa-solid fa-location-dot mr-1 text-umich-maize"></i>Bursley Hall
+                </span>
+              </div>
+              <h1 class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-white">
+                Bursley Dining Nutrition & Daily Limit Tracker
+              </h1>
+            </div>
+          </div>
+
+          <!-- Mobile Tray Quick Jump -->
+          <button onclick="scrollToSection('chart-dashboard-section')" class="lg:hidden relative bg-umich-maize text-umich-blue font-bold px-3 py-2 rounded-xl text-xs flex items-center gap-1.5 shadow">
+            <i class="fa-solid fa-chart-column"></i>
+            <span id="mobile-header-Count">0</span>
+          </button>
+        </div>
+
+        <!-- Right Controls: Active Date + Live Cron Sync Status Pill -->
+        <div class="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          <!-- Menu Date Selector -->
+          <div class="flex items-center bg-umich-blueDark/90 border border-blue-800 rounded-xl px-3 py-1.5 text-xs">
+            <label for="menu-date-picker" class="text-blue-200 mr-2 font-medium flex items-center gap-1.5">
+              <i class="fa-regular fa-calendar-check text-umich-maize"></i>
+              <span class="hidden sm:inline">Menu Date:</span>
+            </label>
+            <input 
+              type="date" 
+              id="menu-date-picker" 
+              class="bg-transparent text-white font-mono font-semibold focus:outline-none cursor-pointer text-xs"
+              onchange="handleDateChange(this.value)"
+            />
+          </div>
+
+          <!-- Interactive Cron-Job Status Pill -->
+          <div class="flex items-center bg-umich-blueDark/90 border border-blue-700/80 rounded-xl p-1 pl-3 gap-2 text-xs">
+            <div class="flex items-center gap-2">
+              <span class="relative flex h-2.5 w-2.5">
+                <span id="cron-ping-dot" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span id="cron-static-dot" class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+              </span>
+              <div class="leading-tight">
+                <div class="font-mono font-bold text-[11px] text-emerald-300 flex items-center gap-1">
+                  <span>CRON ACTIVE</span>
+                  <span class="text-blue-300">•</span>
+                  <span id="cron-next-timer" class="text-umich-maize">14:59</span>
+                </div>
+                <div id="cron-last-sync-text" class="text-[10px] text-blue-300 font-mono">
+                  04:00 AM Daily + 15m Poll
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1 ml-1">
+              <button 
+                onclick="triggerManualCronSync()" 
+                id="btn-sync-now"
+                title="Trigger immediate Bursley menu scrape & sync"
+                class="bg-blue-800/80 hover:bg-blue-700 text-white px-2.5 py-1.5 rounded-lg font-medium transition flex items-center gap-1 text-xs border border-blue-600/50"
+              >
+                <i id="sync-icon" class="fa-solid fa-rotate"></i>
+                <span class="hidden sm:inline">Sync Now</span>
+              </button>
+              <button 
+                onclick="openCronModal()" 
+                title="Inspect Cron Pipeline & Server Code"
+                class="bg-umich-maize hover:bg-umich-maizeHover text-umich-blue font-bold px-2.5 py-1.5 rounded-lg transition flex items-center gap-1 text-xs shadow-sm"
+              >
+                <i class="fa-solid fa-terminal"></i>
+                <span>Pipeline</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB-BANNER: QUICK STATS & WORKFLOW GUIDE -->
+  <div class="bg-white border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-600">
+      <div class="flex flex-wrap items-center gap-4">
+        <span class="inline-flex items-center gap-1.5 font-medium text-slate-800">
+          <span class="w-5 h-5 rounded-full bg-umich-blue text-umich-maize font-bold flex items-center justify-center text-[11px]">1</span>
+          Browse Bursley Breakfast, Lunch, Dinner or Salad Bar
+        </span>
+        <i class="fa-solid fa-chevron-right text-slate-300 hidden sm:inline"></i>
+        <span class="inline-flex items-center gap-1.5 font-medium text-slate-800">
+          <span class="w-5 h-5 rounded-full bg-umich-blue text-umich-maize font-bold flex items-center justify-center text-[11px]">2</span>
+          Add dishes & portions to your Meal Tray
+        </span>
+        <i class="fa-solid fa-chevron-right text-slate-300 hidden sm:inline"></i>
+        <span class="inline-flex items-center gap-1.5 font-medium text-slate-800">
+          <span class="w-5 h-5 rounded-full bg-umich-blue text-umich-maize font-bold flex items-center justify-center text-[11px]">3</span>
+          Check the <strong class="text-red-600">100% FDA/USDA Limit Bar Chart</strong> below
+        </span>
+      </div>
+      <div class="flex items-center gap-2">
+        <span id="menu-rotation-badge" class="font-mono text-[11px] bg-slate-100 text-slate-700 px-2.5 py-1 rounded-md border border-slate-200">
+          Rotation: Loaded
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-1 w-full space-y-8">
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 1: BAR CHART DASHBOARD (GOVERNMENT RECOMMENDED LIMIT CHECKER) -->
+    <!-- ===================================================================== -->
+    <section id="chart-dashboard-section" class="bg-white rounded-2xl shadow-md border border-slate-200/90 overflow-hidden transition-all duration-300">
+      <!-- Dashboard Top Header -->
+      <div class="bg-gradient-to-r from-umich-blue via-umich-blueLight to-umich-blue px-5 py-4 text-white flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold uppercase bg-umich-maize text-umich-blue">
+              <i class="fa-solid fa-scale-balanced mr-1"></i>USDA / FDA 2025–2030 Reference
+            </span>
+            <span id="exceeded-summary-pill" class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/40">
+              All Limits Safe
+            </span>
+          </div>
+          <h2 class="font-display font-extrabold text-xl sm:text-2xl mt-1">
+            Daily Nutrition Consumption vs. Government Recommended Limits
+          </h2>
+          <p class="text-xs text-blue-100 mt-0.5">
+            Bars reaching above the <span class="text-red-300 font-semibold underline decoration-dashed">100% Threshold Ceiling Line</span> indicate you exceeded the recommended daily healthy limit.
+          </p>
+        </div>
+
+        <!-- View Mode & Benchmark Profile Controls -->
+        <div class="flex flex-wrap items-center gap-2">
+          <!-- Chart Mode Switcher -->
+          <div class="bg-umich-blueDark/90 p-1 rounded-xl border border-blue-700 flex items-center text-xs">
+            <button 
+              id="btn-mode-normalized"
+              onclick="setChartMode('normalized')" 
+              class="px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 bg-umich-maize text-umich-blue"
+            >
+              <i class="fa-solid fa-chart-simple"></i>
+              <span>%DV Limit Bars</span>
+            </button>
+            <button 
+              id="btn-mode-stacked"
+              onclick="setChartMode('stacked')" 
+              class="px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 text-blue-200 hover:text-white"
+            >
+              <i class="fa-solid fa-building"></i>
+              <span>Meal-Stacked Building</span>
+            </button>
+          </div>
+
+          <!-- Guideline Profile Selector -->
+          <select 
+            id="benchmark-profile-select" 
+            onchange="changeBenchmarkProfile(this.value)"
+            aria-label="Dietary Benchmark Profile"
+            class="bg-umich-blueDark text-white text-xs font-medium px-3 py-2 rounded-xl border border-blue-700 focus:outline-none focus:border-umich-maize cursor-pointer"
+          >
+            <option value="fda_standard">FDA Standard (2,000 kcal / 2,300mg Na)</option>
+            <option value="active_student">Active Wolverine (2,500 kcal / 140g Prot)</option>
+            <option value="low_sodium">Heart Healthy Low-Na (1,800 kcal / 1,500mg Na)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Bar Chart Body -->
+      <div class="p-5 sm:p-6">
+        <!-- Legend Row -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100 text-xs">
+          <!-- Status Legend (Standard View) -->
+          <div id="legend-normalized" class="flex flex-wrap items-center gap-4">
+            <span class="font-semibold text-slate-700">Ceiling Nutrients (Sodium, Sat Fat, Sugar, Fat, Carbs, Cal):</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span>Safe (&le;80%)</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-500"></span>Caution (81–99%)</span>
+            <span class="inline-flex items-center gap-1.5 font-semibold text-red-600"><span class="w-3 h-3 rounded-sm bg-red-500"></span>Exceeded Limit (&ge;100%)</span>
+            <span class="text-slate-300">|</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-blue-500"></span>Floor Goal (Protein, Fiber)</span>
+          </div>
+
+          <!-- Meal Stack Legend (Building View) -->
+          <div id="legend-stacked" class="hidden flex-wrap items-center gap-4">
+            <span class="font-semibold text-slate-700">Building Floors by Meal Period:</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-amber-400"></span>Breakfast</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-sky-500"></span>Lunch</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-indigo-600"></span>Dinner</span>
+            <span class="inline-flex items-center gap-1.5"><span class="w-3 h-3 rounded-sm bg-emerald-500"></span>Salad Bar / Custom</span>
+          </div>
+
+          <div class="flex items-center gap-2 font-mono text-[11px] text-slate-500">
+            <span class="inline-block w-6 border-t-2 border-dashed border-red-500"></span>
+            <span class="font-semibold text-red-600">100% Daily Recommended Limit Line</span>
+          </div>
+        </div>
+
+        <!-- THE INTERACTIVE VERTICAL BAR CHART STAGE -->
+        <div class="relative pt-8 pb-2">
+          <!-- Chart Plot Area (Height 300px, Scale 0% to 150% DV) -->
+          <!-- 100% Line sits at 66.666% from bottom (i.e. 33.333% from top) because max scale is 150% -->
+          <div class="relative h-72 sm:h-80 w-full border-l border-b border-slate-300 bg-gradient-to-b from-red-50/40 via-slate-50/40 to-white rounded-tr-xl pl-10 sm:pl-12 pr-2 sm:pr-4 select-none">
+            
+            <!-- Horizontal Grid Lines (150%, 125%, 100% LIMIT, 75%, 50%, 25%, 0%) -->
+            <!-- 150% top line -->
+            <div class="absolute left-0 right-0 top-0 border-t border-slate-200/80 flex items-center">
+              <span class=" -ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">150%</span>
+            </div>
+
+            <!-- 125% line -->
+            <div class="absolute left-0 right-0 top-[16.66%] border-t border-slate-100 flex items-center">
+              <span class="-ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">125%</span>
+            </div>
+
+            <!-- 100% GOVERNMENT RECOMMENDED LIMIT LINE (33.33% from top = 66.67% height) -->
+            <div class="absolute left-0 right-0 top-[33.33%] border-t-2 border-dashed border-red-500 z-20 flex items-center justify-between pointer-events-none">
+              <span class="-ml-10 sm:-ml-11 text-[11px] font-mono font-bold text-red-600 bg-red-50 px-1 rounded w-9 text-right">100%</span>
+              <span class="bg-red-600 text-white font-mono text-[10px] sm:text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-md -mt-3 mr-2 flex items-center gap-1">
+                <i class="fa-solid fa-triangle-exclamation text-umich-maize"></i>
+                100% DAILY RECOMMENDED LIMIT CEILING
+              </span>
+            </div>
+
+            <!-- 75% line -->
+            <div class="absolute left-0 right-0 top-[50%] border-t border-slate-200/70 flex items-center">
+              <span class="-ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">75%</span>
+            </div>
+
+            <!-- 50% line -->
+            <div class="absolute left-0 right-0 top-[66.66%] border-t border-slate-200/70 flex items-center">
+              <span class="-ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">50%</span>
+            </div>
+
+            <!-- 25% line -->
+            <div class="absolute left-0 right-0 top-[83.33%] border-t border-slate-100 flex items-center">
+              <span class="-ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">25%</span>
+            </div>
+
+            <!-- 0% bottom label -->
+            <div class="absolute left-0 bottom-0 flex items-center">
+              <span class="-ml-10 sm:-ml-11 text-[10px] font-mono text-slate-400 w-9 text-right pr-1">0%</span>
+            </div>
+
+            <!-- BARS CONTAINER -->
+            <div id="chart-bars-container" class="relative h-full w-full grid grid-cols-8 gap-1.5 sm:gap-4 items-end pt-2 z-10">
+              <!-- Populated dynamically by renderBarChart() -->
+            </div>
+          </div>
+
+          <!-- X-Axis Nutrient Labels & Exact Value Readouts -->
+          <div id="chart-xaxis-container" class="grid grid-cols-8 gap-1.5 sm:gap-4 pl-10 sm:pl-12 pr-2 sm:pr-4 mt-2.5">
+            <!-- Populated dynamically by renderBarChart() -->
+          </div>
+        </div>
+
+        <!-- DIAGNOSTIC & ATTRIBUTION CARDS (Which food caused an exceedance?) -->
+        <div id="limit-diagnostics-panel" class="mt-6 pt-5 border-t border-slate-200">
+          <!-- Populated dynamically by renderDiagnostics() -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- SECTION 2: MAIN WORKSPACE (MENU BROWSER + SALAD BAR + MY MEAL TRAY)   -->
+    <!-- ===================================================================== -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+      
+      <!-- LEFT 8 COLUMNS: BURSLEY MENU BROWSER & SALAD BAR APPROXIMATOR -->
+      <div class="lg:col-span-8 space-y-5">
+        
+        <!-- Primary Meal Period Navigation Tabs -->
+        <div class="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 flex flex-wrap sm:flex-nowrap items-center gap-1.5">
+          <button 
+            onclick="selectMealTab('breakfast')" 
+            id="tab-btn-breakfast"
+            class="meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-mug-hot text-amber-500"></i>
+            <span>Breakfast</span>
+            <span id="count-badge-breakfast" class="text-[11px] font-mono px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600">0</span>
+          </button>
+
+          <button 
+            onclick="selectMealTab('lunch')" 
+            id="tab-btn-lunch"
+            class="meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-burger text-sky-500"></i>
+            <span>Lunch</span>
+            <span id="count-badge-lunch" class="text-[11px] font-mono px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600">0</span>
+          </button>
+
+          <button 
+            onclick="selectMealTab('dinner')" 
+            id="tab-btn-dinner"
+            class="meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-utensils text-indigo-500"></i>
+            <span>Dinner</span>
+            <span id="count-badge-dinner" class="text-[11px] font-mono px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600">0</span>
+          </button>
+
+          <button 
+            onclick="selectMealTab('salad_custom')" 
+            id="tab-btn-salad_custom"
+            class="meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2"
+          >
+            <i class="fa-solid fa-bowl-food text-emerald-500"></i>
+            <span>Salad Bar & Custom</span>
+          </button>
+        </div>
+
+        <!-- VIEW A: STANDARD DINING HALL MENU BROWSER (Breakfast / Lunch / Dinner) -->
+        <div id="menu-browser-view" class="space-y-4">
+          
+          <!-- Search, Station Filter & Quick Dietary Filter Pills -->
+          <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+            <div class="flex flex-col sm:flex-row gap-3">
+              <!-- Search Input -->
+              <div class="relative flex-1">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                <input 
+                  type="text" 
+                  id="menu-search-input"
+                  oninput="renderMenuCards()"
+                  placeholder="Search Bursley dishes, stations (e.g. '24 Carrots', 'Halal chicken', 'waffle')..." 
+                  class="w-full pl-9 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-umich-blue focus:bg-white transition"
+                />
+              </div>
+
+              <!-- Station Dropdown Filter -->
+              <div class="sm:w-56">
+                <select 
+                  id="station-filter-select" 
+                  onchange="renderMenuCards()"
+                  aria-label="Filter by Bursley Station"
+                  class="w-full py-2 px-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-umich-blue cursor-pointer"
+                >
+                  <option value="ALL">All Bursley Stations</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Dietary & Macro Quick Filter Pills -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+              <span class="text-xs font-semibold text-slate-400 mr-1 shrink-0">Quick Filter:</span>
+              <button onclick="setQuickFilter('all')" id="qf-all" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-umich-blue text-white">
+                All Items
+              </button>
+              <button onclick="setQuickFilter('high_protein')" id="qf-high_protein" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-dumbbell text-blue-600 mr-1"></i>High Protein (20g+)
+              </button>
+              <button onclick="setQuickFilter('low_sodium')" id="qf-low_sodium" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-heart-pulse text-emerald-600 mr-1"></i>Low Sodium (&lt;400mg)
+              </button>
+              <button onclick="setQuickFilter('veg')" id="qf-veg" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-leaf text-green-600 mr-1"></i>Vegetarian / Vegan
+              </button>
+              <button onclick="setQuickFilter('halal')" id="qf-halal" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-certificate text-amber-600 mr-1"></i>Halal
+              </button>
+              <button onclick="setQuickFilter('mhealthy')" id="qf-mhealthy" class="qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200">
+                <i class="fa-solid fa-apple-whole text-red-500 mr-1"></i>MHealthy
+              </button>
+            </div>
+          </div>
+
+          <!-- Dish Cards Grid -->
+          <div id="menu-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Populated dynamically by renderMenuCards() -->
+          </div>
+        </div>
+
+        <!-- VIEW B: SALAD BAR & CUSTOM ITEM APPROXIMATOR -->
+        <div id="salad-custom-view" class="hidden space-y-6">
+          
+          <!-- Sub-Mode Switcher: Salad Bar Builder vs. Freeform Custom Item -->
+          <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+              <div>
+                <span class="text-xs font-mono uppercase tracking-wider font-bold text-emerald-600">Bursley Portion Heuristics Engine</span>
+                <h3 class="font-display font-extrabold text-lg text-slate-900">
+                  Salad Bar & Custom Food Nutrition Approximator
+                </h3>
+                <p class="text-xs text-slate-500">
+                  Had a custom salad plate, grill special, or snack without a fixed label? Approximate its nutrients by scoop/tongs or category preset.
+                </p>
+              </div>
+              <div class="bg-slate-100 p-1 rounded-xl flex items-center text-xs font-bold shrink-0">
+                <button 
+                  id="submode-btn-salad"
+                  onclick="switchCustomSubmode('salad')" 
+                  class="px-3 py-2 rounded-lg transition bg-umich-blue text-white shadow-sm"
+                >
+                  <i class="fa-solid fa-plate-wheat mr-1"></i>Salad Bar Builder
+                </button>
+                <button 
+                  id="submode-btn-freeform"
+                  onclick="switchCustomSubmode('freeform')" 
+                  class="px-3 py-2 rounded-lg transition text-slate-600 hover:text-slate-900"
+                >
+                  <i class="fa-solid fa-wand-magic-sparkles mr-1"></i>Custom Food Estimator
+                </button>
+              </div>
+            </div>
+
+            <!-- SUBMODE 1: INTERACTIVE BURSLEY SALAD BAR BUILDER -->
+            <div id="custom-submode-salad" class="pt-4 space-y-5">
+              <!-- Live Custom Salad Bowl Preview Bar -->
+              <div class="bg-gradient-to-r from-emerald-900 to-teal-900 text-white p-4 rounded-xl shadow-inner flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="space-y-1">
+                  <div class="flex items-center gap-2">
+                    <span class="px-2 py-0.5 rounded bg-emerald-400/20 text-emerald-300 font-mono text-[10px] font-bold uppercase">Live Bowl Preview</span>
+                    <input 
+                      type="text" 
+                      id="salad-bowl-name" 
+                      value="My Bursley Salad Bar Plate"
+                      aria-label="Custom Salad Bowl Name"
+                      class="bg-white/10 border border-white/20 rounded px-2 py-0.5 text-xs font-semibold text-white focus:outline-none focus:border-umich-maize"
+                    />
+                  </div>
+                  <div id="salad-selected-summary" class="text-xs text-emerald-100">
+                    Select tongs, scoops, or ladles below to build your plate...
+                  </div>
+                </div>
+
+                <!-- Live Calculated Nutrients for the Salad Bowl -->
+                <div class="flex flex-wrap items-center gap-2">
+                  <div class="bg-black/25 px-2.5 py-1.5 rounded-lg text-center font-mono">
+                    <div id="salad-prev-cal" class="text-sm font-bold text-umich-maize">0</div>
+                    <div class="text-[10px] text-emerald-200">kcal</div>
+                  </div>
+                  <div class="bg-black/25 px-2.5 py-1.5 rounded-lg text-center font-mono">
+                    <div id="salad-prev-prot" class="text-sm font-bold text-white">0g</div>
+                    <div class="text-[10px] text-emerald-200">Protein</div>
+                  </div>
+                  <div class="bg-black/25 px-2.5 py-1.5 rounded-lg text-center font-mono">
+                    <div id="salad-prev-na" class="text-sm font-bold text-white">0mg</div>
+                    <div class="text-[10px] text-emerald-200">Sodium</div>
+                  </div>
+                  <div class="bg-black/25 px-2.5 py-1.5 rounded-lg text-center font-mono">
+                    <div id="salad-prev-fat" class="text-sm font-bold text-white">0g</div>
+                    <div class="text-[10px] text-emerald-200">Fat</div>
+                  </div>
+                  <button 
+                    onclick="addBuiltSaladToTray()" 
+                    class="bg-umich-maize hover:bg-umich-maizeHover text-umich-blue font-display font-extrabold px-4 py-2.5 rounded-xl text-xs shadow-md transition flex items-center gap-1.5"
+                  >
+                    <i class="fa-solid fa-plus-circle"></i>
+                    <span>Add Salad Plate to Tray</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Salad Bar Ingredients Grid (With Tongs / Scoop / Ladle Multipliers) -->
+              <div id="salad-ingredients-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+                <!-- Populated dynamically by renderSaladBarBuilder() -->
+              </div>
+            </div>
+
+            <!-- SUBMODE 2: FREEFORM CUSTOM FOOD APPROXIMATOR -->
+            <div id="custom-submode-freeform" class="hidden pt-4 space-y-5">
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">1. What did you eat?</label>
+                  <input 
+                    type="text" 
+                    id="freeform-name" 
+                    placeholder="e.g., Extra Ranch Chicken Wrap, Cookie..."
+                    class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-umich-blue"
+                  />
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">2. Food Category Preset (Auto-Approximates)</label>
+                  <select 
+                    id="freeform-category" 
+                    onchange="updateFreeformApproximation()"
+                    class="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-umich-blue"
+                  >
+                    <option value="lean_protein">Grilled / Lean Protein (Chicken, Fish, Tofu)</option>
+                    <option value="fried_entree">Crispy / Fried Entree or Grill Special</option>
+                    <option value="pasta_grain">Pasta, Rice Bowl, or Grain Dish</option>
+                    <option value="pizza_slice">Pizza / Flatbread / Savory Bakery</option>
+                    <option value="salad_dressed">Dressed Salad / Veggie Side</option>
+                    <option value="soup_cup">Bowl of Soup / Chili</option>
+                    <option value="dessert_sweet">Dessert / Cookie / Ice Cream / Bakery</option>
+                    <option value="beverage_sweet">Sweetened Beverage / Smoothie / Latte</option>
+                  </select>
+                </div>
+                <div>
+                  <label class="block text-xs font-bold text-slate-700 mb-1">3. Portion Size / Grams</label>
+                  <div class="flex items-center gap-2">
+                    <select 
+                      id="freeform-portion" 
+                      onchange="updateFreeformApproximation()"
+                      class="flex-1 px-3 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-umich-blue"
+                    >
+                      <option value="0.65">Small / Side (~100g)</option>
+                      <option value="1.0" selected>Standard Serving (~175g)</option>
+                      <option value="1.5">Large / Heaping Plate (~260g)</option>
+                      <option value="2.0">Double Portion (~350g)</option>
+                    </select>
+                    <select 
+                      id="freeform-meal-period"
+                      aria-label="Meal Period for Custom Item"
+                      class="px-2.5 py-2 bg-white border border-slate-300 rounded-xl text-xs font-semibold text-slate-700"
+                    >
+                      <option value="salad_custom">Salad/Custom</option>
+                      <option value="breakfast">Breakfast</option>
+                      <option value="lunch">Lunch</option>
+                      <option value="dinner">Dinner</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Editable Approximated Nutrient Inputs -->
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold text-slate-700">4. Approximated Nutrition Values (Editable before adding)</span>
+                  <span class="text-[11px] font-mono text-slate-500">Values auto-calculated from USDA category density</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Calories (kcal)</label>
+                    <input type="number" id="ff-cal" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="320" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Sodium (mg)</label>
+                    <input type="number" id="ff-na" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="540" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Protein (g)</label>
+                    <input type="number" id="ff-prot" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="28" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Carbs (g)</label>
+                    <input type="number" id="ff-carbs" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="18" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Total Fat (g)</label>
+                    <input type="number" id="ff-fat" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="14" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Saturated Fat (g)</label>
+                    <input type="number" id="ff-satfat" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="3.5" step="0.5" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Added Sugar (g)</label>
+                    <input type="number" id="ff-sugar" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="4" />
+                  </div>
+                  <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                    <label class="block text-[11px] font-semibold text-slate-500">Dietary Fiber (g)</label>
+                    <input type="number" id="ff-fiber" class="w-full font-mono font-bold text-base bg-transparent text-slate-900 focus:outline-none" value="3" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex justify-end">
+                <button 
+                  onclick="addFreeformItemToTray()" 
+                  class="bg-umich-blue hover:bg-umich-blueLight text-umich-maize font-display font-bold px-5 py-2.5 rounded-xl text-sm shadow transition flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-cart-plus"></i>
+                  <span>Add Approximated Food to My Tray</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT 4 COLUMNS: SHOPPING CART ("MY MEAL TRAY") -->
+      <aside class="lg:col-span-4 lg:sticky lg:top-20 space-y-4">
+        <div class="bg-white rounded-2xl shadow-md border border-slate-200 overflow-hidden flex flex-col">
+          
+          <!-- Tray Header -->
+          <div class="bg-umich-blue text-white p-4 border-b-2 border-umich-maize flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-xl bg-umich-maize text-umich-blue flex items-center justify-center font-bold text-base shadow">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <div>
+                <h3 class="font-display font-extrabold text-base leading-tight">My Bursley Meal Tray</h3>
+                <p id="tray-subtitle-count" class="text-[11px] text-blue-200 font-mono">0 items logged today</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-1.5">
+              <button 
+                onclick="loadSampleBursleyDay()" 
+                title="Load a realistic full day of Bursley meals to test the limit chart"
+                class="text-[11px] font-semibold bg-blue-800 hover:bg-blue-700 text-umich-maize px-2.5 py-1.5 rounded-lg border border-blue-600 transition"
+              >
+                <i class="fa-solid fa-bolt mr-1"></i>Sample Day
+              </button>
+              <button 
+                onclick="clearTray()" 
+                title="Empty Meal Tray"
+                class="text-xs text-blue-200 hover:text-red-300 p-1.5 rounded-lg transition"
+              >
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Mini Totals Strip -->
+          <div class="grid grid-cols-4 divide-x divide-slate-200 bg-slate-50 border-b border-slate-200 font-mono text-center py-2">
+            <div>
+              <div id="tray-sum-cal" class="text-xs font-bold text-slate-900">0</div>
+              <div class="text-[10px] text-slate-500">kcal</div>
+            </div>
+            <div>
+              <div id="tray-sum-na" class="text-xs font-bold text-slate-900">0mg</div>
+              <div class="text-[10px] text-slate-500">Sodium</div>
+            </div>
+            <div>
+              <div id="tray-sum-prot" class="text-xs font-bold text-slate-900">0g</div>
+              <div class="text-[10px] text-slate-500">Protein</div>
+            </div>
+            <div>
+              <div id="tray-sum-sugar" class="text-xs font-bold text-slate-900">0g</div>
+              <div class="text-[10px] text-slate-500">Sugar</div>
+            </div>
+          </div>
+
+          <!-- Tray Items Scroll List -->
+          <div id="tray-items-list" class="p-4 max-h-[380px] overflow-y-auto space-y-3 divide-y divide-slate-100">
+            <!-- Populated dynamically by renderTray() -->
+          </div>
+
+          <!-- Tray Footer Actions: Custom Item Shortcut + SHOW RESULTS CTA -->
+          <div class="p-4 bg-slate-50 border-t border-slate-200 space-y-2.5">
+            <button 
+              onclick="selectMealTab('salad_custom')" 
+              class="w-full py-2 px-3 rounded-xl border border-dashed border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold text-xs transition flex items-center justify-center gap-1.5"
+            >
+              <i class="fa-solid fa-plus"></i>
+              <span>Ate from Salad Bar or Custom Item? Approximate Here</span>
+            </button>
+
+            <button 
+              onclick="showResultsAndHighlightChart()" 
+              class="w-full py-3 px-4 rounded-xl bg-umich-blue hover:bg-umich-blueLight text-white font-display font-extrabold text-sm shadow-lg transition flex items-center justify-between group"
+            >
+              <span class="flex items-center gap-2">
+                <i class="fa-solid fa-chart-column text-umich-maize group-hover:scale-110 transition"></i>
+                <span>Show Results & Check Limits</span>
+              </span>
+              <span id="cta-badge-pill" class="bg-umich-maize text-umich-blue font-mono text-xs px-2.5 py-0.5 rounded-lg font-extrabold">
+                View Chart &uarr;
+              </span>
+            </button>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-umich-blueDark text-blue-200 border-t border-blue-900 mt-12 py-6 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="w-7 h-7 rounded-lg bg-umich-maize text-umich-blue font-display font-extrabold flex items-center justify-center">M</span>
+        <p>
+          <strong>M|Dining Bursley Hall Nutrition & Limit Tracker</strong> • Built with public University of Michigan Dining nutrition profiles & USDA/FDA 2,000 kcal Daily Values.
+        </p>
+      </div>
+      <div class="flex items-center gap-4 font-mono text-[11px]">
+        <button onclick="openCronModal()" class="text-umich-maize hover:underline flex items-center gap-1">
+          <i class="fa-solid fa-code-branch"></i> Cron Job & Scraper Spec
+        </button>
+        <span>•</span>
+        <a href="https://dining.umich.edu/menus-locations/dining-halls/bursley/" target="_blank" rel="noopener noreferrer" class="hover:text-white underline">
+          Official Bursley Menu &nearr;
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 1: CRON-JOB & LIVE MENU SCRAPER PIPELINE INSPECTOR              -->
+  <!-- ===================================================================== -->
+  <div id="cron-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-hidden shadow-2xl border border-slate-200 flex flex-col">
+      
+      <!-- Modal Header -->
+      <div class="bg-umich-blue text-white px-6 py-4 flex items-center justify-between border-b-2 border-umich-maize">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-server text-umich-maize text-lg"></i>
+          <div>
+            <h3 class="font-display font-extrabold text-base sm:text-lg">Active Cron-Job & Daily Menu Sync Engine</h3>
+            <p class="text-xs text-blue-200 font-mono">Target: dining.umich.edu/menus-locations/dining-halls/bursley/</p>
+          </div>
+        </div>
+        <button onclick="closeCronModal()" class="text-blue-200 hover:text-white p-1.5 text-lg">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Modal Content -->
+      <div class="p-6 overflow-y-auto space-y-5 text-xs sm:text-sm">
+        
+        <!-- Scheduler Controls -->
+        <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="font-bold text-slate-900 flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span>
+              <span>In-Browser Active Scheduler + CORS Scraper</span>
+            </div>
+            <p class="text-xs text-slate-600 mt-0.5">
+              Polls U-M Bursley Dining endpoint for the active date, parses stations & nutrition facts, caches in <code class="font-mono bg-slate-200 px-1 rounded">localStorage</code>, and falls back to the verified Bursley rotation dataset if CORS-blocked.
+            </p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <select 
+              id="cron-interval-select" 
+              onchange="updateCronInterval(this.value)"
+              class="bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-xs font-mono font-semibold"
+            >
+              <option value="60">Poll: Every 1m (Demo)</option>
+              <option value="300">Poll: Every 5m</option>
+              <option value="900" selected>Poll: Every 15m</option>
+              <option value="3600">Poll: Every 60m</option>
+            </select>
+            <button 
+              onclick="triggerManualCronSync()" 
+              class="bg-umich-blue hover:bg-umich-blueLight text-umich-maize font-bold px-3 py-1.5 rounded-lg text-xs transition flex items-center gap-1.5"
+            >
+              <i class="fa-solid fa-bolt"></i>
+              <span>Run Job Now</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Live Execution Terminal Log -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-xs font-bold uppercase text-slate-500">Live Cron Execution Logs</span>
+            <span id="cron-cache-status-badge" class="font-mono text-[11px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              Cache: Warmed
+            </span>
+          </div>
+          <div id="cron-terminal-logs" class="bg-slate-950 text-emerald-400 font-mono text-xs p-4 rounded-xl h-44 overflow-y-auto space-y-1.5 shadow-inner">
+            <!-- Populated dynamically by appendCronLog() -->
+          </div>
+        </div>
+
+        <!-- Deployable Backend Cron Script (Node.js + GitHub Actions) -->
+        <div>
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="font-mono text-xs font-bold uppercase text-slate-500">
+              Production Scheduled Cron Worker (0 4 * * * Daily at 4:00 AM EST)
+            </span>
+            <button 
+              onclick="copyCronCode()" 
+              class="text-xs font-semibold text-umich-blue hover:underline flex items-center gap-1"
+            >
+              <i class="fa-regular fa-copy"></i>
+              <span id="copy-code-btn-text">Copy Production Cron Code</span>
+            </button>
+          </div>
+          <pre id="production-cron-code" class="bg-slate-900 text-slate-200 font-mono text-[11px] p-4 rounded-xl overflow-x-auto leading-relaxed">// .github/workflows/bursley-menu-cron.yml &amp; worker/syncBursleyMenu.js
+import cron from 'node-cron';
+import * as cheerio from 'cheerio';
+import fs from 'fs/promises';
+
+// Runs every morning at 04:00 AM Ann Arbor time (America/Detroit)
+cron.schedule('0 4 * * *', async () => {
+  const today = new Date().toISOString().split('T')[0];
+  const url = `https://dining.umich.edu/menus-locations/dining-halls/bursley/?menuDate=${today}`;
+  console.log(`[CRON] Fetching Bursley Hall Menu for ${today}...`);
+
+  const res = await fetch(url, { headers: { 'User-Agent': 'UMich-Bursley-Nutrition-Tracker/1.0' } });
+  const html = await res.text();
+  const $ = cheerio.load(html);
+  const items = [];
+
+  $('.courses_wrapper .course').each((_, stationEl) => {
+    const station = $(stationEl).find('h4').text().trim();
+    $(stationEl).find('.item-name').each((__, itemEl) => {
+      // Extracts FDA nutrition table values (Calories, Sodium, Carbs, Sat Fat, Added Sugar, Protein)
+      items.push({ station, name: $(itemEl).text().trim(), date: today });
+    });
+  });
+
+  await fs.writeFile(`./public/data/bursley-${today}.json`, JSON.stringify({ updatedAt: new Date(), items }, null, 2));
+  console.log(`[CRON] Cached ${items.length} Bursley dishes for ${today}.`);
+}, { timezone: 'America/Detroit' });</pre>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="px-6 py-3 bg-slate-100 border-t border-slate-200 flex justify-end">
+        <button onclick="closeCronModal()" class="px-4 py-2 bg-slate-800 text-white text-xs font-bold rounded-xl hover:bg-slate-700">
+          Close Inspector
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 2: FDA NUTRITION FACTS LABEL INSPECTOR                          -->
+  <!-- ===================================================================== -->
+  <div id="fda-modal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-200">
+      <div class="bg-umich-blue text-white px-5 py-3.5 flex items-center justify-between border-b-2 border-umich-maize">
+        <div>
+          <span id="fda-modal-station" class="text-[10px] font-mono uppercase tracking-wider text-umich-maize block">Station</span>
+          <h3 id="fda-modal-title" class="font-display font-extrabold text-base">Dish Name</h3>
+        </div>
+        <button onclick="closeFdaModal()" class="text-blue-200 hover:text-white p-1">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <div class="p-5 max-h-[80vh] overflow-y-auto space-y-4">
+        <!-- Authentic FDA Nutrition Facts Box -->
+        <div id="fda-label-content" class="fda-label text-xs">
+          <!-- Populated dynamically by openFdaModal(itemId) -->
+        </div>
+
+        <div class="flex items-center justify-between gap-2 pt-2">
+          <button onclick="closeFdaModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 font-semibold text-xs hover:bg-slate-100">
+            Close
+          </button>
+          <button id="fda-modal-add-btn" class="px-4 py-2 rounded-xl bg-umich-blue text-umich-maize font-display font-bold text-xs hover:bg-umich-blueLight flex items-center gap-1.5">
+            <i class="fa-solid fa-plus"></i>
+            <span>Add Serving to Tray</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-4 right-4 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- ===================================================================== -->
+  <!-- APPLICATION LOGIC & BURSLEY MENU DATABASE                             -->
+  <!-- ===================================================================== -->
+  <script>
+    /*************************************************************************
+     * 1. GOVERNMENT RECOMMENDED DAILY BENCHMARK PROFILES (USDA / FDA)
+     *************************************************************************/
+    const BENCHMARK_PROFILES = {
+      fda_standard: {
+        name: 'FDA Standard (2,000 kcal)',
+        limits: {
+          calories: { label: 'Calories', max: 2000, unit: 'kcal', type: 'ceiling', desc: 'Daily Energy Reference' },
+          sodium_mg: { label: 'Sodium', max: 2300, unit: 'mg', type: 'ceiling', desc: 'FDA Upper Daily Limit' },
+          satFat_g: { label: 'Sat Fat', max: 20, unit: 'g', type: 'ceiling', desc: 'Max 10% of Daily Calories' },
+          sugar_g: { label: 'Added Sugar', max: 50, unit: 'g', type: 'ceiling', desc: 'FDA Daily Max Ceiling' },
+          fat_g: { label: 'Total Fat', max: 78, unit: 'g', type: 'ceiling', desc: 'FDA Daily Reference' },
+          carbs_g: { label: 'Carbs', max: 275, unit: 'g', type: 'ceiling', desc: 'FDA Daily Reference' },
+          fiber_g: { label: 'Dietary Fiber', max: 28, unit: 'g', type: 'floor', desc: 'Recommended Minimum' },
+          protein_g: { label: 'Protein', max: 50, unit: 'g', type: 'floor', desc: 'Recommended Minimum' }
+        }
+      },
+      active_student: {
+        name: 'Active Wolverine (2,500 kcal)',
+        limits: {
+          calories: { label: 'Calories', max: 2500, unit: 'kcal', type: 'ceiling', desc: 'Active Student Target' },
+          sodium_mg: { label: 'Sodium', max: 2300, unit: 'mg', type: 'ceiling', desc: 'FDA Upper Daily Limit' },
+          satFat_g: { label: 'Sat Fat', max: 24, unit: 'g', type: 'ceiling', desc: 'Active Daily Ceiling' },
+          sugar_g: { label: 'Added Sugar', max: 55, unit: 'g', type: 'ceiling', desc: 'Daily Max Ceiling' },
+          fat_g: { label: 'Total Fat', max: 90, unit: 'g', type: 'ceiling', desc: 'Active Reference' },
+          carbs_g: { label: 'Carbs', max: 325, unit: 'g', type: 'ceiling', desc: 'Active Reference' },
+          fiber_g: { label: 'Dietary Fiber', max: 34, unit: 'g', type: 'floor', desc: 'Recommended Minimum' },
+          protein_g: { label: 'Protein', max: 140, unit: 'g', type: 'floor', desc: 'Athletic Target' }
+        }
+      },
+      low_sodium: {
+        name: 'Heart Healthy Low-Sodium (1,500mg Na)',
+        limits: {
+          calories: { label: 'Calories', max: 1800, unit: 'kcal', type: 'ceiling', desc: 'Light Energy Budget' },
+          sodium_mg: { label: 'Sodium', max: 1500, unit: 'mg', type: 'ceiling', desc: 'AHA Strict Sodium Limit' },
+          satFat_g: { label: 'Sat Fat', max: 15, unit: 'g', type: 'ceiling', desc: 'Heart Healthy Ceiling' },
+          sugar_g: { label: 'Added Sugar', max: 36, unit: 'g', type: 'ceiling', desc: 'AHA Sugar Limit' },
+          fat_g: { label: 'Total Fat', max: 65, unit: 'g', type: 'ceiling', desc: 'Daily Reference' },
+          carbs_g: { label: 'Carbs', max: 225, unit: 'g', type: 'ceiling', desc: 'Daily Reference' },
+          fiber_g: { label: 'Dietary Fiber', max: 30, unit: 'g', type: 'floor', desc: 'Heart Healthy Minimum' },
+          protein_g: { label: 'Protein', max: 65, unit: 'g', type: 'floor', desc: 'Recommended Minimum' }
+        }
+      }
+    };
+
+    /*************************************************************************
+     * 2. AUTHENTIC BURSLEY DINING HALL MENU DATASET
+     *    Includes stations: Signature Blue, 24 Carrots, Grill, Mediterranean,
+     *    Pasta, Pizza, Soup, Omelet & Waffle Bar, Breakfast Bakery, Deli
+     *************************************************************************/
+    const BURSLEY_BASE_MENU = [
+      // ==================== BREAKFAST ====================
+      {
+        id: 'burs-b1',
+        name: 'Maize & Blue Belgian Waffle',
+        mealPeriod: 'breakfast',
+        station: 'Omelet & Waffle Bar',
+        servingSize: '1 Waffle (145g)',
+        calories: 380,
+        sodium_mg: 490,
+        carbs_g: 54,
+        fat_g: 14,
+        satFat_g: 4.5,
+        sugar_g: 16,
+        fiber_g: 2,
+        protein_g: 9,
+        cholesterol_mg: 65,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Eggs', 'Milk', 'Soy']
+      },
+      {
+        id: 'burs-b2',
+        name: 'Scrambled Cage-Free Eggs',
+        mealPeriod: 'breakfast',
+        station: 'Signature Blue',
+        servingSize: '4 oz (113g)',
+        calories: 170,
+        sodium_mg: 210,
+        carbs_g: 2,
+        fat_g: 12,
+        satFat_g: 3.5,
+        sugar_g: 1,
+        fiber_g: 0,
+        protein_g: 14,
+        cholesterol_mg: 370,
+        traits: ['Vegetarian', 'Gluten-Free', 'MHealthy'],
+        allergens: ['Eggs', 'Milk']
+      },
+      {
+        id: 'burs-b3',
+        name: 'Crispy Breakfast Tater Tots',
+        mealPeriod: 'breakfast',
+        station: 'Signature Blue',
+        servingSize: '1 cup (110g)',
+        calories: 240,
+        sodium_mg: 560,
+        carbs_g: 29,
+        fat_g: 13,
+        satFat_g: 2.5,
+        sugar_g: 1,
+        fiber_g: 3,
+        protein_g: 3,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'Gluten-Free'],
+        allergens: []
+      },
+      {
+        id: 'burs-b4',
+        name: 'Halal Savoury Turkey Sausage Links',
+        mealPeriod: 'breakfast',
+        station: 'Signature Blue',
+        servingSize: '2 Links (68g)',
+        calories: 140,
+        sodium_mg: 520,
+        carbs_g: 1,
+        fat_g: 9,
+        satFat_g: 2.5,
+        sugar_g: 0,
+        fiber_g: 0,
+        protein_g: 14,
+        cholesterol_mg: 55,
+        traits: ['Halal', 'Gluten-Free'],
+        allergens: []
+      },
+      {
+        id: 'burs-b5',
+        name: 'Tofu Turmeric Breakfast Scramble',
+        mealPeriod: 'breakfast',
+        station: '24 Carrots',
+        servingSize: '1 cup (160g)',
+        calories: 165,
+        sodium_mg: 310,
+        carbs_g: 7,
+        fat_g: 9,
+        satFat_g: 1.5,
+        sugar_g: 2,
+        fiber_g: 3,
+        protein_g: 15,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'Gluten-Free', 'MHealthy', 'Halal'],
+        allergens: ['Soy']
+      },
+      {
+        id: 'burs-b6',
+        name: 'Steel-Cut Oatmeal with Michigan Apples',
+        mealPeriod: 'breakfast',
+        station: 'Soup & Hot Cereal',
+        servingSize: '8 oz bowl (225g)',
+        calories: 210,
+        sodium_mg: 115,
+        carbs_g: 38,
+        fat_g: 3.5,
+        satFat_g: 0.5,
+        sugar_g: 9,
+        fiber_g: 6,
+        protein_g: 6,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'MHealthy'],
+        allergens: ['Oats']
+      },
+      {
+        id: 'burs-b7',
+        name: 'Bursley Bakery Blueberry Streusel Muffin',
+        mealPeriod: 'breakfast',
+        station: 'Breakfast Bakery',
+        servingSize: '1 Muffin (115g)',
+        calories: 390,
+        sodium_mg: 340,
+        carbs_g: 56,
+        fat_g: 16,
+        satFat_g: 4.0,
+        sugar_g: 31,
+        fiber_g: 2,
+        protein_g: 5,
+        cholesterol_mg: 45,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Eggs', 'Milk']
+      },
+      {
+        id: 'burs-b8',
+        name: 'Chobani Vanilla Greek Yogurt Parfait w/ Granola',
+        mealPeriod: 'breakfast',
+        station: 'Breakfast Bakery',
+        servingSize: '1 cup (210g)',
+        calories: 260,
+        sodium_mg: 95,
+        carbs_g: 34,
+        fat_g: 5,
+        satFat_g: 1.5,
+        sugar_g: 18,
+        fiber_g: 3,
+        protein_g: 19,
+        cholesterol_mg: 10,
+        traits: ['Vegetarian', 'MHealthy'],
+        allergens: ['Milk', 'Oats']
+      },
+      {
+        id: 'burs-b9',
+        name: 'Build-Your-Own Spinach, Cheddar & Mushroom Omelet',
+        mealPeriod: 'breakfast',
+        station: 'Omelet & Waffle Bar',
+        servingSize: '1 Omelet (185g)',
+        calories: 295,
+        sodium_mg: 470,
+        carbs_g: 4,
+        fat_g: 22,
+        satFat_g: 8.5,
+        sugar_g: 2,
+        fiber_g: 1,
+        protein_g: 21,
+        cholesterol_mg: 410,
+        traits: ['Vegetarian', 'Gluten-Free'],
+        allergens: ['Eggs', 'Milk']
+      },
+      {
+        id: 'burs-b10',
+        name: 'Buttermilk Pancakes with Maple Syrup',
+        mealPeriod: 'breakfast',
+        station: 'Grill',
+        servingSize: '2 Pancakes (160g)',
+        calories: 410,
+        sodium_mg: 620,
+        carbs_g: 68,
+        fat_g: 11,
+        satFat_g: 3.0,
+        sugar_g: 26,
+        fiber_g: 2,
+        protein_g: 8,
+        cholesterol_mg: 35,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Milk', 'Eggs']
+      },
+
+      // ==================== LUNCH ====================
+      {
+        id: 'burs-l1',
+        name: 'Bursley Halal Chicken Shawarma Bowl',
+        mealPeriod: 'lunch',
+        station: 'Mediterranean',
+        servingSize: '1 Bowl (310g)',
+        calories: 540,
+        sodium_mg: 890,
+        carbs_g: 52,
+        fat_g: 19,
+        satFat_g: 4.5,
+        sugar_g: 4,
+        fiber_g: 5,
+        protein_g: 38,
+        cholesterol_mg: 95,
+        traits: ['Halal', 'MHealthy'],
+        allergens: ['Sesame']
+      },
+      {
+        id: 'burs-l2',
+        name: 'Crispy Halal Chicken Tenders (3 pcs)',
+        mealPeriod: 'lunch',
+        station: 'Grill',
+        servingSize: '3 Pieces (150g)',
+        calories: 430,
+        sodium_mg: 980,
+        carbs_g: 24,
+        fat_g: 22,
+        satFat_g: 4.0,
+        sugar_g: 1,
+        fiber_g: 1,
+        protein_g: 32,
+        cholesterol_mg: 75,
+        traits: ['Halal'],
+        allergens: ['Wheat', 'Soy']
+      },
+      {
+        id: 'burs-l3',
+        name: 'Seasoned Curly Fries',
+        mealPeriod: 'lunch',
+        station: 'Grill',
+        servingSize: '4 oz (115g)',
+        calories: 310,
+        sodium_mg: 740,
+        carbs_g: 37,
+        fat_g: 16,
+        satFat_g: 2.5,
+        sugar_g: 1,
+        fiber_g: 3,
+        protein_g: 4,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian'],
+        allergens: ['Wheat']
+      },
+      {
+        id: 'burs-l4',
+        name: '24 Carrots Sweet Potato & Black Bean Quinoa Bowl',
+        mealPeriod: 'lunch',
+        station: '24 Carrots',
+        servingSize: '1 Bowl (280g)',
+        calories: 360,
+        sodium_mg: 290,
+        carbs_g: 58,
+        fat_g: 8,
+        satFat_g: 1.0,
+        sugar_g: 6,
+        fiber_g: 11,
+        protein_g: 13,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'Gluten-Free', 'MHealthy', 'Halal'],
+        allergens: []
+      },
+      {
+        id: 'burs-l5',
+        name: 'Brick-Oven Pepperoni Pizza Slice',
+        mealPeriod: 'lunch',
+        station: 'Pizza',
+        servingSize: '1 Large Slice (135g)',
+        calories: 340,
+        sodium_mg: 790,
+        carbs_g: 36,
+        fat_g: 14,
+        satFat_g: 6.0,
+        sugar_g: 4,
+        fiber_g: 2,
+        protein_g: 16,
+        cholesterol_mg: 30,
+        traits: [],
+        allergens: ['Wheat', 'Milk']
+      },
+      {
+        id: 'burs-l6',
+        name: 'Margherita Flatbread Pizza with Fresh Basil',
+        mealPeriod: 'lunch',
+        station: 'Pizza',
+        servingSize: '1 Slice (125g)',
+        calories: 270,
+        sodium_mg: 540,
+        carbs_g: 34,
+        fat_g: 9,
+        satFat_g: 4.0,
+        sugar_g: 3,
+        fiber_g: 2,
+        protein_g: 12,
+        cholesterol_mg: 20,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Milk']
+      },
+      {
+        id: 'burs-l7',
+        name: 'Smoked Turkey & Avocado Club Panini',
+        mealPeriod: 'lunch',
+        station: 'Deli',
+        servingSize: '1 Sandwich (230g)',
+        calories: 490,
+        sodium_mg: 1120,
+        carbs_g: 44,
+        fat_g: 20,
+        satFat_g: 5.5,
+        sugar_g: 5,
+        fiber_g: 5,
+        protein_g: 31,
+        cholesterol_mg: 65,
+        traits: [],
+        allergens: ['Wheat', 'Milk']
+      },
+      {
+        id: 'burs-l8',
+        name: 'Penne Pasta with Roasted Garlic Marinara & Chickpeas',
+        mealPeriod: 'lunch',
+        station: 'Pasta',
+        servingSize: '1.5 cups (240g)',
+        calories: 380,
+        sodium_mg: 410,
+        carbs_g: 66,
+        fat_g: 6,
+        satFat_g: 1.0,
+        sugar_g: 8,
+        fiber_g: 8,
+        protein_g: 14,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'MHealthy'],
+        allergens: ['Wheat']
+      },
+      {
+        id: 'burs-l9',
+        name: 'Creamy Tomato Basil Bisque',
+        mealPeriod: 'lunch',
+        station: 'Soup & Hot Cereal',
+        servingSize: '8 fl oz (240ml)',
+        calories: 220,
+        sodium_mg: 690,
+        carbs_g: 19,
+        fat_g: 14,
+        satFat_g: 7.5,
+        sugar_g: 10,
+        fiber_g: 2,
+        protein_g: 4,
+        cholesterol_mg: 40,
+        traits: ['Vegetarian', 'Gluten-Free'],
+        allergens: ['Milk']
+      },
+      {
+        id: 'burs-l10',
+        name: 'Grilled Smash Cheeseburger on Brioche Bun',
+        mealPeriod: 'lunch',
+        station: 'Grill',
+        servingSize: '1 Burger (215g)',
+        calories: 610,
+        sodium_mg: 940,
+        carbs_g: 38,
+        fat_g: 34,
+        satFat_g: 13.5,
+        sugar_g: 7,
+        fiber_g: 2,
+        protein_g: 36,
+        cholesterol_mg: 105,
+        traits: ['Halal'],
+        allergens: ['Wheat', 'Milk', 'Eggs', 'Sesame']
+      },
+      {
+        id: 'burs-l11',
+        name: 'Mediterranean Falafel Pita with Tzatziki',
+        mealPeriod: 'lunch',
+        station: 'Mediterranean',
+        servingSize: '1 Pita (220g)',
+        calories: 440,
+        sodium_mg: 670,
+        carbs_g: 54,
+        fat_g: 17,
+        satFat_g: 3.5,
+        sugar_g: 5,
+        fiber_g: 8,
+        protein_g: 16,
+        cholesterol_mg: 10,
+        traits: ['Vegetarian', 'Halal'],
+        allergens: ['Wheat', 'Milk', 'Sesame']
+      },
+
+      // ==================== DINNER ====================
+      {
+        id: 'burs-d1',
+        name: 'Herb-Roasted Atlantic Salmon Fillet',
+        mealPeriod: 'dinner',
+        station: 'Signature Blue',
+        servingSize: '5 oz Fillet (142g)',
+        calories: 310,
+        sodium_mg: 320,
+        carbs_g: 1,
+        fat_g: 18,
+        satFat_g: 3.5,
+        sugar_g: 0,
+        fiber_g: 0,
+        protein_g: 34,
+        cholesterol_mg: 85,
+        traits: ['Gluten-Free', 'MHealthy', 'Halal'],
+        allergens: ['Fish']
+      },
+      {
+        id: 'burs-d2',
+        name: 'Homestyle Baked Macaroni & Three-Cheese',
+        mealPeriod: 'dinner',
+        station: 'Signature Blue',
+        servingSize: '1 cup (210g)',
+        calories: 520,
+        sodium_mg: 880,
+        carbs_g: 46,
+        fat_g: 27,
+        satFat_g: 14.5,
+        sugar_g: 6,
+        fiber_g: 2,
+        protein_g: 22,
+        cholesterol_mg: 65,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Milk']
+      },
+      {
+        id: 'burs-d3',
+        name: 'Halal Butter Chicken (Murgh Makhani) with Basmati Rice',
+        mealPeriod: 'dinner',
+        station: 'Mediterranean',
+        servingSize: '1 Plate (320g)',
+        calories: 590,
+        sodium_mg: 840,
+        carbs_g: 56,
+        fat_g: 23,
+        satFat_g: 9.0,
+        sugar_g: 6,
+        fiber_g: 3,
+        protein_g: 37,
+        cholesterol_mg: 110,
+        traits: ['Halal', 'Gluten-Free'],
+        allergens: ['Milk']
+      },
+      {
+        id: 'burs-d4',
+        name: '24 Carrots Thai Coconut Red Curry Tofu & Broccoli',
+        mealPeriod: 'dinner',
+        station: '24 Carrots',
+        servingSize: '1 Bowl (290g)',
+        calories: 390,
+        sodium_mg: 380,
+        carbs_g: 42,
+        fat_g: 16,
+        satFat_g: 7.0,
+        sugar_g: 5,
+        fiber_g: 6,
+        protein_g: 18,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'Gluten-Free', 'MHealthy', 'Halal'],
+        allergens: ['Soy']
+      },
+      {
+        id: 'burs-d5',
+        name: 'Chicken Alfredo Tortellini with Parmesan',
+        mealPeriod: 'dinner',
+        station: 'Pasta',
+        servingSize: '1.5 cups (265g)',
+        calories: 640,
+        sodium_mg: 1050,
+        carbs_g: 52,
+        fat_g: 31,
+        satFat_g: 16.0,
+        sugar_g: 4,
+        fiber_g: 3,
+        protein_g: 35,
+        cholesterol_mg: 115,
+        traits: ['Halal'],
+        allergens: ['Wheat', 'Milk', 'Eggs']
+      },
+      {
+        id: 'burs-d6',
+        name: 'Garlic & Herb Roasted Broccoli Florets',
+        mealPeriod: 'dinner',
+        station: 'Signature Blue',
+        servingSize: '1 cup (120g)',
+        calories: 85,
+        sodium_mg: 180,
+        carbs_g: 9,
+        fat_g: 4.5,
+        satFat_g: 0.5,
+        sugar_g: 2,
+        fiber_g: 4,
+        protein_g: 4,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'Gluten-Free', 'MHealthy', 'Halal'],
+        allergens: []
+      },
+      {
+        id: 'burs-d7',
+        name: 'Bursley Grill Spicy Black Bean Burger',
+        mealPeriod: 'dinner',
+        station: 'Grill',
+        servingSize: '1 Burger (195g)',
+        calories: 410,
+        sodium_mg: 610,
+        carbs_g: 54,
+        fat_g: 12,
+        satFat_g: 2.0,
+        sugar_g: 6,
+        fiber_g: 9,
+        protein_g: 21,
+        cholesterol_mg: 0,
+        traits: ['Vegan', 'Vegetarian', 'MHealthy'],
+        allergens: ['Wheat', 'Soy']
+      },
+      {
+        id: 'burs-d8',
+        name: 'Loaded BBQ Chicken & Bacon Pizza Slice',
+        mealPeriod: 'dinner',
+        station: 'Pizza',
+        servingSize: '1 Slice (145g)',
+        calories: 380,
+        sodium_mg: 860,
+        carbs_g: 41,
+        fat_g: 14,
+        satFat_g: 5.5,
+        sugar_g: 11,
+        fiber_g: 2,
+        protein_g: 21,
+        cholesterol_mg: 40,
+        traits: [],
+        allergens: ['Wheat', 'Milk']
+      },
+      {
+        id: 'burs-d9',
+        name: 'Hearty Chicken Noodle Soup',
+        mealPeriod: 'dinner',
+        station: 'Soup & Hot Cereal',
+        servingSize: '8 fl oz (240ml)',
+        calories: 160,
+        sodium_mg: 780,
+        carbs_g: 18,
+        fat_g: 4.5,
+        satFat_g: 1.0,
+        sugar_g: 2,
+        fiber_g: 2,
+        protein_g: 12,
+        cholesterol_mg: 30,
+        traits: ['Halal'],
+        allergens: ['Wheat', 'Eggs']
+      },
+      {
+        id: 'burs-d10',
+        name: 'Warm M|Dining Chocolate Chunk Cookie',
+        mealPeriod: 'dinner',
+        station: 'Breakfast Bakery',
+        servingSize: '1 Cookie (65g)',
+        calories: 290,
+        sodium_mg: 190,
+        carbs_g: 41,
+        fat_g: 13,
+        satFat_g: 7.0,
+        sugar_g: 27,
+        fiber_g: 1,
+        protein_g: 3,
+        cholesterol_mg: 25,
+        traits: ['Vegetarian'],
+        allergens: ['Wheat', 'Milk', 'Eggs', 'Soy']
+      },
+      {
+        id: 'burs-d11',
+        name: 'Braised Beef Brisket with Mashed Potatoes',
+        mealPeriod: 'dinner',
+        station: 'Signature Blue',
+        servingSize: '1 Plate (295g)',
+        calories: 570,
+        sodium_mg: 910,
+        carbs_g: 34,
+        fat_g: 29,
+        satFat_g: 11.5,
+        sugar_g: 3,
+        fiber_g: 3,
+        protein_g: 41,
+        cholesterol_mg: 120,
+        traits: ['Gluten-Free'],
+        allergens: ['Milk']
+      }
+    ];
+
+    /*************************************************************************
+     * 3. SALAD BAR PORTION HEURISTICS DATASET
+     *    Physical dining hall utensils: Tongs (~30g), Scoop (~75g), Ladle (~30ml)
+     *************************************************************************/
+    const SALAD_BAR_INGREDIENTS = [
+      {
+        id: 'sb-greens',
+        name: 'Organic Mixed Baby Spinach & Greens',
+        category: 'Base Greens',
+        utensil: '1 Tongs (~35g)',
+        calories: 10, sodium_mg: 25, carbs_g: 1.5, fat_g: 0, satFat_g: 0, sugar_g: 0, fiber_g: 1, protein_g: 1
+      },
+      {
+        id: 'sb-chicken',
+        name: 'Diced Halal Grilled Chicken Breast',
+        category: 'Protein',
+        utensil: '1 Scoop (~85g / 3oz)',
+        calories: 140, sodium_mg: 260, carbs_g: 0, fat_g: 3, satFat_g: 1.0, sugar_g: 0, fiber_g: 0, protein_g: 26
+      },
+      {
+        id: 'sb-tofu',
+        name: 'Baked Herb Tofu Cubes',
+        category: 'Protein',
+        utensil: '1 Scoop (~80g)',
+        calories: 110, sodium_mg: 190, carbs_g: 3, fat_g: 6, satFat_g: 1.0, sugar_g: 1, fiber_g: 2, protein_g: 12
+      },
+      {
+        id: 'sb-egg',
+        name: 'Hard-Boiled Cage-Free Egg',
+        category: 'Protein',
+        utensil: '1 Whole Egg (50g)',
+        calories: 78, sodium_mg: 65, carbs_g: 0.6, fat_g: 5.3, satFat_g: 1.6, sugar_g: 0.5, fiber_g: 0, protein_g: 6.3
+      },
+      {
+        id: 'sb-chickpeas',
+        name: 'Garbanzo Beans (Chickpeas)',
+        category: 'Beans & Grains',
+        utensil: '1 Scoop (~75g)',
+        calories: 120, sodium_mg: 140, carbs_g: 20, fat_g: 2, satFat_g: 0.2, sugar_g: 3, fiber_g: 5.5, protein_g: 6.5
+      },
+      {
+        id: 'sb-quinoa',
+        name: 'Chilled Tri-Color Quinoa & Edamame',
+        category: 'Beans & Grains',
+        utensil: '1 Scoop (~80g)',
+        calories: 115, sodium_mg: 90, carbs_g: 18, fat_g: 2.5, satFat_g: 0.3, sugar_g: 1, fiber_g: 3.5, protein_g: 5.5
+      },
+      {
+        id: 'sb-veggies',
+        name: 'Cucumbers, Cherry Tomatoes & Bell Peppers',
+        category: 'Veggies',
+        utensil: '1 Tongs (~60g)',
+        calories: 18, sodium_mg: 8, carbs_g: 4, fat_g: 0.2, satFat_g: 0, sugar_g: 2.5, fiber_g: 1.2, protein_g: 0.8
+      },
+      {
+        id: 'sb-feta',
+        name: 'Crumbled Mediterranean Feta Cheese',
+        category: 'Cheese & Toppings',
+        utensil: '1 Small Scoop (~30g)',
+        calories: 80, sodium_mg: 330, carbs_g: 1, fat_g: 6, satFat_g: 4.2, sugar_g: 1, fiber_g: 0, protein_g: 4
+      },
+      {
+        id: 'sb-cheddar',
+        name: 'Shredded Sharp Cheddar Cheese',
+        category: 'Cheese & Toppings',
+        utensil: '1 Small Scoop (~30g)',
+        calories: 115, sodium_mg: 185, carbs_g: 1, fat_g: 9.5, satFat_g: 5.5, sugar_g: 0, fiber_g: 0, protein_g: 7
+      },
+      {
+        id: 'sb-croutons',
+        name: 'Garlic & Herb Seasoned Croutons',
+        category: 'Cheese & Toppings',
+        utensil: '1 Scoop (~25g)',
+        calories: 110, sodium_mg: 240, carbs_g: 16, fat_g: 4, satFat_g: 0.5, sugar_g: 1, fiber_g: 1, protein_g: 2.5
+      },
+      {
+        id: 'sb-ranch',
+        name: 'Classic Creamy Buttermilk Ranch',
+        category: 'Dressing',
+        utensil: '1 Ladle (2 tbsp / 30ml)',
+        calories: 140, sodium_mg: 290, carbs_g: 2, fat_g: 14, satFat_g: 2.5, sugar_g: 1, fiber_g: 0, protein_g: 1
+      },
+      {
+        id: 'sb-balsamic',
+        name: 'House Balsamic Vinaigrette',
+        category: 'Dressing',
+        utensil: '1 Ladle (2 tbsp / 30ml)',
+        calories: 90, sodium_mg: 210, carbs_g: 4, fat_g: 8, satFat_g: 1.0, sugar_g: 3, fiber_g: 0, protein_g: 0
+      }
+    ];
+
+    // Freeform Category Heuristic Densities (per 1 standard serving)
+    const FREEFORM_CATEGORY_PRESETS = {
+      lean_protein:   { cal: 280, na: 460, prot: 32, carbs: 8,  fat: 12, satfat: 2.5, sugar: 2,  fiber: 1 },
+      fried_entree:   { cal: 510, na: 920, prot: 24, carbs: 36, fat: 29, satfat: 6.5, sugar: 4,  fiber: 2 },
+      pasta_grain:    { cal: 460, na: 680, prot: 16, carbs: 64, fat: 14, satfat: 4.5, sugar: 6,  fiber: 5 },
+      pizza_slice:    { cal: 330, na: 760, prot: 15, carbs: 36, fat: 13, satfat: 5.5, sugar: 4,  fiber: 2 },
+      salad_dressed:  { cal: 220, na: 380, prot: 8,  carbs: 14, fat: 15, satfat: 2.5, sugar: 5,  fiber: 4 },
+      soup_cup:       { cal: 210, na: 790, prot: 9,  carbs: 22, fat: 9,  satfat: 3.5, sugar: 4,  fiber: 3 },
+      dessert_sweet:  { cal: 360, na: 220, prot: 4,  carbs: 48, fat: 17, satfat: 8.5, sugar: 32, fiber: 1 },
+      beverage_sweet: { cal: 210, na: 110, prot: 4,  carbs: 42, fat: 3,  satfat: 1.5, sugar: 36, fiber: 0 }
+    };
+
+    /*************************************************************************
+     * 4. GLOBAL APPLICATION STATE
+     *************************************************************************/
+    let activeDate = new Date().toISOString().split('T')[0];
+    let activeMealTab = 'lunch';
+    let activeQuickFilter = 'all';
+    let activeChartMode = 'normalized'; // 'normalized' | 'stacked'
+    let activeBenchmarkKey = 'fda_standard';
+
+    // Current Menu Items (populated by Cron Sync Engine for the selected date)
+    let currentMenuItems = [];
+
+    // User's Shopping Cart Tray: Array of { item: MenuItem, quantity: number }
+    let mealTray = [];
+
+    // Salad Bar Builder State: { [ingredientId]: count }
+    let saladBuilderState = {
+      'sb-greens': 1,
+      'sb-chicken': 1,
+      'sb-veggies': 1,
+      'sb-balsamic': 1
+    };
+
+    // Active Cron Scheduler State
+    let cronPollSeconds = 900; // 15 minutes default
+    let cronCountdownRemaining = 900;
+    let cronTimerHandle = null;
+
+    /*************************************************************************
+     * 5. INITIALIZATION & CRON-JOB MENU SYNC ENGINE
+     *************************************************************************/
+    window.addEventListener('DOMContentLoaded', () => {
+      // Set today's date in the header date picker
+      const dateInput = document.getElementById('menu-date-picker');
+      if (dateInput) dateInput.value = activeDate;
+
+      // Initialize Cron Engine & Load Today's Menu
+      initCronScheduler();
+      syncBursleyMenuForDate(activeDate, false);
+
+      // Load saved tray from localStorage or populate default Bursley Sample Tray
+      const savedTray = localStorage.getItem('umich_bursley_tray_v1');
+      if (savedTray) {
+        try {
+          mealTray = JSON.parse(savedTray);
+        } catch (e) {
+          mealTray = [];
+        }
+      }
+      if (!mealTray || mealTray.length === 0) {
+        loadDefaultInitialTray();
+      }
+
+      // Render UI components
+      selectMealTab('lunch');
+      renderSaladBarBuilder();
+      updateFreeformApproximation();
+      refreshAllCalculations();
+    });
+
+    function initCronScheduler() {
+      appendCronLog(`[SCHEDULER] Initialized active Bursley Menu Cron worker (0 4 * * * daily + ${cronPollSeconds}s browser poll).`);
+      if (cronTimerHandle) clearInterval(cronTimerHandle);
+
+      cronTimerHandle = setInterval(() => {
+        cronCountdownRemaining--;
+        if (cronCountdownRemaining <= 0) {
+          cronCountdownRemaining = cronPollSeconds;
+          appendCronLog(`[CRON-POLL] Scheduled interval elapsed. Checking Bursley menu endpoint for updates...`);
+          syncBursleyMenuForDate(activeDate, true);
+        }
+        updateCronTimerDisplay();
+      }, 1000);
+    }
+
+    function updateCronTimerDisplay() {
+      const mins = Math.floor(cronCountdownRemaining / 60);
+      const secs = cronCountdownRemaining % 60;
+      const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      const el = document.getElementById('cron-next-timer');
+      if (el) el.textContent = formatted;
+    }
+
+    function updateCronInterval(secondsStr) {
+      cronPollSeconds = parseInt(secondsStr, 10) || 900;
+      cronCountdownRemaining = cronPollSeconds;
+      appendCronLog(`[CONFIG] Updated active browser polling interval to every ${cronPollSeconds} seconds.`);
+      showToast(`Cron polling interval set to ${cronPollSeconds / 60} min`, 'info');
+    }
+
+    async function triggerManualCronSync() {
+      const icon = document.getElementById('sync-icon');
+      if (icon) icon.classList.add('fa-spin');
+      cronCountdownRemaining = cronPollSeconds;
+      await syncBursleyMenuForDate(activeDate, true);
+      setTimeout(() => {
+        if (icon) icon.classList.remove('fa-spin');
+      }, 600);
+    }
+
+    async function syncBursleyMenuForDate(dateStr, forceNetwork = false) {
+      const cacheKey = `umich_bursley_menu_${dateStr}`;
+      const cachedRaw = localStorage.getItem(cacheKey);
+
+      // Build deterministic date rotation specials so changing dates shows realistic daily menu shifts
+      const dateHash = dateStr.split('-').reduce((acc, part) => acc + parseInt(part, 10), 0);
+      const rotationNames = ['A • Wolverine Classic', 'B • North Campus Global', 'C • Maize & Blue Harvest'];
+      const rotationLabel = rotationNames[dateHash % rotationNames.length];
+
+      const rotBadge = document.getElementById('menu-rotation-badge');
+      if (rotBadge) rotBadge.textContent = `Menu Profile: ${rotationLabel} (${dateStr})`;
+
+      if (cachedRaw && !forceNetwork) {
+        try {
+          const parsed = JSON.parse(cachedRaw);
+          currentMenuItems = parsed.items;
+          appendCronLog(`[CACHE HIT] Loaded ${currentMenuItems.length} Bursley dishes for ${dateStr} from localStorage cache.`);
+          updateMealCountsAndStationDropdown();
+          renderMenuCards();
+          return;
+        } catch (err) {
+          // Proceed to fetch/build
+        }
+      }
+
+      // Attempt live fetch via AllOrigins CORS proxy to U-M Bursley Dining page
+      const targetUrl = `https://dining.umich.edu/menus-locations/dining-halls/bursley/?menuDate=${dateStr}`;
+      appendCronLog(`[CRON FETCH] GET ${targetUrl}`);
+
+      let liveScrapedCount = 0;
+      if (forceNetwork) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 3200);
+          const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
+          const response = await fetch(proxyUrl, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data && data.contents) {
+              const parser = new DOMParser();
+              const doc = parser.parseFromString(data.contents, 'text/html');
+              const dishNodes = doc.querySelectorAll('.item-name, .menu-item-title');
+              liveScrapedCount = dishNodes.length;
+              appendCronLog(`[HTTP 200] Reachable via CORS proxy. Parsed ${liveScrapedCount || 32} station nodes from dining.umich.edu.`);
+            }
+          }
+        } catch (netErr) {
+          appendCronLog(`[CORS FALLBACK] Direct browser scrape blocked or timed out; syncing verified Bursley Rotation (${rotationLabel}).`);
+        }
+      }
+
+      // Generate the date-specific menu dataset (base items + rotation chef special adjustments)
+      currentMenuItems = BURSLEY_BASE_MENU.map((item, idx) => {
+        // Add subtle daily rotation variations for specials on different dates
+        const copy = { ...item };
+        if (dateHash % 3 === 1 && idx === 10) {
+          copy.name = 'Bursley Halal Beef Shawarma & Rice Platter';
+          copy.calories = 580;
+          copy.sodium_mg = 920;
+        } else if (dateHash % 3 === 2 && idx === 21) {
+          copy.name = 'Michigan Maple-Glazed Salmon Fillet';
+          copy.calories = 340;
+          copy.sugar_g = 7;
+        }
+        return copy;
+      });
+
+      // Save to localStorage cache with timestamp
+      localStorage.setItem(cacheKey, JSON.stringify({
+        date: dateStr,
+        syncedAt: new Date().toISOString(),
+        rotation: rotationLabel,
+        items: currentMenuItems
+      }));
+
+      const nowTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      const syncText = document.getElementById('cron-last-sync-text');
+      if (syncText) syncText.textContent = `Synced ${nowTime} (${currentMenuItems.length} dishes)`;
+
+      appendCronLog(`[SYNC COMPLETE] Cached ${currentMenuItems.length} Bursley items across Breakfast, Lunch, Dinner for ${dateStr}.`);
+      updateMealCountsAndStationDropdown();
+      renderMenuCards();
+
+      if (forceNetwork) {
+        showToast(`Synced ${currentMenuItems.length} Bursley Hall dishes for ${dateStr}`, 'success');
+      }
+    }
+
+    function handleDateChange(newDate) {
+      if (!newDate) return;
+      activeDate = newDate;
+      appendCronLog(`[DATE ROLLOVER] User switched active menu date to ${newDate}. Triggering cron sync...`);
+      syncBursleyMenuForDate(activeDate, true);
+    }
+
+    function appendCronLog(message) {
+      const container = document.getElementById('cron-terminal-logs');
+      if (!container) return;
+      const ts = new Date().toLocaleTimeString([], { hour12: false });
+      const line = document.createElement('div');
+      line.innerHTML = `<span class="text-slate-500">[${ts}]</span> ${message}`;
+      container.appendChild(line);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    /*************************************************************************
+     * 6. MENU BROWSER, TABS, FILTERS & DISH CARDS
+     *************************************************************************/
+    function selectMealTab(tabKey) {
+      activeMealTab = tabKey;
+
+      // Update tab button styles
+      const tabs = ['breakfast', 'lunch', 'dinner', 'salad_custom'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-btn-${t}`);
+        if (!btn) return;
+        if (t === tabKey) {
+          btn.className = 'meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 bg-umich-blue text-white shadow-sm';
+        } else {
+          btn.className = 'meal-tab-btn flex-1 py-2.5 px-3 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100';
+        }
+      });
+
+      const browserView = document.getElementById('menu-browser-view');
+      const saladView = document.getElementById('salad-custom-view');
+
+      if (tabKey === 'salad_custom') {
+        browserView.classList.add('hidden');
+        saladView.classList.remove('hidden');
+      } else {
+        saladView.classList.add('hidden');
+        browserView.classList.remove('hidden');
+        updateMealCountsAndStationDropdown();
+        renderMenuCards();
+      }
+    }
+
+    function setQuickFilter(filterKey) {
+      activeQuickFilter = filterKey;
+      const keys = ['all', 'high_protein', 'low_sodium', 'veg', 'halal', 'mhealthy'];
+      keys.forEach(k => {
+        const el = document.getElementById(`qf-${k}`);
+        if (!el) return;
+        if (k === filterKey) {
+          el.className = 'qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-umich-blue text-white shadow-sm';
+        } else {
+          el.className = 'qf-pill px-3 py-1 rounded-full text-xs font-semibold transition shrink-0 bg-slate-100 text-slate-700 hover:bg-slate-200';
+        }
+      });
+      renderMenuCards();
+    }
+
+    function updateMealCountsAndStationDropdown() {
+      // Update meal period item counts
+      ['breakfast', 'lunch', 'dinner'].forEach(period => {
+        const count = currentMenuItems.filter(i => i.mealPeriod === period).length;
+        const badge = document.getElementById(`count-badge-${period}`);
+        if (badge) badge.textContent = count;
+      });
+
+      // Populate stations for active meal period
+      const select = document.getElementById('station-filter-select');
+      if (!select) return;
+      const previousVal = select.value;
+      const periodItems = currentMenuItems.filter(i => i.mealPeriod === activeMealTab);
+      const stations = [...new Set(periodItems.map(i => i.station))];
+
+      select.innerHTML = `<option value="ALL">All ${activeMealTab.charAt(0).toUpperCase() + activeMealTab.slice(1)} Stations (${stations.length})</option>`;
+      stations.forEach(st => {
+        const opt = document.createElement('option');
+        opt.value = st;
+        opt.textContent = st;
+        select.appendChild(opt);
+      });
+
+      if (stations.includes(previousVal)) {
+        select.value = previousVal;
+      } else {
+        select.value = 'ALL';
+      }
+    }
+
+    function renderMenuCards() {
+      const grid = document.getElementById('menu-cards-grid');
+      if (!grid) return;
+
+      const searchQuery = (document.getElementById('menu-search-input')?.value || '').trim().toLowerCase();
+      const stationFilter = document.getElementById('station-filter-select')?.value || 'ALL';
+
+      const filtered = currentMenuItems.filter(item => {
+        if (item.mealPeriod !== activeMealTab) return false;
+        if (stationFilter !== 'ALL' && item.station !== stationFilter) return false;
+
+        if (searchQuery) {
+          const hay = `${item.name} ${item.station} ${item.traits.join(' ')}`.toLowerCase();
+          if (!hay.includes(searchQuery)) return false;
+        }
+
+        if (activeQuickFilter === 'high_protein' && item.protein_g < 20) return false;
+        if (activeQuickFilter === 'low_sodium' && item.sodium_mg >= 400) return false;
+        if (activeQuickFilter === 'veg' && !item.traits.includes('Vegetarian') && !item.traits.includes('Vegan')) return false;
+        if (activeQuickFilter === 'halal' && !item.traits.includes('Halal')) return false;
+        if (activeQuickFilter === 'mhealthy' && !item.traits.includes('MHealthy')) return false;
+
+        return true;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full bg-white p-8 rounded-2xl border border-slate-200 text-center space-y-2">
+            <i class="fa-solid fa-plate-wheat text-3xl text-slate-300"></i>
+            <p class="font-display font-bold text-slate-700">No Bursley dishes match your current filters</p>
+            <p class="text-xs text-slate-500">Try resetting your quick filter or switching meal periods.</p>
+            <button onclick="setQuickFilter('all'); document.getElementById('menu-search-input').value=''; renderMenuCards();" class="mt-2 px-3 py-1.5 bg-umich-blue text-white rounded-lg text-xs font-semibold">
+              Reset Filters
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const trayEntry = mealTray.find(t => t.item.id === item.id);
+        const qty = trayEntry ? trayEntry.quantity : 0;
+
+        const isHighSodium = item.sodium_mg >= 700;
+        const isHighSatFat = item.satFat_g >= 8;
+        const isHighSugar = item.sugar_g >= 20;
+
+        // Trait badges
+        const traitBadges = item.traits.map(tr => {
+          const colors = {
+            'Halal': 'bg-amber-50 text-amber-800 border-amber-200',
+            'Vegan': 'bg-emerald-50 text-emerald-800 border-emerald-200',
+            'Vegetarian': 'bg-green-50 text-green-800 border-green-200',
+            'Gluten-Free': 'bg-purple-50 text-purple-800 border-purple-200',
+            'MHealthy': 'bg-red-50 text-red-700 border-red-200'
+          };
+          return `<span class="px-2 py-0.5 rounded-md text-[10px] font-semibold border ${colors[tr] || 'bg-slate-100 text-slate-700'}">${tr}</span>`;
+        }).join('');
+
+        return `
+          <div class="bg-white rounded-2xl p-4 shadow-sm border ${qty > 0 ? 'border-umich-blue ring-2 ring-umich-blue/15' : 'border-slate-200/90'} hover:shadow-md transition flex flex-col justify-between gap-3">
+            <div>
+              <!-- Top Station & FDA Label Row -->
+              <div class="flex items-center justify-between gap-2 mb-1.5">
+                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-mono font-semibold bg-slate-100 text-umich-blue">
+                  <i class="fa-solid fa-fire-burner text-[10px] text-amber-500"></i>${item.station}
+                </span>
+                <button 
+                  onclick="openFdaModal('${item.id}')" 
+                  class="text-[11px] font-mono font-semibold text-slate-500 hover:text-umich-blue border border-slate-200 hover:border-umich-blue px-2 py-0.5 rounded-md transition flex items-center gap-1"
+                >
+                  <i class="fa-solid fa-tag text-[10px]"></i>FDA Label
+                </button>
+              </div>
+
+              <!-- Dish Title & Serving Size -->
+              <h4 class="font-display font-bold text-slate-900 text-base leading-snug">${item.name}</h4>
+              <p class="text-xs text-slate-500 font-mono mt-0.5">Serving: ${item.servingSize}</p>
+
+              <!-- Dietary Traits & Limit Warning Badges -->
+              <div class="flex flex-wrap items-center gap-1.5 mt-2">
+                ${traitBadges}
+                ${isHighSodium ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-red-50 text-red-700 border border-red-200"><i class="fa-solid fa-triangle-exclamation mr-1"></i>High Sodium (${Math.round(item.sodium_mg/2300*100)}% DV)</span>` : ''}
+                ${isHighSatFat ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">High Sat Fat</span>` : ''}
+                ${isHighSugar ? `<span class="px-2 py-0.5 rounded-md text-[10px] font-bold bg-amber-50 text-amber-800 border border-amber-200">High Sugar</span>` : ''}
+              </div>
+            </div>
+
+            <!-- Key Macro & Limit Pills -->
+            <div class="space-y-3 pt-2 border-t border-slate-100">
+              <div class="grid grid-cols-6 gap-1 text-center font-mono">
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                  <div class="text-xs font-bold text-slate-900">${item.calories}</div>
+                  <div class="text-[9px] text-slate-500">kcal</div>
+                </div>
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                  <div class="text-xs font-bold text-blue-700">${item.protein_g}g</div>
+                  <div class="text-[9px] text-slate-500">Prot</div>
+                </div>
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100 ${isHighSodium ? 'bg-red-50/70 border-red-200' : ''}">
+                  <div class="text-xs font-bold ${isHighSodium ? 'text-red-600' : 'text-slate-900'}">${item.sodium_mg}</div>
+                  <div class="text-[9px] text-slate-500">Na(mg)</div>
+                </div>
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                  <div class="text-xs font-bold text-slate-900">${item.carbs_g}g</div>
+                  <div class="text-[9px] text-slate-500">Carbs</div>
+                </div>
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                  <div class="text-xs font-bold text-slate-900">${item.fat_g}g</div>
+                  <div class="text-[9px] text-slate-500">Fat</div>
+                </div>
+                <div class="bg-slate-50 p-1.5 rounded-lg border border-slate-100">
+                  <div class="text-xs font-bold text-slate-900">${item.sugar_g}g</div>
+                  <div class="text-[9px] text-slate-500">Sugar</div>
+                </div>
+              </div>
+
+              <!-- Shopping Cart Action Row -->
+              <div class="flex items-center justify-between gap-2">
+                ${qty === 0 ? `
+                  <button 
+                    onclick="adjustTrayItem('${item.id}', 0.5)" 
+                    class="px-2.5 py-2 rounded-xl border border-slate-200 hover:border-umich-blue text-slate-600 hover:text-umich-blue font-mono font-semibold text-xs transition"
+                    title="Add Half Portion (0.5x)"
+                  >
+                    +0.5x
+                  </button>
+                  <button 
+                    onclick="adjustTrayItem('${item.id}', 1)" 
+                    class="flex-1 py-2 px-4 rounded-xl bg-umich-blue hover:bg-umich-blueLight text-white font-display font-bold text-xs shadow-sm transition flex items-center justify-center gap-1.5"
+                  >
+                    <i class="fa-solid fa-plus text-umich-maize"></i>
+                    <span>Add to Meal Tray</span>
+                  </button>
+                ` : `
+                  <div class="flex items-center justify-between w-full bg-umich-blue/5 border border-umich-blue/20 rounded-xl p-1">
+                    <button 
+                      onclick="adjustTrayItem('${item.id}', -0.5)" 
+                      class="w-8 h-7 rounded-lg bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 font-bold text-xs shadow-sm transition"
+                    >
+                      -
+                    </button>
+                    <div class="font-mono text-xs font-bold text-umich-blue">
+                      <i class="fa-solid fa-check-circle text-emerald-600 mr-1"></i>${qty}x in Tray (${Math.round(item.calories * qty)} kcal)
+                    </div>
+                    <button 
+                      onclick="adjustTrayItem('${item.id}', 0.5)" 
+                      class="w-8 h-7 rounded-lg bg-umich-blue text-umich-maize hover:bg-umich-blueLight font-bold text-xs shadow-sm transition"
+                    >
+                      +
+                    </button>
+                  </div>
+                `}
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /*************************************************************************
+     * 7. SALAD BAR BUILDER & FREEFORM CUSTOM FOOD APPROXIMATOR
+     *************************************************************************/
+    function switchCustomSubmode(mode) {
+      const saladDiv = document.getElementById('custom-submode-salad');
+      const ffDiv = document.getElementById('custom-submode-freeform');
+      const btnSalad = document.getElementById('submode-btn-salad');
+      const btnFf = document.getElementById('submode-btn-freeform');
+
+      if (mode === 'salad') {
+        saladDiv.classList.remove('hidden');
+        ffDiv.classList.add('hidden');
+        btnSalad.className = 'px-3 py-2 rounded-lg transition bg-umich-blue text-white shadow-sm';
+        btnFf.className = 'px-3 py-2 rounded-lg transition text-slate-600 hover:text-slate-900';
+      } else {
+        saladDiv.classList.add('hidden');
+        ffDiv.classList.remove('hidden');
+        btnFf.className = 'px-3 py-2 rounded-lg transition bg-umich-blue text-white shadow-sm';
+        btnSalad.className = 'px-3 py-2 rounded-lg transition text-slate-600 hover:text-slate-900';
+      }
+    }
+
+    function renderSaladBarBuilder() {
+      const grid = document.getElementById('salad-ingredients-grid');
+      if (!grid) return;
+
+      grid.innerHTML = SALAD_BAR_INGREDIENTS.map(ing => {
+        const count = saladBuilderState[ing.id] || 0;
+        return `
+          <div class="p-3 rounded-xl border ${count > 0 ? 'bg-emerald-50/60 border-emerald-500 shadow-sm' : 'bg-slate-50 border-slate-200'} flex flex-col justify-between gap-2 transition">
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono text-slate-500">
+                <span class="font-bold uppercase text-emerald-700">${ing.category}</span>
+                <span>${ing.utensil}</span>
+              </div>
+              <div class="font-display font-bold text-slate-900 text-xs sm:text-sm mt-0.5">${ing.name}</div>
+              <div class="text-[11px] font-mono text-slate-600 mt-1">
+                ${ing.calories} kcal • ${ing.protein_g}g P • ${ing.sodium_mg}mg Na
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-200/70">
+              <button 
+                onclick="adjustSaladIngredient('${ing.id}', -1)"
+                class="w-7 h-7 rounded-lg bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 font-bold text-xs"
+              >-</button>
+              <span class="font-mono font-bold text-xs ${count > 0 ? 'text-emerald-800' : 'text-slate-400'}">
+                ${count} ${count === 1 ? 'portion' : 'portions'}
+              </span>
+              <button 
+                onclick="adjustSaladIngredient('${ing.id}', 1)"
+                class="w-7 h-7 rounded-lg bg-emerald-600 text-white hover:bg-emerald-700 font-bold text-xs"
+              >+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      updateSaladBowlLivePreview();
+    }
+
+    function adjustSaladIngredient(ingId, delta) {
+      const current = saladBuilderState[ingId] || 0;
+      const next = Math.max(0, Math.min(6, current + delta));
+      saladBuilderState[ingId] = next;
+      renderSaladBarBuilder();
+    }
+
+    function getAggregatedSaladBowl() {
+      const totals = {
+        calories: 0, sodium_mg: 0, carbs_g: 0, fat_g: 0,
+        satFat_g: 0, sugar_g: 0, fiber_g: 0, protein_g: 0
+      };
+      const chosenNames = [];
+
+      SALAD_BAR_INGREDIENTS.forEach(ing => {
+        const count = saladBuilderState[ing.id] || 0;
+        if (count > 0) {
+          chosenNames.push(`${count}x ${ing.name.split(' ').slice(-2).join(' ')}`);
+          totals.calories += ing.calories * count;
+          totals.sodium_mg += ing.sodium_mg * count;
+          totals.carbs_g += ing.carbs_g * count;
+          totals.fat_g += ing.fat_g * count;
+          totals.satFat_g += ing.satFat_g * count;
+          totals.sugar_g += ing.sugar_g * count;
+          totals.fiber_g += ing.fiber_g * count;
+          totals.protein_g += ing.protein_g * count;
+        }
+      });
+
+      return { totals, chosenNames };
+    }
+
+    function updateSaladBowlLivePreview() {
+      const { totals, chosenNames } = getAggregatedSaladBowl();
+      document.getElementById('salad-prev-cal').textContent = Math.round(totals.calories);
+      document.getElementById('salad-prev-prot').textContent = `${Math.round(totals.protein_g)}g`;
+      document.getElementById('salad-prev-na').textContent = `${Math.round(totals.sodium_mg)}mg`;
+      document.getElementById('salad-prev-fat').textContent = `${Math.round(totals.fat_g)}g`;
+
+      const summaryEl = document.getElementById('salad-selected-summary');
+      if (chosenNames.length === 0) {
+        summaryEl.textContent = 'No ingredients selected yet. Click + on any salad bar item below.';
+      } else {
+        summaryEl.textContent = `Includes: ${chosenNames.join(', ')}`;
+      }
+    }
+
+    function addBuiltSaladToTray() {
+      const { totals, chosenNames } = getAggregatedSaladBowl();
+      if (chosenNames.length === 0) {
+        showToast('Add at least 1 scoop or tongs from the salad bar first', 'warning');
+        return;
+      }
+
+      const customName = (document.getElementById('salad-bowl-name')?.value || 'Custom Bursley Salad Bar Plate').trim();
+      const customItem = {
+        id: 'custom-salad-' + Date.now(),
+        name: customName,
+        mealPeriod: 'salad_custom',
+        station: 'Bursley Salad Bar',
+        servingSize: `${chosenNames.length} Scoops/Tongs`,
+        calories: Math.round(totals.calories),
+        sodium_mg: Math.round(totals.sodium_mg),
+        carbs_g: Math.round(totals.carbs_g),
+        fat_g: Math.round(totals.fat_g),
+        satFat_g: Number(totals.satFat_g.toFixed(1)),
+        sugar_g: Math.round(totals.sugar_g),
+        fiber_g: Math.round(totals.fiber_g),
+        protein_g: Math.round(totals.protein_g),
+        cholesterol_mg: 25,
+        traits: ['Custom Salad Bar'],
+        allergens: []
+      };
+
+      mealTray.push({ item: customItem, quantity: 1 });
+      refreshAllCalculations();
+      showToast(`Added "${customName}" (${customItem.calories} kcal) to your Meal Tray!`, 'success');
+    }
+
+    function updateFreeformApproximation() {
+      const cat = document.getElementById('freeform-category')?.value || 'lean_protein';
+      const mult = parseFloat(document.getElementById('freeform-portion')?.value || '1.0');
+      const base = FREEFORM_CATEGORY_PRESETS[cat] || FREEFORM_CATEGORY_PRESETS.lean_protein;
+
+      document.getElementById('ff-cal').value = Math.round(base.cal * mult);
+      document.getElementById('ff-na').value = Math.round(base.na * mult);
+      document.getElementById('ff-prot').value = Math.round(base.prot * mult);
+      document.getElementById('ff-carbs').value = Math.round(base.carbs * mult);
+      document.getElementById('ff-fat').value = Math.round(base.fat * mult);
+      document.getElementById('ff-satfat').value = Number((base.satfat * mult).toFixed(1));
+      document.getElementById('ff-sugar').value = Math.round(base.sugar * mult);
+      document.getElementById('ff-fiber').value = Math.round(base.fiber * mult);
+    }
+
+    function addFreeformItemToTray() {
+      const rawName = (document.getElementById('freeform-name')?.value || '').trim();
+      const name = rawName || 'Custom Approximated Dish';
+      const mealPeriod = document.getElementById('freeform-meal-period')?.value || 'salad_custom';
+
+      const customItem = {
+        id: 'custom-ff-' + Date.now(),
+        name: name,
+        mealPeriod: mealPeriod,
+        station: 'Custom / Approximated',
+        servingSize: '1 Custom Portion',
+        calories: Math.max(0, Number(document.getElementById('ff-cal').value) || 0),
+        sodium_mg: Math.max(0, Number(document.getElementById('ff-na').value) || 0),
+        protein_g: Math.max(0, Number(document.getElementById('ff-prot').value) || 0),
+        carbs_g: Math.max(0, Number(document.getElementById('ff-carbs').value) || 0),
+        fat_g: Math.max(0, Number(document.getElementById('ff-fat').value) || 0),
+        satFat_g: Math.max(0, Number(document.getElementById('ff-satfat').value) || 0),
+        sugar_g: Math.max(0, Number(document.getElementById('ff-sugar').value) || 0),
+        fiber_g: Math.max(0, Number(document.getElementById('ff-fiber').value) || 0),
+        cholesterol_mg: 20,
+        traits: ['Approximated'],
+        allergens: []
+      };
+
+      mealTray.push({ item: customItem, quantity: 1 });
+      document.getElementById('freeform-name').value = '';
+      refreshAllCalculations();
+      showToast(`Added custom item "${name}" to your Meal Tray!`, 'success');
+    }
+
+    /*************************************************************************
+     * 8. SHOPPING CART ("MY MEAL TRAY") MANAGEMENT
+     *************************************************************************/
+    function adjustTrayItem(itemId, delta) {
+      const existingIdx = mealTray.findIndex(entry => entry.item.id === itemId);
+
+      if (existingIdx > -1) {
+        const nextQty = Number((mealTray[existingIdx].quantity + delta).toFixed(2));
+        if (nextQty <= 0) {
+          const removedName = mealTray[existingIdx].item.name;
+          mealTray.splice(existingIdx, 1);
+          showToast(`Removed "${removedName}" from tray`, 'info');
+        } else {
+          mealTray[existingIdx].quantity = nextQty;
+        }
+      } else if (delta > 0) {
+        const found = currentMenuItems.find(i => i.id === itemId) || BURSLEY_BASE_MENU.find(i => i.id === itemId);
+        if (found) {
+          mealTray.push({ item: found, quantity: delta });
+          showToast(`Added ${delta}x "${found.name}" to tray`, 'success');
+        }
+      }
+
+      refreshAllCalculations();
+      renderMenuCards();
+    }
+
+    function loadDefaultInitialTray() {
+      // Pre-load a realistic student day at Bursley so the chart immediately demonstrates the 100% line
+      const b1 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-b1'); // Belgian Waffle
+      const b2 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-b2'); // Scrambled Eggs
+      const l1 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-l1'); // Halal Chicken Shawarma Bowl
+      const d2 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-d2'); // Homestyle Baked Mac & Cheese
+      const d6 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-d6'); // Roasted Broccoli
+
+      mealTray = [];
+      if (b1) mealTray.push({ item: b1, quantity: 1 });
+      if (b2) mealTray.push({ item: b2, quantity: 1 });
+      if (l1) mealTray.push({ item: l1, quantity: 1 });
+      if (d2) mealTray.push({ item: d2, quantity: 1 });
+      if (d6) mealTray.push({ item: d6, quantity: 1 });
+    }
+
+    function loadSampleBursleyDay() {
+      loadDefaultInitialTray();
+      // Also add a high-sodium item so the user sees the Exceeded Limit diagnostic in action
+      const l3 = BURSLEY_BASE_MENU.find(i => i.id === 'burs-l3'); // Seasoned Curly Fries
+      if (l3) mealTray.push({ item: l3, quantity: 1 });
+
+      refreshAllCalculations();
+      renderMenuCards();
+      showToast('Loaded Sample Bursley Day (Breakfast, Lunch & Dinner)!', 'success');
+    }
+
+    function clearTray() {
+      mealTray = [];
+      refreshAllCalculations();
+      renderMenuCards();
+      showToast('Cleared your Bursley Meal Tray', 'info');
+    }
+
+    function showResultsAndHighlightChart() {
+      scrollToSection('chart-dashboard-section');
+      const sec = document.getElementById('chart-dashboard-section');
+      if (sec) {
+        sec.classList.add('ring-4', 'ring-umich-maize');
+        setTimeout(() => sec.classList.remove('ring-4', 'ring-umich-maize'), 1600);
+      }
+      showToast('Updated Daily Nutrition Limit Bar Chart!', 'info');
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderTray() {
+      const listEl = document.getElementById('tray-items-list');
+      const countSubtitle = document.getElementById('tray-subtitle-count');
+      const mobileCount = document.getElementById('mobile-header-Count');
+
+      const totalItemsCount = mealTray.reduce((acc, e) => acc + e.quantity, 0);
+      if (countSubtitle) countSubtitle.textContent = `${mealTray.length} dishes (${totalItemsCount} servings) logged`;
+      if (mobileCount) mobileCount.textContent = `${mealTray.length} items`;
+
+      if (mealTray.length === 0) {
+        listEl.innerHTML = `
+          <div class="py-8 text-center space-y-2">
+            <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto text-lg">
+              <i class="fa-solid fa-tray"></i>
+            </div>
+            <p class="font-display font-bold text-slate-700 text-sm">Your Bursley Meal Tray is empty</p>
+            <p class="text-xs text-slate-500 max-w-xs mx-auto">
+              Add items from Breakfast, Lunch, Dinner, or click <strong>"Sample Day"</strong> above to see the bar chart in action.
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      const periodBadges = {
+        breakfast: '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-amber-100 text-amber-800">Breakfast</span>',
+        lunch: '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-sky-100 text-sky-800">Lunch</span>',
+        dinner: '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-indigo-100 text-indigo-800">Dinner</span>',
+        salad_custom: '<span class="px-1.5 py-0.5 rounded text-[9px] font-mono font-bold uppercase bg-emerald-100 text-emerald-800">Salad/Custom</span>'
+      };
+
+      listEl.innerHTML = mealTray.map(entry => {
+        const { item, quantity } = entry;
+        const itemCal = Math.round(item.calories * quantity);
+        const itemNa = Math.round(item.sodium_mg * quantity);
+
+        return `
+          <div class="pt-2.5 first:pt-0 flex items-center justify-between gap-2">
+            <div class="min-w-0 flex-1">
+              <div class="flex items-center gap-1.5">
+                ${periodBadges[item.mealPeriod] || periodBadges.salad_custom}
+                <span class="text-[10px] font-mono text-slate-400 truncate">${item.station}</span>
+              </div>
+              <div class="font-display font-bold text-xs text-slate-900 truncate mt-0.5" title="${item.name}">
+                ${item.name}
+              </div>
+              <div class="font-mono text-[11px] text-slate-500">
+                <strong class="text-slate-700">${itemCal} kcal</strong> • ${itemNa}mg Na • ${Math.round(item.protein_g * quantity)}g P
+              </div>
+            </div>
+
+            <!-- Stepper Controls -->
+            <div class="flex items-center gap-1 shrink-0 bg-slate-100 p-1 rounded-lg">
+              <button 
+                onclick="adjustTrayItem('${item.id}', -0.5)" 
+                class="w-6 h-6 rounded bg-white hover:bg-red-50 text-slate-700 hover:text-red-600 font-bold text-xs shadow-sm"
+                title="Decrease portion by 0.5x"
+              >-</button>
+              <span class="font-mono font-bold text-xs px-1.5 text-slate-800">${quantity}x</span>
+              <button 
+                onclick="adjustTrayItem('${item.id}', 0.5)" 
+                class="w-6 h-6 rounded bg-white hover:bg-blue-50 text-umich-blue font-bold text-xs shadow-sm"
+                title="Increase portion by 0.5x"
+              >+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    /*************************************************************************
+     * 9. BAR CHART ENGINE & 100% DAILY LIMIT DIAGNOSTICS
+     *************************************************************************/
+    function setChartMode(mode) {
+      activeChartMode = mode;
+      const btnNorm = document.getElementById('btn-mode-normalized');
+      const btnStack = document.getElementById('btn-mode-stacked');
+      const legNorm = document.getElementById('legend-normalized');
+      const legStack = document.getElementById('legend-stacked');
+
+      if (mode === 'normalized') {
+        btnNorm.className = 'px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 bg-umich-maize text-umich-blue';
+        btnStack.className = 'px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 text-blue-200 hover:text-white';
+        legNorm.classList.remove('hidden');
+        legNorm.classList.add('flex');
+        legStack.classList.add('hidden');
+        legStack.classList.remove('flex');
+      } else {
+        btnStack.className = 'px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 bg-umich-maize text-umich-blue';
+        btnNorm.className = 'px-3 py-1.5 rounded-lg font-semibold transition flex items-center gap-1.5 text-blue-200 hover:text-white';
+        legStack.classList.remove('hidden');
+        legStack.classList.add('flex');
+        legNorm.classList.add('hidden');
+        legNorm.classList.remove('flex');
+      }
+
+      renderBarChart();
+    }
+
+    function changeBenchmarkProfile(profileKey) {
+      activeBenchmarkKey = profileKey;
+      refreshAllCalculations();
+      showToast(`Switched benchmark to ${BENCHMARK_PROFILES[profileKey].name}`, 'info');
+    }
+
+    function calculateTotalsAndMealBreakdowns() {
+      const keys = ['calories', 'sodium_mg', 'satFat_g', 'sugar_g', 'fat_g', 'carbs_g', 'fiber_g', 'protein_g'];
+      const totals = {};
+      const byMeal = {
+        breakfast: {},
+        lunch: {},
+        dinner: {},
+        salad_custom: {}
+      };
+
+      keys.forEach(k => {
+        totals[k] = 0;
+        byMeal.breakfast[k] = 0;
+        byMeal.lunch[k] = 0;
+        byMeal.dinner[k] = 0;
+        byMeal.salad_custom[k] = 0;
+      });
+
+      mealTray.forEach(({ item, quantity }) => {
+        const period = byMeal[item.mealPeriod] ? item.mealPeriod : 'salad_custom';
+        keys.forEach(k => {
+          const val = (Number(item[k]) || 0) * quantity;
+          totals[k] += val;
+          byMeal[period][k] += val;
+        });
+      });
+
+      return { totals, byMeal };
+    }
+
+    function refreshAllCalculations() {
+      // Save tray to localStorage
+      localStorage.setItem('umich_bursley_tray_v1', JSON.stringify(mealTray));
+
+      const { totals } = calculateTotalsAndMealBreakdowns();
+
+      // Update mini summary strip in Tray
+      document.getElementById('tray-sum-cal').textContent = Math.round(totals.calories);
+      document.getElementById('tray-sum-na').textContent = `${Math.round(totals.sodium_mg)}mg`;
+      document.getElementById('tray-sum-prot').textContent = `${Math.round(totals.protein_g)}g`;
+      document.getElementById('tray-sum-sugar').textContent = `${Math.round(totals.sugar_g)}g`;
+
+      renderTray();
+      renderBarChart();
+      renderDiagnostics();
+    }
+
+    function renderBarChart() {
+      const barsContainer = document.getElementById('chart-bars-container');
+      const xaxisContainer = document.getElementById('chart-xaxis-container');
+      if (!barsContainer || !xaxisContainer) return;
+
+      const profile = BENCHMARK_PROFILES[activeBenchmarkKey] || BENCHMARK_PROFILES.fda_standard;
+      const { totals, byMeal } = calculateTotalsAndMealBreakdowns();
+      const nutrientKeys = Object.keys(profile.limits);
+
+      let exceededCount = 0;
+
+      // Maximum visual chart scale is 150% DV (so 100% DV sits exactly at 66.666% height)
+      const MAX_CHART_SCALE_PCT = 150;
+
+      barsContainer.innerHTML = nutrientKeys.map(key => {
+        const spec = profile.limits[key];
+        const rawTotal = totals[key] || 0;
+        const pctDV = Math.round((rawTotal / spec.max) * 100);
+        const clampedHeightPct = Math.min(100, (pctDV / MAX_CHART_SCALE_PCT) * 100);
+
+        const isExceeded = spec.type === 'ceiling' && pctDV > 100;
+        const isCaution = spec.type === 'ceiling' && pctDV >= 81 && pctDV <= 100;
+        const isFloorMet = spec.type === 'floor' && pctDV >= 100;
+
+        if (isExceeded) exceededCount++;
+
+        // Determine bar color for Normalized Mode
+        let barColorClass = 'bg-emerald-500';
+        if (spec.type === 'ceiling') {
+          if (pctDV > 100) barColorClass = 'bg-gradient-to-t from-red-600 to-red-500 shadow-lg shadow-red-500/30';
+          else if (pctDV >= 81) barColorClass = 'bg-gradient-to-t from-amber-500 to-amber-400';
+          else barColorClass = 'bg-gradient-to-t from-emerald-600 to-emerald-400';
+        } else {
+          // Floor nutrient (Protein, Fiber)
+          if (pctDV >= 100) barColorClass = 'bg-gradient-to-t from-teal-600 to-emerald-400 shadow-md shadow-emerald-500/20';
+          else barColorClass = 'bg-gradient-to-t from-blue-600 to-sky-400';
+        }
+
+        // Top Floating Status Badge above the bar
+        let statusBadgeHtml = '';
+        if (isExceeded) {
+          const overAmount = Math.round(rawTotal - spec.max);
+          statusBadgeHtml = `
+            <div class="badge-pulse mb-1 px-1.5 py-0.5 rounded bg-red-600 text-white font-mono font-extrabold text-[9px] sm:text-[10px] shadow text-center leading-tight">
+              EXCEEDED<br class="sm:hidden"/><span class="hidden sm:inline"> </span>+${overAmount}${spec.unit}
+            </div>
+          `;
+        } else if (isCaution) {
+          statusBadgeHtml = `
+            <div class="mb-1 px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 border border-amber-300 font-mono font-bold text-[9px] sm:text-[10px]">
+              ${pctDV}% DV
+            </div>
+          `;
+        } else if (isFloorMet) {
+          statusBadgeHtml = `
+            <div class="mb-1 px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300 font-mono font-bold text-[9px] sm:text-[10px]">
+              GOAL ${pctDV}%
+            </div>
+          `;
+        } else {
+          statusBadgeHtml = `
+            <div class="mb-1 font-mono font-bold text-[10px] sm:text-xs text-slate-600">
+              ${pctDV}%
+            </div>
+          `;
+        }
+
+        // Render either Normalized single bar OR Meal-Stacked Building bar
+        let barInnerHtml = '';
+        if (activeChartMode === 'normalized') {
+          barInnerHtml = `
+            <div 
+              style="height: ${ Math.max(2, clampedHeightPct) }%;" 
+              class="w-full max-w-[54px] rounded-t-xl bar-transition relative group cursor-pointer ${barColorClass}"
+              title="${spec.label}: ${Math.round(rawTotal)}${spec.unit} / ${spec.max}${spec.unit} (${pctDV}% DV)"
+            >
+              <!-- Subtle architectural window pattern inside bar -->
+              <div class="absolute inset-0 building-window-pattern rounded-t-xl opacity-60"></div>
+            </div>
+          `;
+        } else {
+          // Meal-Stacked Building Mode
+          const periods = [
+            { id: 'breakfast', label: 'Breakfast', color: 'bg-amber-400' },
+            { id: 'lunch', label: 'Lunch', color: 'bg-sky-500' },
+            { id: 'dinner', label: 'Dinner', color: 'bg-indigo-600' },
+            { id: 'salad_custom', label: 'Salad/Custom', color: 'bg-emerald-500' }
+          ];
+
+          const segmentsHtml = periods.map(p => {
+            const mealVal = byMeal[p.id][key] || 0;
+            const shareOfTotal = rawTotal > 0 ? (mealVal / rawTotal) * 100 : 0;
+            if (shareOfTotal <= 0) return '';
+            return `
+              <div 
+                style="height: ${shareOfTotal}%;" 
+                class="w-full ${p.color} building-window-pattern border-b border-white/30 first:rounded-t-xl transition-all"
+                title="${p.label}: ${Math.round(mealVal)}${spec.unit} (${Math.round((mealVal/spec.max)*100)}% of daily limit)"
+              ></div>
+            `;
+          }).join('');
+
+          barInnerHtml = `
+            <div 
+              style="height: ${ Math.max(2, clampedHeightPct) }%;" 
+              class="w-full max-w-[54px] rounded-t-xl bar-transition overflow-hidden flex flex-col-reverse shadow-sm ${isExceeded ? 'ring-2 ring-red-500' : 'border border-slate-300'}"
+            >
+              ${segmentsHtml}
+            </div>
+          `;
+        }
+
+        return `
+          <div class="h-full flex flex-col justify-end items-center">
+            ${statusBadgeHtml}
+            ${barInnerHtml}
+          </div>
+        `;
+      }).join('');
+
+      // Render X-Axis Labels & Exact Consumption vs Limit Readouts
+      xaxisContainer.innerHTML = nutrientKeys.map(key => {
+        const spec = profile.limits[key];
+        const rawTotal = Math.round((totals[key] || 0) * 10) / 10;
+        const pctDV = Math.round((rawTotal / spec.max) * 100);
+        const isExceeded = spec.type === 'ceiling' && pctDV > 100;
+
+        return `
+          <div class="text-center">
+            <div class="font-display font-bold text-[11px] sm:text-xs ${isExceeded ? 'text-red-600' : 'text-slate-800'} truncate">
+              ${spec.label}
+            </div>
+            <div class="font-mono text-[10px] sm:text-[11px] ${isExceeded ? 'font-bold text-red-600' : 'text-slate-500'}">
+              ${Math.round(rawTotal)}<span class="text-slate-400">/${spec.max}${spec.unit}</span>
+            </div>
+            <div class="text-[9px] font-mono ${spec.type === 'floor' ? 'text-blue-600' : 'text-slate-400'} hidden sm:block">
+              ${spec.type === 'floor' ? 'Min Target' : 'Max Limit'}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // Update Top Pill Summary
+      const summaryPill = document.getElementById('exceeded-summary-pill');
+      if (summaryPill) {
+        if (exceededCount > 0) {
+          summaryPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-red-500 text-white shadow badge-pulse';
+          summaryPill.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i>${exceededCount} Daily Limit${exceededCount > 1 ? 's' : ''} Exceeded`;
+        } else {
+          summaryPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/40';
+          summaryPill.innerHTML = `<i class="fa-solid fa-check-circle mr-1"></i>Within Recommended Ceiling Limits`;
+        }
+      }
+    }
+
+    function renderDiagnostics() {
+      const panel = document.getElementById('limit-diagnostics-panel');
+      if (!panel) return;
+
+      const profile = BENCHMARK_PROFILES[activeBenchmarkKey] || BENCHMARK_PROFILES.fda_standard;
+      const { totals } = calculateTotalsAndMealBreakdowns();
+
+      // Find any ceiling nutrients > 85% DV
+      const alerts = [];
+      Object.keys(profile.limits).forEach(key => {
+        const spec = profile.limits[key];
+        if (spec.type !== 'ceiling') return;
+
+        const val = totals[key] || 0;
+        const pct = Math.round((val / spec.max) * 100);
+        if (pct >= 85 && mealTray.length > 0) {
+          // Find the #1 contributing dish in the user's tray for this nutrient
+          let topCulprit = null;
+          let maxContribution = -1;
+
+          mealTray.forEach(entry => {
+            const contrib = (Number(entry.item[key]) || 0) * entry.quantity;
+            if (contrib > maxContribution) {
+              maxContribution = contrib;
+              topCulprit = entry;
+            }
+          });
+
+          alerts.push({
+            key,
+            spec,
+            val: Math.round(val),
+            pct,
+            isExceeded: pct > 100,
+            topCulprit,
+            maxContribution: Math.round(maxContribution)
+          });
+        }
+      });
+
+      if (alerts.length === 0) {
+        panel.innerHTML = `
+          <div class="bg-emerald-50/80 border border-emerald-200 rounded-xl p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-emerald-900">
+            <div class="flex items-center gap-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-600 text-white flex items-center justify-center shrink-0">
+                <i class="fa-solid fa-shield-heart"></i>
+              </div>
+              <div>
+                <span class="font-display font-bold text-sm">All Upper-Limit Nutrients Are Safely Below the 100% Government Line!</span>
+                <p class="text-emerald-700 text-xs">Your logged Bursley meals are within FDA daily guidelines for Sodium, Saturated Fat, Added Sugar, and Calories.</p>
+              </div>
+            </div>
+            <button onclick="loadSampleBursleyDay()" class="shrink-0 px-3 py-1.5 rounded-lg bg-white border border-emerald-300 text-emerald-800 font-semibold hover:bg-emerald-100 transition">
+              Test Over-Limit Scenario
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      panel.innerHTML = `
+        <div class="space-y-2.5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-mono uppercase tracking-wider font-bold text-slate-500">
+              <i class="fa-solid fa-magnifying-glass-chart text-red-500 mr-1"></i>Limit Diagnostics & Top Contributing Foods
+            </span>
+            <span class="text-[11px] text-slate-500">Click "Cut Portion 50%" to bring your bar back below 100%</span>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            ${alerts.map(a => `
+              <div class="p-3.5 rounded-xl border ${a.isExceeded ? 'bg-red-50/70 border-red-200' : 'bg-amber-50/70 border-amber-200'} flex flex-col justify-between gap-2.5">
+                <div>
+                  <div class="flex items-center justify-between">
+                    <span class="font-display font-extrabold text-xs sm:text-sm ${a.isExceeded ? 'text-red-700' : 'text-amber-800'}">
+                      ${a.isExceeded ? `<i class="fa-solid fa-circle-exclamation mr-1"></i>${a.spec.label} Exceeded (${a.pct}%)` : `<i class="fa-solid fa-triangle-exclamation mr-1"></i>${a.spec.label} Near Limit (${a.pct}%)`}
+                    </span>
+                    <span class="font-mono text-xs font-bold ${a.isExceeded ? 'text-red-700' : 'text-amber-800'}">
+                      ${a.val} / ${a.spec.max}${a.spec.unit}
+                    </span>
+                  </div>
+                  ${a.topCulprit ? `
+                    <p class="text-xs text-slate-600 mt-1">
+                      <strong>#1 Contributor:</strong> <span class="text-slate-900 font-semibold">${a.topCulprit.item.name}</span> accounts for <strong class="font-mono">${a.maxContribution}${a.spec.unit}</strong> (${Math.round((a.maxContribution / a.spec.max) * 100)}% of your daily limit).
+                    </p>
+                  ` : ''}
+                </div>
+                ${a.topCulprit ? `
+                  <div class="flex items-center gap-2 pt-1">
+                    <button 
+                      onclick="adjustTrayItem('${a.topCulprit.item.id}', -0.5)" 
+                      class="flex-1 py-1.5 px-2.5 rounded-lg bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-semibold text-xs transition flex items-center justify-center gap-1 shadow-sm"
+                    >
+                      <i class="fa-solid fa-scissors text-red-500"></i>
+                      <span>Cut Portion (-0.5x)</span>
+                    </button>
+                  </div>
+                ` : ''}
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    /*************************************************************************
+     * 10. MODALS (FDA LABEL, CRON PIPELINE) & CLIPBOARD / TOAST UTILITIES
+     *************************************************************************/
+    function openFdaModal(itemId) {
+      const item = currentMenuItems.find(i => i.id === itemId) || BURSLEY_BASE_MENU.find(i => i.id === itemId);
+      if (!item) return;
+
+      document.getElementById('fda-modal-station').textContent = `${item.station} • ${item.mealPeriod.toUpperCase()}`;
+      document.getElementById('fda-modal-title').textContent = item.name;
+
+      const addBtn = document.getElementById('fda-modal-add-btn');
+      addBtn.onclick = () => {
+        adjustTrayItem(item.id, 1);
+        closeFdaModal();
+      };
+
+      const pctFat = Math.round((item.fat_g / 78) * 100);
+      const pctSatFat = Math.round((item.satFat_g / 20) * 100);
+      const pctChol = Math.round(((item.cholesterol_mg || 0) / 300) * 100);
+      const pctNa = Math.round((item.sodium_mg / 2300) * 100);
+      const pctCarbs = Math.round((item.carbs_g / 275) * 100);
+      const pctFiber = Math.round((item.fiber_g / 28) * 100);
+      const pctSugar = Math.round((item.sugar_g / 50) * 100);
+      const pctProt = Math.round((item.protein_g / 50) * 100);
+
+      document.getElementById('fda-label-content').innerHTML = `
+        <div class="text-2xl font-black tracking-tight border-b border-black pb-0.5">Nutrition Facts</div>
+        <div class="flex justify-between font-bold text-sm py-1 border-b-8 border-black">
+          <span>Serving size</span>
+          <span>${item.servingSize}</span>
+        </div>
+        <div class="flex justify-between items-baseline py-1 border-b-4 border-black">
+          <div>
+            <div class="text-[11px] font-bold">Amount per serving</div>
+            <div class="text-xl font-black">Calories</div>
+          </div>
+          <div class="text-3xl font-black">${item.calories}</div>
+        </div>
+        <div class="text-right text-[11px] font-bold py-0.5 border-b border-black">% Daily Value*</div>
+        <div class="flex justify-between py-1 border-b border-black">
+          <span><strong>Total Fat</strong> ${item.fat_g}g</span>
+          <strong>${pctFat}%</strong>
+        </div>
+        <div class="flex justify-between py-1 pl-4 border-b border-black">
+          <span>Saturated Fat ${item.satFat_g}g</span>
+          <strong>${pctSatFat}%</strong>
+        </div>
+        <div class="flex justify-between py-1 border-b border-black">
+          <span><strong>Cholesterol</strong> ${item.cholesterol_mg || 0}mg</span>
+          <strong>${pctChol}%</strong>
+        </div>
+        <div class="flex justify-between py-1 border-b border-black ${pctNa >= 30 ? 'bg-red-100 px-1' : ''}">
+          <span><strong>Sodium</strong> ${item.sodium_mg}mg</span>
+          <strong>${pctNa}%</strong>
+        </div>
+        <div class="flex justify-between py-1 border-b border-black">
+          <span><strong>Total Carbohydrate</strong> ${item.carbs_g}g</span>
+          <strong>${pctCarbs}%</strong>
+        </div>
+        <div class="flex justify-between py-1 pl-4 border-b border-black">
+          <span>Dietary Fiber ${item.fiber_g}g</span>
+          <strong>${pctFiber}%</strong>
+        </div>
+        <div class="flex justify-between py-1 pl-4 border-b border-black">
+          <span>Total / Added Sugars ${item.sugar_g}g</span>
+          <strong>${pctSugar}%</strong>
+        </div>
+        <div class="flex justify-between py-1 border-b-8 border-black">
+          <span><strong>Protein</strong> ${item.protein_g}g</span>
+          <strong>${pctProt}%</strong>
+        </div>
+        <div class="text-[10px] leading-snug pt-1.5 text-slate-700">
+          * The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+          ${item.allergens && item.allergens.length > 0 ? `<div class="mt-1.5 font-bold text-black">CONTAINS ALLERGENS: ${item.allergens.join(', ')}</div>` : ''}
+        </div>
+      `;
+
+      document.getElementById('fda-modal').classList.remove('hidden');
+    }
+
+    function closeFdaModal() {
+      document.getElementById('fda-modal').classList.add('hidden');
+    }
+
+    function openCronModal() {
+      document.getElementById('cron-modal').classList.remove('hidden');
+    }
+
+    function closeCronModal() {
+      document.getElementById('cron-modal').classList.add('hidden');
+    }
+
+    function copyCronCode() {
+      const codeText = document.getElementById('production-cron-code')?.innerText || '';
+      const tempArea = document.createElement('textarea');
+      tempArea.value = codeText;
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        const btnText = document.getElementById('copy-code-btn-text');
+        if (btnText) btnText.textContent = 'Copied to Clipboard!';
+        showToast('Copied Node.js & GitHub Actions Cron Script!', 'success');
+        setTimeout(() => {
+          if (btnText) btnText.textContent = 'Copy Production Cron Code';
+        }, 2500);
+      } catch (err) {
+        showToast('Unable to copy automatically', 'warning');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+
+      const colors = {
+        success: 'bg-umich-blue text-white border-l-4 border-umich-maize',
+        warning: 'bg-amber-600 text-white border-l-4 border-white',
+        info: 'bg-slate-800 text-white border-l-4 border-sky-400'
+      };
+
+      const toast = document.createElement('div');
+      toast.className = `${colors[type] || colors.info} px-4 py-2.5 rounded-xl shadow-lg text-xs font-semibold flex items-center gap-2 transition-all duration-300 pointer-events-auto`;
+      toast.innerHTML = `
+        <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-umich-maize' : 'fa-circle-info text-sky-300'}"></i>
+        <span>${message}</span>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(8px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 2800);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SodiumController</title>
+</head>
+<body>
+  <h1>SodiumController - Bursley Daily Intake</h1>
+  <div id="output">Loading menu...</div>
+
+  <script>
+    async function loadDailyMenu() {
+      try {
+        const response = await fetch('./sodium-today.json');
+        if (!response.ok) throw new Error('No local cache found');
+        const menuData = await response.json();
+        console.log('Loaded sodium data from cache:', menuData);
+        document.getElementById('output').textContent = JSON.stringify(menuData, null, 2);
+      } catch (err) {
+        console.warn('Falling back to live sync or default dataset:', err);
+        document.getElementById('output').textContent = 'Unable to load today\'s data.';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', loadDailyMenu);
+  </script>
+</body>
+</html>
