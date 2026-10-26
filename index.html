@@ -3,27 +3,542 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SodiumController</title>
+  <title>SodiumController • Bursley Dining Hall Nutrition & Limit Tracker</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background-color: #0b0f19; color: #f1f5f9; font-family: Inter, system-ui, -apple-system, sans-serif; }
+    .umich-maize { color: #FFCB05; }
+    .bg-umich-maize { background-color: #FFCB05; }
+    .bg-umich-blue { background-color: #00274C; }
+    .border-umich-maize { border-color: #FFCB05; }
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0f172a; }
+    ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+  </style>
 </head>
-<body>
-  <h1>SodiumController - Bursley Daily Intake</h1>
-  <div id="output">Loading menu...</div>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Top Navigation Header -->
+  <header class="border-b border-slate-800 bg-slate-900/90 backdrop-blur sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-lg bg-umich-blue border border-umich-maize flex items-center justify-center font-black text-lg umich-maize">
+          SC
+        </div>
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="text-lg font-bold tracking-tight text-white">SodiumController</h1>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 font-medium">
+              Bursley Hall
+            </span>
+          </div>
+          <p class="text-xs text-slate-400">Daily M|Dining Nutrition &amp; FDA Limit Bar Tracker</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 text-xs">
+        <div id="syncStatusBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-slate-300">
+          <span id="syncDot" class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span id="syncText">Checking sodium-today.json...</span>
+        </div>
+        <button onclick="fetchSodiumJson(true)" class="px-3 py-1.5 rounded-lg bg-umich-maize text-slate-950 font-semibold hover:bg-amber-400 transition">
+          Reload Data
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Grid -->
+  <main class="max-w-7xl mx-auto w-full px-4 py-6 grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+
+    <!-- LEFT COLUMN: Bursley Menu Browser & Salad Bar Estimator (7 cols) -->
+    <section class="lg:col-span-7 flex flex-col gap-4">
+
+      <!-- Meal Period Tabs & Search -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-3">
+        <div class="flex flex-wrap items-center justify-between gap-2">
+          <div class="flex gap-1.5 bg-slate-950 p-1 rounded-lg border border-slate-800">
+            <button onclick="setMealPeriod('breakfast')" id="tab-breakfast" class="meal-tab px-3.5 py-1.5 rounded-md text-xs font-semibold transition">Breakfast</button>
+            <button onclick="setMealPeriod('lunch')" id="tab-lunch" class="meal-tab px-3.5 py-1.5 rounded-md text-xs font-semibold transition">Lunch / Brunch</button>
+            <button onclick="setMealPeriod('dinner')" id="tab-dinner" class="meal-tab px-3.5 py-1.5 rounded-md text-xs font-semibold transition">Dinner</button>
+            <button onclick="setMealPeriod('salad')" id="tab-salad" class="meal-tab px-3.5 py-1.5 rounded-md text-xs font-semibold transition text-emerald-400">+ Salad Bar / Custom</button>
+          </div>
+          <span id="itemCountLabel" class="text-xs text-slate-400 font-mono">0 items</span>
+        </div>
+
+        <div id="searchBarContainer" class="relative">
+          <input
+            id="searchInput"
+            type="text"
+            oninput="renderMenuList()"
+            placeholder="Search Bursley menu items or stations (e.g., Chicken, Hashbrowns, Halal)..."
+            class="w-full bg-slate-950 border border-slate-800 rounded-lg px-3.5 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+          />
+        </div>
+      </div>
+
+      <!-- Menu List Container -->
+      <div id="menuListContainer" class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-4 max-h-[640px] overflow-y-auto">
+        <!-- Populated by JS -->
+      </div>
+
+      <!-- Salad Bar & Custom Item Builder (Hidden unless tab-salad is active) -->
+      <div id="saladBuilderContainer" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-5">
+        <div>
+          <h2 class="text-base font-bold text-white">Bursley Salad Bar &amp; Custom Food Estimator</h2>
+          <p class="text-xs text-slate-400 mt-0.5">Approximate unlabelled salad bar scoops or custom items by standard portion size.</p>
+        </div>
+
+        <!-- Quick Salad Bar Presets -->
+        <div>
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">1-Click Salad Bar Portions</h3>
+          <div id="saladPresetsGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5"></div>
+        </div>
+
+        <!-- Custom Manual Input -->
+        <div class="border-t border-slate-800 pt-4">
+          <h3 class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">Custom Food Entry</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs">
+            <div class="col-span-2">
+              <label class="text-slate-400 block mb-1">Food Name</label>
+              <input id="custName" type="text" placeholder="e.g., Grilled Chicken Breast" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">Calories</label>
+              <input id="custCal" type="number" value="180" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-amber-400 font-semibold block mb-1">Sodium (mg)</label>
+              <input id="custSodium" type="number" value="320" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">Protein (g)</label>
+              <input id="custProtein" type="number" value="25" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">Carbs (g)</label>
+              <input id="custCarbs" type="number" value="5" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">Total Fat (g)</label>
+              <input id="custFat" type="number" value="6" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+            <div>
+              <label class="text-slate-400 block mb-1">Sugar (g)</label>
+              <input id="custSugar" type="number" value="2" class="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white" />
+            </div>
+          </div>
+          <button onclick="addCustomFoodItem()" class="mt-3 w-full py-2 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs hover:bg-emerald-400 transition">
+            + Add Custom Item to Tray
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Tray Cart & Daily Limit Bar Chart (5 cols) -->
+    <section class="lg:col-span-5 flex flex-col gap-4">
+
+      <!-- Shopping Cart / Daily Tray -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-3">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white flex items-center gap-2">
+              Your Daily Food Tray
+              <span id="cartCountBadge" class="px-2 py-0.5 text-xs rounded-full bg-umich-maize text-slate-950 font-extrabold">0</span>
+            </h2>
+            <p class="text-xs text-slate-400">Add what you ate and click Show Results below</p>
+          </div>
+          <button onclick="clearCart()" class="text-xs text-rose-400 hover:underline">Clear Tray</button>
+        </div>
+
+        <div id="cartItemsList" class="divide-y divide-slate-800/80 max-h-52 overflow-y-auto text-xs">
+          <!-- Populated by JS -->
+        </div>
+
+        <button onclick="scrollToResults()" class="w-full py-2.5 rounded-lg bg-umich-maize text-slate-950 font-black text-xs uppercase tracking-wider hover:bg-amber-400 transition shadow">
+          Show Results • Update Bar Chart
+        </button>
+      </div>
+
+      <!-- Bar Chart Card: Daily Government Limit Comparison -->
+      <div id="resultsChartCard" class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col gap-4">
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-sm font-bold text-white">Daily Recommended Limit Bar Chart</h2>
+            <p class="text-xs text-slate-400">Dashed line marks 100% FDA Daily Recommended Limit</p>
+          </div>
+          <span id="sodiumAlertPill" class="text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+            Sodium OK
+          </span>
+        </div>
+
+        <!-- Vertical Bar Chart Area -->
+        <div class="relative h-72 pt-6 pb-8 px-2 bg-slate-950 border border-slate-800 rounded-lg flex items-end justify-around gap-2 overflow-hidden">
+          <!-- 100% FDA Limit Reference Line (Positioned at 66.6% height so bars can go up to 150%) -->
+          <div style="bottom: 66.6%;" class="absolute left-0 right-0 border-t-2 border-dashed border-rose-500/90 z-10 pointer-events-none flex justify-end pr-2">
+            <span class=" -mt-5 bg-rose-500/20 text-rose-300 border border-rose-500/40 px-1.5 py-0.5 rounded text-[10px] font-bold">
+              100% Daily Limit Line
+            </span>
+          </div>
+
+          <!-- Dynamic Bars Container -->
+          <div id="verticalBarsContainer" class="w-full h-full flex items-end justify-around gap-1.5 z-20">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- Detailed Breakdown Table -->
+        <div id="nutrientSummaryRows" class="grid grid-cols-2 gap-2 text-xs">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </section>
+  </main>
 
   <script>
-    async function loadDailyMenu() {
+    // FDA Daily Recommended Guidelines (2,000 kcal baseline)
+    const FDA_LIMITS = [
+      { key: 'sodium_mg', label: 'Sodium', limit: 2300, unit: 'mg', isCeiling: true },
+      { key: 'calories', label: 'Calories', limit: 2000, unit: 'kcal', isCeiling: false },
+      { key: 'satFat_g', label: 'Sat Fat', limit: 20, unit: 'g', isCeiling: true },
+      { key: 'sugar_g', label: 'Sugars', limit: 50, unit: 'g', isCeiling: true },
+      { key: 'fat_g', label: 'Total Fat', limit: 78, unit: 'g', isCeiling: true },
+      { key: 'carbs_g', label: 'Carbs', limit: 275, unit: 'g', isCeiling: false },
+      { key: 'fiber_g', label: 'Fiber', limit: 28, unit: 'g', isCeiling: false },
+      { key: 'protein_g', label: 'Protein', limit: 50, unit: 'g', isCeiling: false }
+    ];
+
+    // Salad Bar Scoop Heuristics
+    const SALAD_PRESETS = [
+      { name: 'Mixed Leafy Greens (1 Tongs / 40g)', servingSize: '1 Tongs', calories: 10, sodium_mg: 12, protein_g: 1, carbs_g: 2, fat_g: 0, satFat_g: 0, sugar_g: 1, fiber_g: 1 },
+      { name: 'Cucumber & Bell Peppers (1 Scoop / 60g)', servingSize: '1 Scoop', calories: 14, sodium_mg: 3, protein_g: 0.6, carbs_g: 3, fat_g: 0, satFat_g: 0, sugar_g: 1.5, fiber_g: 1 },
+      { name: 'Diced Grilled Chicken (1 Scoop / 85g)', servingSize: '1 Scoop (3 oz)', calories: 140, sodium_mg: 310, protein_g: 26, carbs_g: 0, fat_g: 3, satFat_g: 1, sugar_g: 0, fiber_g: 0 },
+      { name: 'Hard Boiled Egg (1 Whole)', servingSize: '1 Egg', calories: 78, sodium_mg: 62, protein_g: 6, carbs_g: 0.6, fat_g: 5, satFat_g: 1.6, sugar_g: 0.5, fiber_g: 0 },
+      { name: 'Chickpeas / Garbanzo Beans (1 Scoop / 60g)', servingSize: '1 Scoop', calories: 105, sodium_mg: 140, protein_g: 5.5, carbs_g: 17, fat_g: 1.6, satFat_g: 0.2, sugar_g: 3, fiber_g: 4.5 },
+      { name: 'Balsamic Vinaigrette (1 Ladle / 2 Tbsp)', servingSize: '2 Tbsp', calories: 90, sodium_mg: 280, protein_g: 0, carbs_g: 4, fat_g: 8, satFat_g: 1, sugar_g: 3, fiber_g: 0 }
+    ];
+
+    // Real Bursley Fallback Items if sodium-today.json is not yet committed
+    const FALLBACK_BURSLEY_ITEMS = [
+      { id: 'b-1', name: 'Oatmeal', mealPeriod: 'breakfast', station: 'Hot Cereal', servingSize: 'Cups (253g)', calories: 183, fat_g: 3, satFat_g: 1, sodium_mg: 3, carbs_g: 33, fiber_g: 5, sugar_g: 1, protein_g: 6, tags: ['Vegan'] },
+      { id: 'b-2', name: 'Deep Fried Hashbrowns', mealPeriod: 'breakfast', station: 'Toast', servingSize: '2 Tritaters (113g)', calories: 207, fat_g: 15, satFat_g: 2, sodium_mg: 506, carbs_g: 22, fiber_g: 2, sugar_g: 0, protein_g: 2, tags: ['Vegan'] },
+      { id: 'b-3', name: 'Pork Sausage Patty', mealPeriod: 'breakfast', station: 'Toast', servingSize: 'Patty (43g)', calories: 179, fat_g: 16, satFat_g: 6, sodium_mg: 284, carbs_g: 0, fiber_g: 0, sugar_g: 0, protein_g: 6, tags: ['Gluten-Free'] },
+      { id: 'b-4', name: 'Scrambled Eggs', mealPeriod: 'breakfast', station: 'Toast', servingSize: '1/2 cup (84g)', calories: 163, fat_g: 12, satFat_g: 4, sodium_mg: 116, carbs_g: 0, fiber_g: 0, sugar_g: 0, protein_g: 11, tags: ['Gluten-Free', 'Vegetarian'] },
+      { id: 'b-5', name: 'French Toast Strata w/ Strawberry', mealPeriod: 'breakfast', station: 'Toast', servingSize: 'Piece (263g)', calories: 543, fat_g: 22, satFat_g: 11, sodium_mg: 446, carbs_g: 76, fiber_g: 3, sugar_g: 46, protein_g: 14, tags: ['Vegetarian'] },
+      { id: 'b-6', name: 'Garden Scrambled Tofu', mealPeriod: 'breakfast', station: 'Toast', servingSize: '1/2 Cup (113g)', calories: 74, fat_g: 3, satFat_g: 1, sodium_mg: 470, carbs_g: 6, fiber_g: 2, sugar_g: 3, protein_g: 7, tags: ['Vegan', 'Gluten-Free'] },
+      { id: 'l-1', name: 'Grilled Herb Chicken Breast', mealPeriod: 'lunch', station: 'Signature', servingSize: '1 Fillet (140g)', calories: 230, fat_g: 6, satFat_g: 1.5, sodium_mg: 520, carbs_g: 1, fiber_g: 0, sugar_g: 0, protein_g: 41, tags: ['Halal', 'Gluten-Free'] },
+      { id: 'l-2', name: 'Penne Marinara with Parmesan', mealPeriod: 'lunch', station: 'Pasta', servingSize: '1 Cup (190g)', calories: 340, fat_g: 7, satFat_g: 2.5, sodium_mg: 610, carbs_g: 56, fiber_g: 4, sugar_g: 7, protein_g: 12, tags: ['Vegetarian'] },
+      { id: 'd-1', name: 'Roasted Garlic Chicken Thighs', mealPeriod: 'dinner', station: 'Homestyle', servingSize: '2 Pieces (165g)', calories: 310, fat_g: 18, satFat_g: 5, sodium_mg: 680, carbs_g: 3, fiber_g: 0, sugar_g: 1, protein_g: 34, tags: ['Halal', 'Gluten-Free'] },
+      { id: 'd-2', name: 'Steamed Broccoli Florets', mealPeriod: 'dinner', station: 'Homestyle', servingSize: '1/2 Cup (78g)', calories: 27, fat_g: 0.3, satFat_g: 0, sodium_mg: 32, carbs_g: 5.6, fiber_g: 2.4, sugar_g: 1.1, protein_g: 1.9, tags: ['Vegan', 'Gluten-Free'] }
+    ];
+
+    const state = {
+      mealPeriod: 'breakfast',
+      menuItems: [...FALLBACK_BURSLEY_ITEMS],
+      cart: JSON.parse(localStorage.getItem('sodiumControllerCart') || '[]')
+    };
+
+    async function fetchSodiumJson(manual = false) {
+      const syncText = document.getElementById('syncText');
+      const syncDot = document.getElementById('syncDot');
+      syncText.textContent = 'Syncing sodium-today.json...';
+
       try {
-        const response = await fetch('./sodium-today.json');
-        if (!response.ok) throw new Error('No local cache found');
-        const menuData = await response.json();
-        console.log('Loaded sodium data from cache:', menuData);
-        document.getElementById('output').textContent = JSON.stringify(menuData, null, 2);
+        const res = await fetch(`./sodium-today.json?t=${Date.now()}`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        if (Array.isArray(data.items) && data.items.length > 0) {
+          state.menuItems = data.items;
+          syncText.textContent = `Live Bursley Menu (${data.date}) • ${data.items.length} items`;
+          syncDot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+        } else {
+          throw new Error('Empty items array');
+        }
       } catch (err) {
-        console.warn('Falling back to live sync or default dataset:', err);
-        document.getElementById('output').textContent = 'Unable to load today\'s data.';
+        syncText.textContent = 'Using Built-in Bursley Menu (Run GitHub Action for live JSON)';
+        syncDot.className = 'w-2 h-2 rounded-full bg-amber-400';
       }
+
+      renderAll();
     }
 
-    window.addEventListener('DOMContentLoaded', loadDailyMenu);
+    function setMealPeriod(period) {
+      state.mealPeriod = period;
+      document.querySelectorAll('.meal-tab').forEach(btn => {
+        btn.className = 'meal-tab px-3.5 py-1.5 rounded-md text-xs font-semibold transition text-slate-400 hover:text-white';
+      });
+      const activeBtn = document.getElementById(`tab-${period}`);
+      if (activeBtn) {
+        activeBtn.className = 'meal-tab px-3.5 py-1.5 rounded-md text-xs font-bold transition bg-umich-maize text-slate-950';
+      }
+
+      const isSalad = period === 'salad';
+      document.getElementById('menuListContainer').classList.toggle('hidden', isSalad);
+      document.getElementById('searchBarContainer').classList.toggle('hidden', isSalad);
+      document.getElementById('saladBuilderContainer').classList.toggle('hidden', !isSalad);
+
+      renderMenuList();
+    }
+
+    function renderMenuList() {
+      const container = document.getElementById('menuListContainer');
+      const query = (document.getElementById('searchInput').value || '').toLowerCase().trim();
+
+      const filtered = state.menuItems.filter(item => {
+        const matchesMeal = item.mealPeriod === state.mealPeriod;
+        const matchesQuery = !query ||
+          item.name.toLowerCase().includes(query) ||
+          (item.station && item.station.toLowerCase().includes(query)) ||
+          (item.tags && item.tags.some(t => t.toLowerCase().includes(query)));
+        return matchesMeal && matchesQuery;
+      });
+
+      document.getElementById('itemCountLabel').textContent = `${filtered.length} items`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-10 text-slate-500 text-xs">No items found for this meal filter.</div>`;
+        return;
+      }
+
+      // Group by station
+      const grouped = {};
+      filtered.forEach(item => {
+        const st = item.station || 'General';
+        if (!grouped[st]) grouped[st] = [];
+        grouped[st].push(item);
+      });
+
+      container.innerHTML = Object.entries(grouped).map(([station, items]) => `
+        <div class="space-y-2">
+          <h3 class="text-xs font-bold uppercase tracking-wider umich-maize border-b border-slate-800 pb-1">${station}</h3>
+          <div class="grid grid-cols-1 gap-2">
+            ${items.map(item => `
+              <div class="p-3 rounded-lg bg-slate-950 border border-slate-800/90 hover:border-slate-700 flex items-center justify-between gap-3">
+                <div class="min-w-0">
+                  <div class="flex items-center gap-2 flex-wrap">
+                    <span class="text-sm font-semibold text-white truncate">${item.name}</span>
+                    <span class="text-[11px] text-slate-400">(${item.servingSize})</span>
+                  </div>
+                  <div class="flex flex-wrap items-center gap-3 mt-1 text-xs text-slate-400">
+                    <span><strong class="text-slate-200">${item.calories}</strong> kcal</span>
+                    <span class="${item.sodium_mg >= 450 ? 'text-rose-400 font-bold' : 'text-amber-300'}">${item.sodium_mg}mg Sodium</span>
+                    <span>${item.protein_g}g Protein</span>
+                    <span>${item.carbs_g}g Carbs</span>
+                    <span>${item.fat_g}g Fat</span>
+                  </div>
+                </div>
+                <button
+                  onclick='addToCart(${JSON.stringify(item).replace(/'/g, "&#39;")})'
+                  class="shrink-0 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-umich-maize hover:text-slate-950 text-xs font-bold transition"
+                >
+                  + Add
+                </button>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderSaladPresets() {
+      const grid = document.getElementById('saladPresetsGrid');
+      grid.innerHTML = SALAD_PRESETS.map((preset, idx) => `
+        <div class="p-3 rounded-lg bg-slate-950 border border-slate-800 flex items-center justify-between gap-2">
+          <div>
+            <div class="text-xs font-semibold text-white">${preset.name}</div>
+            <div class="text-[11px] text-slate-400">${preset.calories} kcal • ${preset.sodium_mg}mg Na • ${preset.protein_g}g P</div>
+          </div>
+          <button
+            onclick="addSaladPreset(${idx})"
+            class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500 hover:text-slate-950 text-xs font-bold transition"
+          >
+            + Add
+          </button>
+        </div>
+      `).join('');
+    }
+
+    function addSaladPreset(idx) {
+      const p = SALAD_PRESETS[idx];
+      addToCart({
+        id: `salad-${idx}-${Date.now()}`,
+        name: p.name,
+        servingSize: p.servingSize,
+        calories: p.calories,
+        sodium_mg: p.sodium_mg,
+        protein_g: p.protein_g,
+        carbs_g: p.carbs_g,
+        fat_g: p.fat_g,
+        satFat_g: p.satFat_g,
+        sugar_g: p.sugar_g,
+        fiber_g: p.fiber_g
+      });
+    }
+
+    function addCustomFoodItem() {
+      const name = document.getElementById('custName').value.trim() || 'Custom Salad / Food';
+      addToCart({
+        id: `custom-${Date.now()}`,
+        name,
+        servingSize: 'Custom Portion',
+        calories: parseFloat(document.getElementById('custCal').value) || 0,
+        sodium_mg: parseFloat(document.getElementById('custSodium').value) || 0,
+        protein_g: parseFloat(document.getElementById('custProtein').value) || 0,
+        carbs_g: parseFloat(document.getElementById('custCarbs').value) || 0,
+        fat_g: parseFloat(document.getElementById('custFat').value) || 0,
+        satFat_g: 0,
+        sugar_g: parseFloat(document.getElementById('custSugar').value) || 0,
+        fiber_g: 0
+      });
+    }
+
+    function addToCart(item) {
+      const existing = state.cart.find(c => c.id === item.id);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        state.cart.push({ ...item, qty: 1 });
+      }
+      saveAndRenderCart();
+    }
+
+    function updateQty(id, delta) {
+      const idx = state.cart.findIndex(c => c.id === id);
+      if (idx === -1) return;
+      state.cart[idx].qty = Math.round((state.cart[idx].qty + delta) * 10) / 10;
+      if (state.cart[idx].qty <= 0) state.cart.splice(idx, 1);
+      saveAndRenderCart();
+    }
+
+    function clearCart() {
+      state.cart = [];
+      saveAndRenderCart();
+    }
+
+    function saveAndRenderCart() {
+      localStorage.setItem('sodiumControllerCart', JSON.stringify(state.cart));
+      renderCart();
+      renderChart();
+    }
+
+    function renderCart() {
+      const list = document.getElementById('cartItemsList');
+      const badge = document.getElementById('cartCountBadge');
+      const totalItems = state.cart.reduce((sum, i) => sum + i.qty, 0);
+      badge.textContent = totalItems;
+
+      if (state.cart.length === 0) {
+        list.innerHTML = `<div class="py-6 text-center text-slate-500">Your tray is empty. Select items from the Bursley menu on the left.</div>`;
+        return;
+      }
+
+      list.innerHTML = state.cart.map(item => `
+        <div class="py-2 flex items-center justify-between gap-2">
+          <div class="min-w-0">
+            <div class="font-semibold text-white truncate">${item.name}</div>
+            <div class="text-[11px] text-slate-400">
+              ${Math.round(item.calories * item.qty)} kcal •
+              <span class="text-amber-300 font-semibold">${Math.round(item.sodium_mg * item.qty)}mg Na</span> •
+              ${Math.round(item.protein_g * item.qty)}g P
+            </div>
+          </div>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <button onclick="updateQty('${item.id}', -0.5)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold">-</button>
+            <span class="w-8 text-center font-mono text-white">${item.qty}x</span>
+            <button onclick="updateQty('${item.id}', 0.5)" class="w-6 h-6 rounded bg-slate-800 hover:bg-slate-700 text-white font-bold">+</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderChart() {
+      const totals = {};
+      FDA_LIMITS.forEach(m => totals[m.key] = 0);
+
+      state.cart.forEach(item => {
+        FDA_LIMITS.forEach(m => {
+          totals[m.key] += (Number(item[m.key]) || 0) * item.qty;
+        });
+      });
+
+      const barsContainer = document.getElementById('verticalBarsContainer');
+      const summaryContainer = document.getElementById('nutrientSummaryRows');
+      const sodiumPill = document.getElementById('sodiumAlertPill');
+
+      const sodiumPct = Math.round((totals.sodium_mg / 2300) * 100);
+      if (sodiumPct >= 100) {
+        sodiumPill.textContent = `EXCEEDED SODIUM (${sodiumPct}%)`;
+        sodiumPill.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40';
+      } else if (sodiumPct >= 80) {
+        sodiumPill.textContent = `Sodium Near Limit (${sodiumPct}%)`;
+        sodiumPill.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-amber-500/20 text-amber-300 border border-amber-500/40';
+      } else {
+        sodiumPill.textContent = `Sodium Within Limit (${sodiumPct}%)`;
+        sodiumPill.className = 'text-xs px-2.5 py-1 rounded-full font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30';
+      }
+
+      // Max chart scale is 150% DV (so 100% DV sits at 66.6% height)
+      barsContainer.innerHTML = FDA_LIMITS.map(metric => {
+        const val = Math.round(totals[metric.key]);
+        const pct = Math.round((val / metric.limit) * 100);
+        const visualHeightPct = Math.min(100, Math.round((pct / 150) * 100));
+
+        let barColor = 'bg-sky-500';
+        if (metric.isCeiling) {
+          if (pct >= 100) barColor = 'bg-rose-500';
+          else if (pct >= 80) barColor = 'bg-amber-400';
+          else barColor = 'bg-emerald-500';
+        } else if (pct >= 100) {
+          barColor = 'bg-emerald-400';
+        }
+
+        return `
+          <div class="flex-1 h-full flex flex-col justify-end items-center group relative">
+            <span class="text-[10px] font-mono font-bold mb-1 ${pct >= 100 && metric.isCeiling ? 'text-rose-400' : 'text-slate-300'}">
+              ${pct}%
+            </span>
+            <div class="w-full max-w-[34px] bg-slate-900 rounded-t overflow-hidden flex items-end h-full">
+              <div style="height: ${visualHeightPct}%;" class="w-full ${barColor} transition-all duration-300 rounded-t"></div>
+            </div>
+            <span class="text-[10px] text-slate-400 mt-1.5 font-medium truncate">${metric.label}</span>
+          </div>
+        `;
+      }).join('');
+
+      summaryContainer.innerHTML = FDA_LIMITS.map(metric => {
+        const val = Math.round(totals[metric.key]);
+        const pct = Math.round((val / metric.limit) * 100);
+        const over = metric.isCeiling && pct >= 100;
+        return `
+          <div class="p-2.5 rounded-lg bg-slate-950 border ${over ? 'border-rose-500/50' : 'border-slate-800'} flex items-center justify-between">
+            <div>
+              <div class="text-slate-400 text-[11px]">${metric.label}</div>
+              <div class="font-bold text-white">${val} / ${metric.limit}${metric.unit}</div>
+            </div>
+            <span class="text-xs font-mono font-bold ${over ? 'text-rose-400' : 'text-slate-300'}">${pct}%</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function scrollToResults() {
+      document.getElementById('resultsChartCard').scrollIntoView({ behavior: 'smooth' });
+      renderChart();
+    }
+
+    function renderAll() {
+      setMealPeriod(state.mealPeriod);
+      renderSaladPresets();
+      renderCart();
+      renderChart();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      fetchSodiumJson();
+    });
   </script>
 </body>
 </html>

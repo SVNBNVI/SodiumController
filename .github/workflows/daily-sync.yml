@@ -2,7 +2,7 @@ name: Daily Sodium Sync
 
 on:
   schedule:
-    # Runs at 08:00 UTC (4:00 AM EST) every day
+    # Runs at 08:00 UTC (4:00 AM EDT/EST) every day
     - cron: '0 8 * * *'
   workflow_dispatch: # Allows manual one-click runs from GitHub dashboard
 
@@ -29,4 +29,4 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sodium-today.json
-          git diff --staged --quiet || (git commit -m "Auto-sync sodium data: $(date +'%Y-%m-%d')" && git push)
+          git diff --staged --quiet || (git commit -m "SodiumController auto-sync: $(date +'%Y-%m-%d')" && git pull --rebase && git push)
