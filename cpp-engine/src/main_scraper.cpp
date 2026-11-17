@@ -190,10 +190,6 @@ bool scrapeHall(const HallInfo& hall,
     std::string hallAssetPath = "frontend/src/assets/menus/" + hall.slug + "-today.json";
     writeJsonFile(hallAssetPath, payloadJson);
 
-    if (fs::exists("frontend/public")) {
-        writeJsonFile("frontend/public/menus/" + hall.slug + "-today.json", payloadJson);
-    }
-
     // 2. If bursley (default), also write root sodium-today.json and frontend/src/assets/sodium-today.json
     if (hall.slug == "bursley") {
         std::string primaryOut = outputPath.empty() ? "sodium-today.json" : outputPath;
@@ -201,10 +197,6 @@ bool scrapeHall(const HallInfo& hall,
 
         std::string feOut = frontendOutputPath.empty() ? "frontend/src/assets/sodium-today.json" : frontendOutputPath;
         writeJsonFile(feOut, payloadJson);
-
-        if (fs::exists("frontend/public")) {
-            writeJsonFile("frontend/public/sodium-today.json", payloadJson);
-        }
     } else if (!isAllHallsMode) {
         // If single non-bursley hall run, also honor explicit output flags if specified
         if (!outputPath.empty()) {
