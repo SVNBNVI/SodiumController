@@ -1,0 +1,13 @@
+# C++ build artifacts
+cpp-engine/build/
+*.o
+*.a
+
+# Frontend build & dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+
+# OS and Editor files
+.DS_Store
+.vscode/

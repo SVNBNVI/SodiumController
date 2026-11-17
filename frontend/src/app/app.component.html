@@ -1,0 +1,58 @@
+<!-- Header & Live Sync Status -->
+<app-header-status></app-header-status>
+
+<!-- Main Application Workspace -->
+<main class="max-w-7xl mx-auto px-4 py-6 space-y-8">
+  <!-- Welcome & Information Hero Banner -->
+  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#00274C] via-slate-900 to-slate-950 border border-slate-800 p-6 shadow-xl">
+    <div class="relative z-10 max-w-3xl space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#FFCB05] text-xs font-semibold">
+        <span>📍 University of Michigan • Bursley Hall</span>
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
+        Control Your Sodium &amp; Track Daily Nutritional Ceilings
+      </h2>
+      <p class="text-sm text-slate-300 leading-relaxed">
+        Dining hall foods can easily pack over <strong>100% of your FDA recommended daily sodium (2,300 mg)</strong> into a single meal. Select your dishes from the daily Bursley breakfast, lunch, or dinner menu, add customized scoops from the salad bar, and monitor your limits on the interactive bar chart.
+      </p>
+    </div>
+    <!-- Decorative background accent -->
+    <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-[#FFCB05]/10 blur-3xl pointer-events-none"></div>
+  </section>
+
+  <!-- Interactive Grid: Menu / Salad Builder + Food Tray Cart -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+    <!-- Left Column: Menu Browser OR Salad Bar Estimator (8 of 12 cols on desktop) -->
+    <div class="lg:col-span-8 space-y-6">
+      <app-menu-browser></app-menu-browser>
+      
+      <!-- Shows Salad Bar Estimator when the Salad tab is active -->
+      <app-salad-bar-estimator *ngIf="menuSync.selectedMealPeriod() === 'salad'"></app-salad-bar-estimator>
+    </div>
+
+    <!-- Right Column: Food Tray Cart (4 of 12 cols on desktop) -->
+    <div class="lg:col-span-4">
+      <app-food-tray-cart></app-food-tray-cart>
+    </div>
+  </div>
+
+  <!-- Bottom Section: FDA Daily Recommended Limit Bar Chart -->
+  <section class="pt-4">
+    <app-limit-bar-chart></app-limit-bar-chart>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="border-t border-slate-800/80 bg-slate-950 py-8 mt-12 text-center text-xs text-slate-500">
+  <div class="max-w-7xl mx-auto px-4 space-y-2">
+    <p class="font-medium text-slate-400">
+      SodiumController • Engineered with C++20 Scraper Engine &amp; Angular 19 SPA
+    </p>
+    <p>
+      Menu data sourced directly from M|Dining (<a href="https://dining.umich.edu" target="_blank" class="text-[#FFCB05] hover:underline">dining.umich.edu</a>). Daily Value limits based on FDA guidelines for a 2,000 kcal diet.
+    </p>
+    <p class="text-[11px] text-slate-600 font-mono">
+      University of Michigan Ann Arbor • Bursley Dining Hall
+    </p>
+  </div>
+</footer>
