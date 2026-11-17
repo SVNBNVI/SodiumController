@@ -19,7 +19,8 @@ const std::vector<FDABenchmark>& NutritionCalculator::getFDABenchmarks() {
     return benchmarks;
 }
 
-TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem>& cart) {
+TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem>& cart,
+                                                      const std::vector<FDABenchmark>& benchmarks) {
     TraySummary summary;
     summary.totalItemsCount = static_cast<int>(cart.size());
 
@@ -43,8 +44,8 @@ TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem
     }
     summary.totalServingsCount = totalServings;
 
-    const auto& benchmarks = getFDABenchmarks();
-    for (const auto& bm : benchmarks) {
+    const auto& activeBenchmarks = benchmarks.empty() ? getFDABenchmarks() : benchmarks;
+    for (const auto& bm : activeBenchmarks) {
         double val = 0.0;
         if (bm.key == "sodium_mg") val = t.sodium_mg;
         else if (bm.key == "calories") val = t.calories;

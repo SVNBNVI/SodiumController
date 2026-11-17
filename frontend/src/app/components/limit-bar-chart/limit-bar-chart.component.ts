@@ -1,18 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { TrayCartService } from '../../services/tray-cart.service';
-import { PercentDailyValue } from '../../models/nutrition.model';
+import { PercentDailyValue, BENCHMARK_PROFILES, BenchmarkProfileId } from '../../models/nutrition.model';
 
 @Component({
   selector: 'app-limit-bar-chart',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   template: `
     <div id="resultsChartCard" class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-6 shadow-xl">
-      <!-- Header with Status Pill and Mode Switcher -->
-      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-800 pb-4">
+      <!-- Header with Status Pill and Controls -->
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-4">
         <div>
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-2 flex-wrap">
             <h2 class="text-base font-bold text-white font-display">FDA Daily Recommended Limit Bar</h2>
             <!-- Sodium Status Pill -->
             <span
@@ -25,34 +26,72 @@ import { PercentDailyValue } from '../../models/nutrition.model';
             >
               {{ getSodiumStatusLabel() }}
             </span>
+            <!-- Engine Indicator Badge -->
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 border border-slate-700 font-mono">
+              ⚡ {{ cartService.engineMode() }}
+            </span>
           </div>
           <p class="text-xs text-slate-400 mt-1">
-            2,000 kcal FDA Standard Benchmark • Visualizing Daily Intake vs Recommended Ceilings &amp; Floors
+            {{ cartService.activeProfile().label }} • {{ cartService.activeProfile().description }}
           </p>
         </div>
 
-        <!-- View Mode Toggle -->
-        <div class="flex items-center gap-1 p-1 bg-slate-950 border border-slate-800 rounded-lg shrink-0 self-start sm:self-auto">
+        <!-- Controls: Profile Switcher, History, and View Mode Toggle -->
+        <div class="flex items-center gap-2 flex-wrap self-start lg:self-auto">
+          <!-- Section 5: Benchmark Profile Selector -->
+          <div class="flex items-center gap-1.5">
+            <label for="benchmarkProfileSelect" class="text-xs text-slate-400 hidden sm:inline font-medium">Profile:</label>
+            <select
+              id="benchmarkProfileSelect"
+              [ngModel]="cartService.activeProfileId()"
+              (ngModelChange)="onProfileChange($event)"
+              class="text-xs px-2.5 py-1.5 rounded-lg bg-slate-950 text-[#FFCB05] border border-amber-500/30 font-semibold cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#FFCB05] hover:border-amber-400/50 transition appearance-none pr-6 bg-no-repeat bg-right"
+              style="background-image: url('data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2210%22 height=%226%22 viewBox=%220 0 10 6%22%3E%3Cpath d=%22M0 0l5 6 5-6z%22 fill=%22%23FFCB05%22/%3E%3C/svg%3E'); background-position: right 6px center; background-size: 8px 5px;"
+            >
+              <option *ngFor="let profile of profiles" [value]="profile.id" class="bg-slate-900 text-slate-200">
+                {{ profile.label }}
+              </option>
+            </select>
+          </div>
+
+          <!-- Section 4: 7-Day History Trigger -->
           <button
-            (click)="viewMode.set('bars')"
-            class="px-3 py-1 rounded text-xs font-semibold transition"
-            [ngClass]="{
-              'bg-[#FFCB05] text-slate-950 font-bold': viewMode() === 'bars',
-              'text-slate-400 hover:text-white': viewMode() !== 'bars'
-            }"
+            (click)="cartService.openHistory()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-950 text-slate-300 border border-slate-800 hover:border-slate-700 hover:text-white text-xs font-semibold transition flex items-center gap-1.5"
+            title="View Multi-Day Sodium Intake History"
           >
-            📊 %DV Bars
+            <span>📅 History</span>
+            <span
+              *ngIf="cartService.history().length > 0"
+              class="px-1.5 py-0.2 rounded-full text-[10px] bg-[#FFCB05] text-slate-950 font-bold"
+            >
+              {{ cartService.history().length }}
+            </span>
           </button>
-          <button
-            (click)="viewMode.set('summary')"
-            class="px-3 py-1 rounded text-xs font-semibold transition"
-            [ngClass]="{
-              'bg-[#FFCB05] text-slate-950 font-bold': viewMode() === 'summary',
-              'text-slate-400 hover:text-white': viewMode() !== 'summary'
-            }"
-          >
-            📋 Macro Cards
-          </button>
+
+          <!-- View Mode Toggle -->
+          <div class="flex items-center gap-1 p-1 bg-slate-950 border border-slate-800 rounded-lg shrink-0">
+            <button
+              (click)="viewMode.set('bars')"
+              class="px-3 py-1 rounded text-xs font-semibold transition"
+              [ngClass]="{
+                'bg-[#FFCB05] text-slate-950 font-bold': viewMode() === 'bars',
+                'text-slate-400 hover:text-white': viewMode() !== 'bars'
+              }"
+            >
+              📊 %DV Bars
+            </button>
+            <button
+              (click)="viewMode.set('summary')"
+              class="px-3 py-1 rounded text-xs font-semibold transition"
+              [ngClass]="{
+                'bg-[#FFCB05] text-slate-950 font-bold': viewMode() === 'summary',
+                'text-slate-400 hover:text-white': viewMode() !== 'summary'
+              }"
+            >
+              📋 Macro Cards
+            </button>
+          </div>
         </div>
       </div>
 
@@ -216,6 +255,11 @@ import { PercentDailyValue } from '../../models/nutrition.model';
 export class LimitBarChartComponent {
   readonly cartService = inject(TrayCartService);
   readonly viewMode = signal<'bars' | 'summary'>('bars');
+  readonly profiles = BENCHMARK_PROFILES;
+
+  onProfileChange(profileId: string): void {
+    this.cartService.setProfile(profileId as BenchmarkProfileId);
+  }
 
   getSodiumStatusLabel(): string {
     const pct = this.cartService.sodiumPercent();

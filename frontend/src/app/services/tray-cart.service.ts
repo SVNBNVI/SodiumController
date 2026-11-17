@@ -46,6 +46,40 @@ export class TrayCartService {
   readonly todayDate = signal<string>(getDetroitDate());
   readonly cart = signal<TrayItem[]>(this.loadCartWithExpiry());
   readonly history = signal<DailyHistoryEntry[]>(this.loadHistory());
+  readonly isHistoryOpen = signal<boolean>(false);
+
+  readonly fullHistoryWithToday = computed<(DailyHistoryEntry & { isLiveToday?: boolean })[]>(() => {
+    const list = [...this.history()];
+    const todayCart = this.cart();
+    const totals = this.totalNutrients();
+    const today = this.todayDate();
+
+    // If today's cart has items, add or update today's live preview in the list
+    if (todayCart.length > 0) {
+      const existingIdx = list.findIndex((h) => h.date === today);
+      const liveEntry: DailyHistoryEntry & { isLiveToday?: boolean } = {
+        date: today,
+        totalCalories: Math.round(totals.calories),
+        totalSodium_mg: Math.round(totals.sodium_mg),
+        itemsCount: todayCart.length,
+        isLiveToday: true
+      };
+
+      if (existingIdx !== -1) {
+        list[existingIdx] = liveEntry;
+      } else {
+        list.unshift(liveEntry);
+      }
+    }
+
+    return list;
+  });
+
+  // ── Section 3: WebAssembly engine status ──
+  readonly wasmLoaded = signal<boolean>(false);
+  readonly engineMode = computed<string>(() => {
+    return this.wasmLoaded() ? 'C++20 WebAssembly (WASM)' : 'TypeScript Engine';
+  });
 
   readonly cartCount = computed(() => {
     return this.cart().length;
@@ -174,6 +208,26 @@ export class TrayCartService {
         localStorage.setItem(PROFILE_KEY, profileId);
       } catch { /* ignore */ }
     });
+
+    this.initWasmEngine();
+  }
+
+  private initWasmEngine(): void {
+    if (typeof window !== 'undefined' && (window as any).createNutritionEngine) {
+      try {
+        (window as any).createNutritionEngine().then((mod: any) => {
+          if (mod && mod.calculateTraySummary) {
+            (window as any).__sodiumWasmModule = mod;
+            this.wasmLoaded.set(true);
+            console.log('[TrayCartService] C++20 WebAssembly nutrition engine loaded successfully.');
+          }
+        }).catch(() => {
+          // Fallback to TS
+        });
+      } catch {
+        // Fallback to TS
+      }
+    }
   }
 
   // ── Cart mutations ──
@@ -215,6 +269,26 @@ export class TrayCartService {
   // ── Section 5: Profile switching ──
   setProfile(profileId: BenchmarkProfileId): void {
     this.activeProfileId.set(profileId);
+  }
+
+  // ── Section 4: History modal controls ──
+  openHistory(): void {
+    this.isHistoryOpen.set(true);
+  }
+
+  closeHistory(): void {
+    this.isHistoryOpen.set(false);
+  }
+
+  toggleHistory(): void {
+    this.isHistoryOpen.update((v) => !v);
+  }
+
+  clearHistory(): void {
+    try {
+      localStorage.removeItem(HISTORY_KEY);
+      this.history.set([]);
+    } catch { /* ignore */ }
   }
 
   // ── Section 4: Date-aware storage ──

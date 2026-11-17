@@ -5,6 +5,7 @@ import { MenuBrowserComponent } from './components/menu-browser/menu-browser.com
 import { SaladBarEstimatorComponent } from './components/salad-bar-estimator/salad-bar-estimator.component';
 import { FoodTrayCartComponent } from './components/food-tray-cart/food-tray-cart.component';
 import { LimitBarChartComponent } from './components/limit-bar-chart/limit-bar-chart.component';
+import { SodiumHistoryComponent } from './components/sodium-history/sodium-history.component';
 import { MenuSyncService } from './services/menu-sync.service';
 import { TrayCartService } from './services/tray-cart.service';
 
@@ -17,7 +18,8 @@ import { TrayCartService } from './services/tray-cart.service';
     MenuBrowserComponent,
     SaladBarEstimatorComponent,
     FoodTrayCartComponent,
-    LimitBarChartComponent
+    LimitBarChartComponent,
+    SodiumHistoryComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

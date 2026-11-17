@@ -74,6 +74,10 @@ double HtmlParser::extractNumber(const std::string& text, const std::string& pat
 }
 
 std::vector<MenuItem> HtmlParser::parseBursleyHtml(const std::string& html) {
+    return parseDiningHallHtml(html, "bursley");
+}
+
+std::vector<MenuItem> HtmlParser::parseDiningHallHtml(const std::string& html, const std::string& hallSlug) {
     std::vector<MenuItem> items;
     int idCounter = 1;
 
@@ -161,7 +165,7 @@ std::vector<MenuItem> HtmlParser::parseBursleyHtml(const std::string& html) {
                                            itemBlock.find("nutrition-facts") != std::string::npos || 
                                            itemBlock.find("Calories") != std::string::npos)) {
                     MenuItem item;
-                    item.id = "sc-bursley-" + meal.name + "-" + std::to_string(idCounter++);
+                    item.id = "sc-" + hallSlug + "-" + meal.name + "-" + std::to_string(idCounter++);
                     item.name = dishName;
                     item.mealPeriod = meal.name;
                     item.station = stationName;

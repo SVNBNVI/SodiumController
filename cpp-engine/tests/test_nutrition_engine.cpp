@@ -53,6 +53,12 @@ void testHtmlParser() {
     assert(parsed[0].protein_g == 5.0);
     assert(!parsed[0].tags.empty() && parsed[0].tags[0] == "Vegan");
     std::cout << "  ✓ Mock HTML parsed with 100% precision.\n";
+
+    // Test multi-hall parsing with custom slug ID
+    auto southQuadParsed = sodium::HtmlParser::parseDiningHallHtml(mockHtml, "south-quad");
+    assert(southQuadParsed.size() == 1);
+    assert(southQuadParsed[0].id.find("sc-south-quad-") == 0);
+    std::cout << "  ✓ Multi-hall parser correctly prefixes dining hall IDs.\n";
 }
 
 void testNutritionCalculator() {

@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuSyncService } from '../../services/menu-sync.service';
+import { TrayCartService } from '../../services/tray-cart.service';
 import { DiningHall } from '../../models/nutrition.model';
 
 @Component({
@@ -63,6 +64,20 @@ import { DiningHall } from '../../models/nutrition.model';
           </button>
 
           <button
+            (click)="cartService.toggleHistory()"
+            class="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 font-medium transition flex items-center gap-1.5 active:scale-95"
+            title="View Multi-Day Sodium Intake History"
+          >
+            <span>📅 History</span>
+            <span
+              *ngIf="cartService.history().length > 0"
+              class="px-1.5 py-0.2 rounded-full text-[10px] bg-[#FFCB05] text-slate-950 font-bold"
+            >
+              {{ cartService.history().length }}
+            </span>
+          </button>
+
+          <button
             (click)="scrollToChart()"
             class="hidden sm:inline-flex px-3 py-1.5 rounded-lg bg-slate-800 text-slate-200 border border-slate-700 hover:bg-slate-700 font-medium transition"
           >
@@ -75,6 +90,7 @@ import { DiningHall } from '../../models/nutrition.model';
 })
 export class HeaderStatusComponent {
   readonly menuSync = inject(MenuSyncService);
+  readonly cartService = inject(TrayCartService);
 
   onHallChange(slug: string): void {
     const hall = this.menuSync.diningHalls.find((h) => h.slug === slug);

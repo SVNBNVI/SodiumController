@@ -12,9 +12,6 @@ else()
     add_compile_options(-Wall -Wextra -Wpedantic -O2)
 endif()
 
-# Find CURL
-find_package(CURL REQUIRED)
-
 # Find or Fetch nlohmann/json
 find_package(nlohmann_json 3.10.0 QUIET)
 if(NOT nlohmann_json_FOUND)
@@ -45,24 +42,60 @@ target_link_libraries(nutrition_engine PUBLIC
     nlohmann_json::nlohmann_json
 )
 
-# Sodium Scraper Executable
-add_executable(sodium_scraper
-    src/main_scraper.cpp
-)
+# ── WebAssembly Build (Emscripten) ──
+if(EMSCRIPTEN)
+    message(STATUS "Configuring WebAssembly target (nutrition_engine_wasm)...")
+    add_executable(nutrition_engine_wasm
+        src/nutrition_calculator.cpp
+        wasm/nutrition_bindings.cpp
+    )
 
-target_link_libraries(sodium_scraper PRIVATE
-    nutrition_engine
-    CURL::libcurl
-)
+    target_include_directories(nutrition_engine_wasm PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+    )
 
-# Test Suite Executable
-enable_testing()
-add_executable(test_nutrition_engine
-    tests/test_nutrition_engine.cpp
-)
+    target_link_libraries(nutrition_engine_wasm PRIVATE
+        nlohmann_json::nlohmann_json
+    )
 
-target_link_libraries(test_nutrition_engine PRIVATE
-    nutrition_engine
-)
+    set_target_properties(nutrition_engine_wasm PROPERTIES
+        OUTPUT_NAME "nutrition_engine"
+        SUFFIX ".js"
+    )
 
-add_test(NAME EngineTests COMMAND test_nutrition_engine)
+    target_compile_options(nutrition_engine_wasm PRIVATE -O3 -std=c++20)
+    target_link_options(nutrition_engine_wasm PRIVATE
+        -O3
+        --bind
+        -s MODULARIZE=1
+        -s EXPORT_ES6=1
+        -s EXPORT_NAME="createNutritionEngine"
+        -s ALLOW_MEMORY_GROWTH=1
+        -s ENVIRONMENT=web,worker
+    )
+else()
+    # ── Native Scraper & Tests ──
+    find_package(CURL REQUIRED)
+
+    # Sodium Scraper Executable
+    add_executable(sodium_scraper
+        src/main_scraper.cpp
+    )
+
+    target_link_libraries(sodium_scraper PRIVATE
+        nutrition_engine
+        CURL::libcurl
+    )
+
+    # Test Suite Executable
+    enable_testing()
+    add_executable(test_nutrition_engine
+        tests/test_nutrition_engine.cpp
+    )
+
+    target_link_libraries(test_nutrition_engine PRIVATE
+        nutrition_engine
+    )
+
+    add_test(NAME EngineTests COMMAND test_nutrition_engine)
+endif()

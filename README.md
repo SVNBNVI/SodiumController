@@ -22,12 +22,14 @@ The original `sync-sodium.js` Node.js scraper was ported to a fully modular C++2
 
 | File | Purpose |
 |------|---------|
-| `CMakeLists.txt` | CMake build config — links `libcurl` for HTTP and `nlohmann/json` for serialization |
+| `CMakeLists.txt` | CMake build config — links `libcurl` and `nlohmann/json` for native binary, plus optional Emscripten WASM build target |
 | `include/menu_item.hpp` | Strongly typed `MenuItem`, `TrayItem`, and `DailyMenuPayload` structs with JSON round-trip support |
-| `include/html_parser.hpp` / `src/html_parser.cpp` | Deterministic HTML parser that extracts meal periods, station names, serving sizes, 10 macro/electrolyte values, and dietary tags (Vegan, Vegetarian, Halal, Gluten-Free) from the M|Dining HTML payload |
-| `include/nutrition_calculator.hpp` / `src/nutrition_calculator.cpp` | Decoupled O(N) nutrition aggregator — computes %DV ratios against FDA benchmarks, evaluates ceiling/floor status, and ranks the #1 top-offending food item when any limit is exceeded or warned |
-| `src/main_scraper.cpp` | CLI binary that fetches Bursley's menu using `User-Agent: python-requests/2.32.3` (required to bypass the dining.umich.edu WAF), locks dates to `America/Detroit` timezone, and writes `sodium-today.json` to both the repo root and `frontend/src/assets/` |
-| `tests/test_nutrition_engine.cpp` | Unit tests covering mock HTML parsing, nutrition calculation correctness, sodium alert states, top-offender ranking, and JSON serialization round-trips |
+| `include/html_parser.hpp` / `src/html_parser.cpp` | Deterministic HTML parser that extracts meal periods, station names, serving sizes, 10 macro/electrolyte values, and dietary tags (Vegan, Vegetarian, Halal, Gluten-Free) across any M|Dining residential hall |
+| `include/nutrition_calculator.hpp` / `src/nutrition_calculator.cpp` | Decoupled O(N) nutrition aggregator — computes %DV ratios against configurable FDA / Wolverine / Low-Sodium benchmarks, evaluates ceiling/floor status, and ranks the #1 top-offending food item |
+| `src/main_scraper.cpp` | Multi-hall CLI binary (`--all-halls` or `--hall <slug>`) that fetches live menus using `User-Agent: python-requests/2.32.3` (required to bypass dining.umich.edu WAF), locks dates to `America/Detroit` timezone, and writes per-hall JSON files to `frontend/src/assets/menus/` |
+| `wasm/nutrition_bindings.cpp` | Emscripten `embind` bindings exposing `calculateTraySummary` directly to WebAssembly |
+| `build-wasm.sh` | One-click build script compiling C++ nutrition engine to `nutrition_engine.wasm` + `.js` |
+| `tests/test_nutrition_engine.cpp` | Unit tests covering mock HTML parsing, multi-hall prefixing, nutrition calculation correctness, sodium alert states, top-offender ranking, and JSON serialization round-trips |
 
 **Key technical details preserved from the original prototype:**
 - The WAF on `dining.umich.edu` blocks default user agents with HTTP 403. The exact header `User-Agent: python-requests/2.32.3` returns HTTP 200 immediately — no headless browser needed.
@@ -40,14 +42,15 @@ A full single-page application ported from the original `index.html` vanilla JS 
 
 | Layer | File(s) | What It Does |
 |-------|---------|--------------|
-| **Data Models** | `models/nutrition.model.ts` | Strict TypeScript interfaces (`MenuItem`, `TrayItem`, `NutrientTotals`, `PercentDailyValue`, `TopOffender`, `TraySummary`), FDA benchmark constants, salad bar presets, and fallback menu items |
-| **Menu Sync Service** | `services/menu-sync.service.ts` | Fetches `sodium-today.json` on app load, falls back to built-in verified Bursley database if the JSON is empty or unavailable. Exposes reactive signals for filtered menu items, station grouping, search query, and dietary tag filtering |
-| **Tray Cart Service** | `services/tray-cart.service.ts` | Angular Signals-based shopping cart (`signal`, `computed`, `effect`). Computes total nutrients, %DV for all 9 FDA metrics, sodium alert state (`ok` / `warning` / `exceeded`), and top offenders. Automatically persists to `localStorage` under key `sodiumControllerCart` |
-| **Header Status** | `components/header-status/` | Sticky top nav with the SC logo, Bursley Hall badge, live/offline sync status indicator with animated pulse dot, and Reload Data button |
+| **Data Models** | `models/nutrition.model.ts` | Strict TypeScript interfaces (`MenuItem`, `TrayItem`, `NutrientTotals`, `PercentDailyValue`, `TopOffender`, `TraySummary`), `BENCHMARK_PROFILES` (FDA Standard, Active Wolverine, Low-Sodium), `DINING_HALLS` registry, `StoredTrayEnvelope`, and salad bar presets |
+| **Menu Sync Service** | `services/menu-sync.service.ts` | Fetches hall-specific JSON (`assets/menus/{hall.slug}-today.json`) with cache-busting timestamp `?t=${Date.now()}`. Supports instant dining hall switching across 6 UMich dining halls with offline database fallbacks |
+| **Tray Cart Service** | `services/tray-cart.service.ts` | Angular Signals-based cart (`signal`, `computed`, `effect`). Supports auto-expiry at Detroit midnight with 14-day history archival, active benchmark profile switching, WebAssembly engine integration with TypeScript fallback |
+| **Header Status** | `components/header-status/` | Sticky top nav with SC logo, 6-hall dining hall selector dropdown, live/offline sync indicator, Reload button, and 7-day sodium history modal trigger |
 | **Menu Browser** | `components/menu-browser/` | Four-tab meal period switcher (Breakfast, Lunch/Brunch, Dinner, Salad Bar). Instant search input. Dietary tag filter pills (All, Vegan, Vegetarian, Halal, Gluten-Free). Station-grouped dish cards with color-coded sodium badges and one-click "Add to Tray" |
 | **Salad Bar Estimator** | `components/salad-bar-estimator/` | Six 1-click dining hall scoop presets (Mixed Greens, Cucumber & Peppers, Grilled Chicken, Hard Boiled Egg, Chickpeas, Balsamic Vinaigrette). Reactive Form for logging custom food items with full nutrition label entry |
 | **Food Tray Cart** | `components/food-tray-cart/` | Sticky sidebar showing logged items with `-0.5x` / `+0.5x` portion steppers, real-time calorie and sodium totals, color-coded sodium indicator, and Clear Tray action |
-| **Limit Bar Chart** | `components/limit-bar-chart/` | Vertical %DV bar chart (0–150% scale) with a dashed **100% FDA Daily Value Limit Line** at 66.6% height. Dynamic bar colors (green < 80%, amber 80–99%, red ≥ 100%). Top Offender analysis callout when ceiling metrics are exceeded. Toggle between bar chart view and macro summary cards |
+| **Limit Bar Chart** | `components/limit-bar-chart/` | Vertical %DV bar chart (0–150% scale) with dashed 100% FDA Daily Value limit line, dynamic bar colors, Benchmark Profile switcher dropdown, engine badge (WASM/TS), and Top Offender analysis |
+| **Sodium History Modal** | `components/sodium-history/` | Modal displaying multi-day sodium trends against the 2,300 mg FDA ceiling, average daily sodium stats, days over ceiling, and day-by-day intake breakdown with "Live Today" preview |
 
 ### GitHub Actions CI/CD (`.github/workflows/daily-sync.yml`)
 
@@ -127,8 +130,17 @@ cmake --build cpp-engine/build
 # Scrape live Bursley menu
 ./cpp-engine/build/sodium_scraper
 
+# Scrape ALL 6 Ann Arbor residential dining halls (Bursley, South Quad, East Quad, Mojo, North Quad, Markley)
+./cpp-engine/build/sodium_scraper --all-halls
+
+# Scrape a specific dining hall
+./cpp-engine/build/sodium_scraper --hall south-quad
+
 # Parse from a saved HTML file instead
 ./cpp-engine/build/sodium_scraper --input-html saved_page.html
+
+# Compile C++ Nutrition Engine to WebAssembly (optional)
+./cpp-engine/build-wasm.sh
 ```
 
 ### Angular Frontend
@@ -137,7 +149,6 @@ cd frontend
 npm install
 npm run build       # Production build → dist/frontend/
 npm start           # Dev server on http://localhost:4200
-npm test            # Karma/Jasmine unit tests
 ```
 
 ---

@@ -78,7 +78,8 @@ void from_json(const nlohmann::json& j, TraySummary& s);
 class NutritionCalculator {
 public:
     static const std::vector<FDABenchmark>& getFDABenchmarks();
-    static TraySummary calculateTraySummary(const std::vector<TrayItem>& cart);
+    static TraySummary calculateTraySummary(const std::vector<TrayItem>& cart,
+                                            const std::vector<FDABenchmark>& benchmarks = getFDABenchmarks());
 };
 
 } // namespace sodium
