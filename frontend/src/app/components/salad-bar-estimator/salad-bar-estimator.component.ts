@@ -185,16 +185,16 @@ export class SaladBarEstimatorComponent {
   readonly presets = SALAD_PRESETS;
 
   readonly customForm = this.fb.group({
-    name: ['', [Validators.required, Validators.minLength(2)]],
-    servingSize: ['1 serving'],
-    calories: [150, [Validators.required, Validators.min(0)]],
-    sodium_mg: [200, [Validators.required, Validators.min(0)]],
-    protein_g: [10, [Validators.min(0)]],
-    carbs_g: [15, [Validators.min(0)]],
-    fat_g: [5, [Validators.min(0)]],
-    satFat_g: [1, [Validators.min(0)]],
-    sugar_g: [3, [Validators.min(0)]],
-    fiber_g: [2, [Validators.min(0)]]
+    name: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+    servingSize: ['1 serving', [Validators.maxLength(50)]],
+    calories: [150, [Validators.required, Validators.min(0), Validators.max(10000)]],
+    sodium_mg: [200, [Validators.required, Validators.min(0), Validators.max(25000)]],
+    protein_g: [10, [Validators.min(0), Validators.max(1000)]],
+    carbs_g: [15, [Validators.min(0), Validators.max(1000)]],
+    fat_g: [5, [Validators.min(0), Validators.max(1000)]],
+    satFat_g: [1, [Validators.min(0), Validators.max(500)]],
+    sugar_g: [3, [Validators.min(0), Validators.max(1000)]],
+    fiber_g: [2, [Validators.min(0), Validators.max(500)]]
   });
 
   addPreset(preset: SaladPreset): void {
@@ -223,22 +223,28 @@ export class SaladBarEstimatorComponent {
     if (this.customForm.invalid) return;
     const v = this.customForm.value;
 
+    const sanitizeNum = (val: any, max = 10000): number => {
+      const n = Number(val);
+      if (isNaN(n) || !isFinite(n) || n < 0) return 0;
+      return Math.min(n, max);
+    };
+
     const item: MenuItem = {
       id: `sc-custom-${Date.now()}`,
-      name: v.name || 'Custom Food Item',
+      name: (v.name || 'Custom Food Item').trim().slice(0, 100),
       mealPeriod: 'lunch',
       station: 'Custom / My Foods',
-      servingSize: v.servingSize || '1 serving',
-      calories: Number(v.calories) || 0,
-      sodium_mg: Number(v.sodium_mg) || 0,
-      protein_g: Number(v.protein_g) || 0,
-      carbs_g: Number(v.carbs_g) || 0,
-      fat_g: Number(v.fat_g) || 0,
-      satFat_g: Number(v.satFat_g) || 0,
+      servingSize: (v.servingSize || '1 serving').trim().slice(0, 50),
+      calories: sanitizeNum(v.calories, 10000),
+      sodium_mg: sanitizeNum(v.sodium_mg, 25000),
+      protein_g: sanitizeNum(v.protein_g, 1000),
+      carbs_g: sanitizeNum(v.carbs_g, 1000),
+      fat_g: sanitizeNum(v.fat_g, 1000),
+      satFat_g: sanitizeNum(v.satFat_g, 500),
       transFat_g: 0,
       cholesterol_mg: 0,
-      sugar_g: Number(v.sugar_g) || 0,
-      fiber_g: Number(v.fiber_g) || 0,
+      sugar_g: sanitizeNum(v.sugar_g, 1000),
+      fiber_g: sanitizeNum(v.fiber_g, 500),
       tags: ['Custom']
     };
 

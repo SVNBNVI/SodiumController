@@ -7,9 +7,7 @@ on:
   workflow_dispatch: # Allows manual one-click runs from GitHub dashboard
 
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
 concurrency:
   group: "pages"
@@ -18,6 +16,10 @@ concurrency:
 jobs:
   scrape-build-deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

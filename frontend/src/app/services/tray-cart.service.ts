@@ -358,7 +358,11 @@ export class TrayCartService {
       const stored = localStorage.getItem(HISTORY_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) return parsed;
+        if (Array.isArray(parsed)) {
+          return parsed.filter(
+            (item) => item && typeof item.date === 'string' && typeof item.totalSodium_mg === 'number'
+          );
+        }
       }
     } catch { /* ignore */ }
     return [];

@@ -1,42 +1,72 @@
-# ==============================================================================
-# SodiumController — Unified Git Ignore Rules
-# ==============================================================================
+# ==========================================
+# Node.js & Angular Frontend
+# ==========================================
+node_modules/
+**/node_modules/
+dist/
+**/dist/
+.angular/
+**/.angular/
+tmp/
+out-tsc/
+*.tsbuildinfo
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# --- C++ Engine Build Artifacts ---
-cpp-engine/build/
-cpp-engine/build-wasm/
+# ==========================================
+# C++20 / CMake / Compilers
+# ==========================================
+build/
+**/build/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+compile_commands.json
 *.o
+*.obj
 *.a
-*.out
+*.so
+*.dylib
+*.dll
 *.exe
+*.out
+*.app
+*.wasm
 
-# --- Angular 19 Frontend ---
-frontend/node_modules/
-frontend/dist/
-frontend/.angular/
-frontend/npm-debug.log*
-frontend/yarn-error.log*
+# ==========================================
+# Secrets & Local Environment Variables
+# ==========================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+*.p12
 
-# --- Environment & OS Files ---
+# ==========================================
+# macOS & IDE Files
+# ==========================================
 .DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# --- IDEs & Editors ---
+**/.DS_Store
+.AppleDouble
+.LSOverride
 .vscode/
+**/.vscode/
+.editorconfig
+**/.editorconfig
 .idea/
-frontend/.editorconfig
-*.sublime-project
-*.sublime-workspace
+*.swp
+*.swo
+*~
 
-# --- Local Notes & Roadmaps ---
+# ==========================================
+# Local Development & Hygiene Guides
+# ==========================================
+security_and_repository_hygiene_guide.md
 sodiumcontroller_phase_3_fixes_and_upgrades.md
 fixes-*.md
-
-# --- Logs & Temp ---
-*.log
-/tmp/

@@ -16,9 +16,15 @@ namespace fs = std::filesystem;
 
 namespace {
 
+constexpr size_t MAX_RESPONSE_BYTES = 5 * 1024 * 1024; // 5 MB payload cap to prevent memory exhaustion
+
 size_t curlWriteCallback(void* contents, size_t size, size_t nmemb, void* userp) {
     size_t totalSize = size * nmemb;
     auto* str = static_cast<std::string*>(userp);
+    if (str->size() + totalSize > MAX_RESPONSE_BYTES) {
+        std::cerr << "[SodiumController WARNING] Upstream response exceeded 5 MB cap; aborting to prevent memory exhaustion.\n";
+        return 0; // Returning 0 causes libcurl to abort transfer with CURLE_WRITE_ERROR
+    }
     str->append(static_cast<char*>(contents), totalSize);
     return totalSize;
 }
@@ -69,8 +75,10 @@ bool fetchUrl(const std::string& url, std::string& responseOut, long& httpCode) 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &responseOut);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
+    curl_easy_setopt(curl, CURLOPT_TIMEOUT, 15L);
+    curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10L);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+    curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L);
 
     CURLcode res = curl_easy_perform(curl);
     curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
