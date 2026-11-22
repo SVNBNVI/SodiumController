@@ -22,15 +22,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  scrape-build-deploy:
+  build:
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pages: write
       id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -63,7 +60,7 @@ jobs:
           git add sodium-today.json frontend/src/assets/sodium-today.json frontend/src/assets/menus/ || true
           git diff --staged --quiet || (git commit -m "chore(data): SodiumController C++ auto-sync $(date +'%Y-%m-%d')" && git pull --rebase && git push)
 
-      # ── Angular Frontend Test, Build & Deploy ──
+      # ── Angular Frontend Test & Production Build ──
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -77,20 +74,31 @@ jobs:
 
       - name: Run Angular Unit Tests
         working-directory: frontend
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+        run: npm test -- --watch=false --browsers=ChromeHeadlessCI
 
       - name: Build Angular Production Bundle
         working-directory: frontend
         run: npm run build -- --base-href /SodiumController/
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: frontend/dist/frontend/browser
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
