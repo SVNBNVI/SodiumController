@@ -2,6 +2,61 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  color-scheme: dark;
+  accent-color: #FFCB05;
+  --scrollbar-thumb: #64748b;
+  --scrollbar-track: #0f172a;
+}
+
+html {
+  scroll-padding-top: 4.5rem;
+  scroll-padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+html,
+.sc-scroller {
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+.sc-contained-scroll {
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+}
+
+.sc-bottom-bar {
+  padding-top: 0.625rem;
+  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+/* Legacy fallback for WebKit/Blink browsers lacking standard scrollbar-color */
+@supports not (scrollbar-color: auto) {
+  html::-webkit-scrollbar,
+  .sc-scroller::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  html::-webkit-scrollbar-thumb,
+  .sc-scroller::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 6px;
+  }
+
+  html::-webkit-scrollbar-track,
+  .sc-scroller::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+  }
+}
+
 body {
   background-color: #0b0f19;
   color: #f1f5f9;
@@ -9,20 +64,51 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  overflow-wrap: break-word;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Native modal dialog scroll containment (no root overflow mutation) */
+dialog:modal {
+  overscroll-behavior: contain;
 }
-::-webkit-scrollbar-track {
-  background: #0f172a;
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgb(2 6 23 / 0.82);
+  backdrop-filter: blur(4px);
 }
-::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 3px;
+
+/* Accessible focus ring & post-interaction validation state */
+:where(a:any-link, button, select, input):focus-visible {
+  outline: 2px solid #FFCB05;
+  outline-offset: 2px;
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+
+input:not(input[type="range"]):user-invalid {
+  border-color: rgb(244 63 94 / 0.85);
+}
+
+/* Visually hidden utility that reveals focusable skip links on focus */
+.visually-hidden:where(:not(:focus-within, :active)) {
+  position: absolute !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  white-space: nowrap !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -23,6 +23,7 @@ struct MenuItem {
     double sugar_g = 0.0;
     double fiber_g = 0.0;
     std::vector<std::string> tags;
+    std::vector<std::string> allergens;
 
     bool operator==(const MenuItem& other) const = default;
 };
@@ -40,7 +41,9 @@ struct DailyMenuPayload {
     std::string date;
     std::string lastUpdated;
     std::string hall = "Bursley Dining Hall";
+    std::string hallSlug = "bursley";
     std::string sourceUrl;
+    bool isFallback = false;
     int itemCount = 0;
     std::vector<MenuItem> items;
 };
@@ -63,16 +66,17 @@ inline void to_json(nlohmann::json& j, const MenuItem& item) {
         {"sodium_mg", item.sodium_mg},
         {"sugar_g", item.sugar_g},
         {"fiber_g", item.fiber_g},
-        {"tags", item.tags}
+        {"tags", item.tags},
+        {"allergens", item.allergens}
     };
 }
 
 inline void from_json(const nlohmann::json& j, MenuItem& item) {
     j.at("id").get_to(item.id);
     j.at("name").get_to(item.name);
-    j.at("mealPeriod").get_to(item.mealPeriod);
-    j.at("station").get_to(item.station);
-    j.at("servingSize").get_to(item.servingSize);
+    item.mealPeriod = j.value("mealPeriod", "lunch");
+    item.station = j.value("station", "General");
+    item.servingSize = j.value("servingSize", "1 serving");
     item.calories = j.value("calories", 0.0);
     item.protein_g = j.value("protein_g", 0.0);
     item.carbs_g = j.value("carbs_g", 0.0);
@@ -87,6 +91,11 @@ inline void from_json(const nlohmann::json& j, MenuItem& item) {
         item.tags = j["tags"].get<std::vector<std::string>>();
     } else {
         item.tags.clear();
+    }
+    if (j.contains("allergens") && j["allergens"].is_array()) {
+        item.allergens = j["allergens"].get<std::vector<std::string>>();
+    } else {
+        item.allergens.clear();
     }
 }
 
@@ -106,7 +115,9 @@ inline void to_json(nlohmann::json& j, const DailyMenuPayload& payload) {
         {"date", payload.date},
         {"lastUpdated", payload.lastUpdated},
         {"hall", payload.hall},
+        {"hallSlug", payload.hallSlug},
         {"sourceUrl", payload.sourceUrl},
+        {"isFallback", payload.isFallback},
         {"itemCount", payload.itemCount},
         {"items", payload.items}
     };
@@ -117,7 +128,9 @@ inline void from_json(const nlohmann::json& j, DailyMenuPayload& payload) {
     payload.date = j.value("date", "");
     payload.lastUpdated = j.value("lastUpdated", "");
     payload.hall = j.value("hall", "Bursley Dining Hall");
+    payload.hallSlug = j.value("hallSlug", "bursley");
     payload.sourceUrl = j.value("sourceUrl", "");
+    payload.isFallback = j.value("isFallback", false);
     payload.itemCount = j.value("itemCount", 0);
     if (j.contains("items") && j["items"].is_array()) {
         payload.items = j["items"].get<std::vector<MenuItem>>();

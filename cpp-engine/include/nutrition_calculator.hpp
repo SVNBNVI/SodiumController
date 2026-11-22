@@ -35,6 +35,7 @@ struct PercentDailyValue {
     double limit = 0.0;
     std::string unit;
     double percent = 0.0; // e.g. 85.0 for 85%
+    double visualHeightPct = 0.0; // Scaled 0-100% across a 0-150% DV chart axis
     bool isCeiling = false;
     std::string status; // "ok", "warning", "exceeded", "achieved"
 };

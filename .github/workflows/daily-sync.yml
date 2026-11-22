@@ -2,8 +2,16 @@ name: Daily Sodium Sync & Deploy
 
 on:
   schedule:
-    # Runs at 08:00 UTC (4:00 AM EDT/EST) every day
+    # Runs at 08:00 UTC (4:00 AM EDT / 3:00 AM EST) every day
     - cron: '0 8 * * *'
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'sodium-today.json'
+      - 'frontend/src/assets/sodium-today.json'
+      - 'frontend/src/assets/menus/**'
+      - '**.md'
   workflow_dispatch: # Allows manual one-click runs from GitHub dashboard
 
 permissions:
@@ -27,7 +35,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # ── C++ Scraper Build & Run ──
+      # ── C++ Scraper Build & Test ──
       - name: Install C++ Build Dependencies
         run: |
           sudo apt-get update
@@ -38,36 +46,42 @@ jobs:
           cmake -B cpp-engine/build -S cpp-engine -DCMAKE_BUILD_TYPE=Release
           cmake --build cpp-engine/build
 
-      - name: Run Nutrition Engine Tests
+      - name: Run C++ Nutrition Engine Unit Tests
         run: |
           ./cpp-engine/build/test_nutrition_engine
 
       - name: Run C++ Scraper (All Halls)
+        if: github.event_name != 'push'
         run: |
           ./cpp-engine/build/sodium_scraper --all-halls
 
       - name: Commit Updated Sodium Data
+        if: github.event_name != 'push'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add sodium-today.json frontend/src/assets/ || true
-          git diff --staged --quiet || (git commit -m "SodiumController C++ auto-sync: $(date +'%Y-%m-%d')" && git pull --rebase && git push)
+          git add sodium-today.json frontend/src/assets/sodium-today.json frontend/src/assets/menus/ || true
+          git diff --staged --quiet || (git commit -m "chore(data): SodiumController C++ auto-sync $(date +'%Y-%m-%d')" && git pull --rebase && git push)
 
-      # ── Angular Frontend Build & Deploy ──
+      # ── Angular Frontend Test, Build & Deploy ──
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Install Frontend Dependencies
-        run: |
-          cd frontend
-          npm ci
+        working-directory: frontend
+        run: npm ci
+
+      - name: Run Angular Unit Tests
+        working-directory: frontend
+        run: npm test -- --watch=false --browsers=ChromeHeadless
 
       - name: Build Angular Production Bundle
-        run: |
-          cd frontend
-          npm run build -- --base-href /SodiumController/
+        working-directory: frontend
+        run: npm run build -- --base-href /SodiumController/
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5

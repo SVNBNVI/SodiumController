@@ -1,9 +1,12 @@
 {
-  "date": "2026-11-22",
+  "date": "2026-11-21",
   "hall": "Bursley Dining Hall",
-  "itemCount": 58,
+  "hallSlug": "bursley",
+  "isFallback": false,
+  "itemCount": 65,
   "items": [
     {
+      "allergens": [],
       "calories": 200.0,
       "carbs_g": 36.0,
       "cholesterol_mg": 0.0,
@@ -19,12 +22,12 @@
       "station": "Hot Cereal",
       "sugar_g": 1.0,
       "tags": [
-        "Vegan",
-        "Gluten-Free"
+        "Vegan"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [],
       "calories": 15.0,
       "carbs_g": 4.0,
       "cholesterol_mg": 0.0,
@@ -46,20 +49,47 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 85.0,
-      "carbs_g": 15.0,
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 92.0,
+      "carbs_g": 17.0,
       "cholesterol_mg": 0.0,
       "fat_g": 2.0,
-      "fiber_g": 2.0,
+      "fiber_g": 1.0,
       "id": "sc-bursley-breakfast-3",
       "mealPeriod": "breakfast",
-      "name": "O'Brien Potatoes",
-      "protein_g": 2.0,
+      "name": "Hash Browns",
+      "protein_g": 1.0,
       "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (105g)",
-      "sodium_mg": 178.0,
+      "servingSize": "1/2 Cup (91g)",
+      "sodium_mg": 138.0,
       "station": "Toast",
       "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 182.0,
+      "carbs_g": 3.0,
+      "cholesterol_mg": 40.0,
+      "fat_g": 15.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-breakfast-4",
+      "mealPeriod": "breakfast",
+      "name": "Cajun Andouille Sausage",
+      "protein_g": 10.0,
+      "satFat_g": 5.0,
+      "servingSize": "2 Ounces (57g)",
+      "sodium_mg": 626.0,
+      "station": "Toast",
+      "sugar_g": 1.0,
       "tags": [
         "Vegan",
         "Gluten-Free"
@@ -88,6 +118,10 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Eggs",
+        "Soy"
+      ],
       "calories": 163.0,
       "carbs_g": 0.0,
       "cholesterol_mg": 336.0,
@@ -109,20 +143,26 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 147.0,
-      "carbs_g": 15.0,
-      "cholesterol_mg": 84.0,
-      "fat_g": 8.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 254.0,
+      "carbs_g": 32.0,
+      "cholesterol_mg": 120.0,
+      "fat_g": 10.0,
       "fiber_g": 1.0,
       "id": "sc-bursley-breakfast-6",
       "mealPeriod": "breakfast",
-      "name": "Grilled Waffles",
-      "protein_g": 5.0,
+      "name": "Deep Fried French Toast Sticks",
+      "protein_g": 8.0,
       "satFat_g": 2.0,
-      "servingSize": "1 Waffle (37g)",
-      "sodium_mg": 197.0,
+      "servingSize": "4 Sticks (100g)",
+      "sodium_mg": 355.0,
       "station": "Toast",
-      "sugar_g": 3.0,
+      "sugar_g": 10.0,
       "tags": [
         "Vegan",
         "Vegetarian",
@@ -131,6 +171,9 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Soy"
+      ],
       "calories": 74.0,
       "carbs_g": 6.0,
       "cholesterol_mg": 0.0,
@@ -152,6 +195,10 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
       "calories": 164.0,
       "carbs_g": 23.0,
       "cholesterol_mg": 17.0,
@@ -172,52 +219,87 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 202.0,
-      "carbs_g": 27.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 9.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 176.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 17.0,
+      "fat_g": 8.0,
       "fiber_g": 1.0,
       "id": "sc-bursley-breakfast-9",
       "mealPeriod": "breakfast",
-      "name": "Cappuccino Chocolate Chip Muffins",
+      "name": "Chocolate Chocolate Chip Muffins",
       "protein_g": 2.0,
-      "satFat_g": 3.0,
+      "satFat_g": 2.0,
       "servingSize": "Muffin (54g)",
-      "sodium_mg": 145.0,
+      "sodium_mg": 172.0,
       "station": "MBakery",
-      "sugar_g": 17.0,
+      "sugar_g": 15.0,
       "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 150.0,
-      "carbs_g": 17.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 314.0,
+      "carbs_g": 34.0,
       "cholesterol_mg": 20.0,
-      "fat_g": 8.0,
+      "fat_g": 19.0,
       "fiber_g": 1.0,
       "id": "sc-bursley-breakfast-10",
       "mealPeriod": "breakfast",
-      "name": "Chocolate Croissant",
-      "protein_g": 3.0,
-      "satFat_g": 4.0,
-      "servingSize": "Each (43g)",
-      "sodium_mg": 150.0,
+      "name": "Cinnamon Sugar Donuts",
+      "protein_g": 4.0,
+      "satFat_g": 10.0,
+      "servingSize": "Donut (85g)",
+      "sodium_mg": 359.0,
       "station": "MBakery",
-      "sugar_g": 5.0,
+      "sugar_g": 15.0,
       "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [],
+      "calories": 90.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-breakfast-11",
+      "mealPeriod": "breakfast",
+      "name": "Apple Cider",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "6 Ounces (170g)",
+      "sodium_mg": 19.0,
+      "station": "MBakery",
+      "sugar_g": 20.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
       "calories": 200.0,
       "carbs_g": 36.0,
       "cholesterol_mg": 0.0,
       "fat_g": 3.0,
       "fiber_g": 5.0,
-      "id": "sc-bursley-lunch-11",
+      "id": "sc-bursley-lunch-12",
       "mealPeriod": "lunch",
       "name": "Oatmeal",
       "protein_g": 7.0,
@@ -225,6 +307,649 @@
       "servingSize": "Cups (253g)",
       "sodium_mg": 3.0,
       "station": "Hot Cereal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 15.0,
+      "carbs_g": 4.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-13",
+      "mealPeriod": "lunch",
+      "name": "Brown Sugar",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "Teaspoon (4g)",
+      "sodium_mg": 0.0,
+      "station": "Hot Cereal",
+      "sugar_g": 4.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 92.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-14",
+      "mealPeriod": "lunch",
+      "name": "Hash Browns",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (91g)",
+      "sodium_mg": 138.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 182.0,
+      "carbs_g": 3.0,
+      "cholesterol_mg": 40.0,
+      "fat_g": 15.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-15",
+      "mealPeriod": "lunch",
+      "name": "Cajun Andouille Sausage",
+      "protein_g": 10.0,
+      "satFat_g": 5.0,
+      "servingSize": "2 Ounces (57g)",
+      "sodium_mg": 626.0,
+      "station": "Toast",
+      "sugar_g": 1.0,
+      "tags": [
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Soy"
+      ],
+      "calories": 163.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 336.0,
+      "fat_g": 12.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-16",
+      "mealPeriod": "lunch",
+      "name": "Scrambled Eggs",
+      "protein_g": 11.0,
+      "satFat_g": 4.0,
+      "servingSize": "1/2 cup Serving (84g)",
+      "sodium_mg": 116.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegetarian",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 191.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 91.0,
+      "fat_g": 8.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-17",
+      "mealPeriod": "lunch",
+      "name": "Deep Fried French Toast Sticks",
+      "protein_g": 6.0,
+      "satFat_g": 1.0,
+      "servingSize": "3 Sticks (75g)",
+      "sodium_mg": 267.0,
+      "station": "Toast",
+      "sugar_g": 8.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 74.0,
+      "carbs_g": 6.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-18",
+      "mealPeriod": "lunch",
+      "name": "Garden Scrambled Tofu",
+      "protein_g": 7.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 470.0,
+      "station": "Toast",
+      "sugar_g": 3.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 35.0,
+      "carbs_g": 5.0,
+      "cholesterol_mg": 5.0,
+      "fat_g": 1.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-19",
+      "mealPeriod": "lunch",
+      "name": "Chicken Tortilla Soup",
+      "protein_g": 2.0,
+      "satFat_g": 0.0,
+      "servingSize": "4 oz Serving (113g)",
+      "sodium_mg": 197.0,
+      "station": "Soup",
+      "sugar_g": 2.0,
+      "tags": [
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat"
+      ],
+      "calories": 226.0,
+      "carbs_g": 19.0,
+      "cholesterol_mg": 55.0,
+      "fat_g": 16.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-20",
+      "mealPeriod": "lunch",
+      "name": "Potato Leek Soup",
+      "protein_g": 2.0,
+      "satFat_g": 10.0,
+      "servingSize": "8 oz Cup (227g)",
+      "sodium_mg": 441.0,
+      "station": "Soup",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 61.0,
+      "carbs_g": 9.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-21",
+      "mealPeriod": "lunch",
+      "name": "Oyster Crackers",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": ".5 oz Serving (14g)",
+      "sodium_mg": 142.0,
+      "station": "Soup",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 73.0,
+      "carbs_g": 11.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 3.0,
+      "id": "sc-bursley-lunch-22",
+      "mealPeriod": "lunch",
+      "name": "Mushroom and Kale Ragout",
+      "protein_g": 3.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 oz Serving (85g)",
+      "sodium_mg": 603.0,
+      "station": "24 Carrots",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 165.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 6.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-23",
+      "mealPeriod": "lunch",
+      "name": "Fresh Whipped Potatoes",
+      "protein_g": 2.0,
+      "satFat_g": 3.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 65.0,
+      "station": "24 Carrots",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 10.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-24",
+      "mealPeriod": "lunch",
+      "name": "Parsley",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "Ounce (28g)",
+      "sodium_mg": 15.0,
+      "station": "24 Carrots",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 282.0,
+      "carbs_g": 9.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-25",
+      "mealPeriod": "lunch",
+      "name": "Lebanese Chicken",
+      "protein_g": 25.0,
+      "satFat_g": 5.0,
+      "servingSize": "6 oz Piece (170g)",
+      "sodium_mg": 406.0,
+      "station": "Halal",
+      "sugar_g": 6.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 109.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-26",
+      "mealPeriod": "lunch",
+      "name": "Lemon Parsley Rice",
+      "protein_g": 3.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 Oz Serving (85g)",
+      "sodium_mg": 254.0,
+      "station": "Halal",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 8.0,
+      "carbs_g": 1.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-lunch-27",
+      "mealPeriod": "lunch",
+      "name": "Charred Grape Tomatoes",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "Ounce (28g)",
+      "sodium_mg": 23.0,
+      "station": "Halal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 416.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 123.0,
+      "fat_g": 19.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-28",
+      "mealPeriod": "lunch",
+      "name": "Breakfast Pizza with Meat",
+      "protein_g": 20.0,
+      "satFat_g": 7.0,
+      "servingSize": "Slice (154g)",
+      "sodium_mg": 936.0,
+      "station": "Pizziti",
+      "sugar_g": 3.0,
+      "tags": [],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 227.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 26.0,
+      "fat_g": 9.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-29",
+      "mealPeriod": "lunch",
+      "name": "Garlic Cheese Bread",
+      "protein_g": 9.0,
+      "satFat_g": 5.0,
+      "servingSize": "Piece (70g)",
+      "sodium_mg": 386.0,
+      "station": "Pizziti",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 283.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 21.0,
+      "fat_g": 8.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-30",
+      "mealPeriod": "lunch",
+      "name": "Cheese Pizza",
+      "protein_g": 12.0,
+      "satFat_g": 3.0,
+      "servingSize": "Slice (105g)",
+      "sodium_mg": 540.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 311.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 28.0,
+      "fat_g": 11.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-31",
+      "mealPeriod": "lunch",
+      "name": "Pepperoni Pizza",
+      "protein_g": 13.0,
+      "satFat_g": 4.0,
+      "servingSize": "Slice (113g)",
+      "sodium_mg": 647.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 133.0,
+      "carbs_g": 20.0,
+      "cholesterol_mg": 10.0,
+      "fat_g": 6.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-32",
+      "mealPeriod": "lunch",
+      "name": "Oatmeal Raisin Cookies",
+      "protein_g": 2.0,
+      "satFat_g": 2.0,
+      "servingSize": "Cookie (33g)",
+      "sodium_mg": 100.0,
+      "station": "MBakery",
+      "sugar_g": 10.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 152.0,
+      "carbs_g": 21.0,
+      "cholesterol_mg": 5.0,
+      "fat_g": 7.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-33",
+      "mealPeriod": "lunch",
+      "name": "Chocolate Chunk Cookies",
+      "protein_g": 2.0,
+      "satFat_g": 3.0,
+      "servingSize": "Cookie (35g)",
+      "sodium_mg": 117.0,
+      "station": "MBakery",
+      "sugar_g": 13.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Tree Nuts",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 163.0,
+      "carbs_g": 20.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-lunch-34",
+      "mealPeriod": "lunch",
+      "name": "Vegan Raspberry Hazelnut Linzer Cookies",
+      "protein_g": 1.0,
+      "satFat_g": 3.0,
+      "servingSize": "Cookie (41g)",
+      "sodium_mg": 157.0,
+      "station": "MBakery",
+      "sugar_g": 11.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 322.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 61.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-lunch-35",
+      "mealPeriod": "lunch",
+      "name": "Cinnamon Coffee Cake",
+      "protein_g": 4.0,
+      "satFat_g": 8.0,
+      "servingSize": "Piece (84g)",
+      "sodium_mg": 305.0,
+      "station": "MBakery",
+      "sugar_g": 25.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 242.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 5.0,
+      "id": "sc-bursley-dinner-36",
+      "mealPeriod": "dinner",
+      "name": "Chicken Tortilla Chili",
+      "protein_g": 19.0,
+      "satFat_g": 2.0,
+      "servingSize": "8 oz Cup (234g)",
+      "sodium_mg": 534.0,
+      "station": "Soup",
+      "sugar_g": 6.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat"
+      ],
+      "calories": 226.0,
+      "carbs_g": 19.0,
+      "cholesterol_mg": 55.0,
+      "fat_g": 16.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-37",
+      "mealPeriod": "dinner",
+      "name": "Potato Leek Soup",
+      "protein_g": 2.0,
+      "satFat_g": 10.0,
+      "servingSize": "8 oz Cup (227g)",
+      "sodium_mg": 441.0,
+      "station": "Soup",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 61.0,
+      "carbs_g": 9.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-38",
+      "mealPeriod": "dinner",
+      "name": "Oyster Crackers",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": ".5 oz Serving (14g)",
+      "sodium_mg": 142.0,
+      "station": "Soup",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk"
+      ],
+      "calories": 160.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 3.0,
+      "fat_g": 11.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-39",
+      "mealPeriod": "dinner",
+      "name": "Piri-Piri Chicken",
+      "protein_g": 15.0,
+      "satFat_g": 3.0,
+      "servingSize": "3 oz Piece (92g)",
+      "sodium_mg": 218.0,
+      "station": "Signature Maize",
       "sugar_g": 1.0,
       "tags": [
         "Vegan",
@@ -483,40 +1208,20 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 117.0,
-      "carbs_g": 25.0,
+      "allergens": [],
+      "calories": 156.0,
+      "carbs_g": 34.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 1.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-24",
-      "mealPeriod": "lunch",
-      "name": "Cilantro Lime Brown Rice",
-      "protein_g": 3.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-40",
+      "mealPeriod": "dinner",
+      "name": "Jasmine Rice",
+      "protein_g": 4.0,
       "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (85g)",
-      "sodium_mg": 243.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 70.0,
-      "carbs_g": 3.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-25",
-      "mealPeriod": "lunch",
-      "name": "Guacamole",
-      "protein_g": 0.0,
-      "satFat_g": 1.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 120.0,
-      "station": "Halal",
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 0.0,
+      "station": "Signature Maize",
       "sugar_g": 0.0,
       "tags": [
         "Vegan",
@@ -525,18 +1230,180 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 32.0,
-      "carbs_g": 6.0,
+      "allergens": [],
+      "calories": 49.0,
+      "carbs_g": 8.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 3.0,
+      "id": "sc-bursley-dinner-41",
+      "mealPeriod": "dinner",
+      "name": "Roasted Shaved Brussels Sprouts",
+      "protein_g": 3.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 oz Serving (85g)",
+      "sodium_mg": 21.0,
+      "station": "Signature Maize",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 10.0,
+      "carbs_g": 2.0,
       "cholesterol_mg": 0.0,
       "fat_g": 1.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-lunch-26",
-      "mealPeriod": "lunch",
-      "name": "Corn and Black Bean Salsa",
-      "protein_g": 1.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-42",
+      "mealPeriod": "dinner",
+      "name": "Cilantro Chutney",
+      "protein_g": 0.0,
       "satFat_g": 0.0,
-      "servingSize": "2 oz Serving (57g)",
-      "sodium_mg": 102.0,
+      "servingSize": "1 oz serving (28g)",
+      "sodium_mg": 210.0,
+      "station": "Signature Maize",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 6.0,
+      "carbs_g": 3.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-43",
+      "mealPeriod": "dinner",
+      "name": "Lemon Wedges",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "Ounce (28g)",
+      "sodium_mg": 0.0,
+      "station": "Signature Maize",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 33.0,
+      "carbs_g": 5.0,
+      "cholesterol_mg": 1.0,
+      "fat_g": 0.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-44",
+      "mealPeriod": "dinner",
+      "name": "Mushroom Nimono",
+      "protein_g": 4.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 oz Serving (85g)",
+      "sodium_mg": 460.0,
+      "station": "24 Carrots",
+      "sugar_g": 4.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 104.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 6.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-dinner-45",
+      "mealPeriod": "dinner",
+      "name": "Savory Baked Tofu",
+      "protein_g": 11.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 Cup (57g)",
+      "sodium_mg": 214.0,
+      "station": "24 Carrots",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 193.0,
+      "carbs_g": 43.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-46",
+      "mealPeriod": "dinner",
+      "name": "Basmati Rice",
+      "protein_g": 4.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 356.0,
+      "station": "24 Carrots",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 39.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 1.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-47",
+      "mealPeriod": "dinner",
+      "name": "Miso Broth",
+      "protein_g": 4.0,
+      "satFat_g": 0.0,
+      "servingSize": "8 oz Cup (227g)",
+      "sodium_mg": 466.0,
+      "station": "24 Carrots",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 112.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 4.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-dinner-48",
+      "mealPeriod": "dinner",
+      "name": "Chili Roasted Potatoes",
+      "protein_g": 2.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 oz Portion (85g)",
+      "sodium_mg": 177.0,
       "station": "Halal",
       "sugar_g": 2.0,
       "tags": [
@@ -546,13 +1413,85 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [],
+      "calories": 116.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.0,
+      "fiber_g": 3.0,
+      "id": "sc-bursley-dinner-49",
+      "mealPeriod": "dinner",
+      "name": "Corn with Bell Peppers",
+      "protein_g": 3.0,
+      "satFat_g": 0.0,
+      "servingSize": "4 oz (113g)",
+      "sodium_mg": 408.0,
+      "station": "Halal",
+      "sugar_g": 9.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 74.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 8.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-50",
+      "mealPeriod": "dinner",
+      "name": "Spicy Garlic-Lime Sauce",
+      "protein_g": 0.0,
+      "satFat_g": 1.0,
+      "servingSize": "1 oz Serving (24g)",
+      "sodium_mg": 239.0,
+      "station": "Halal",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 122.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 61.0,
+      "fat_g": 2.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-51",
+      "mealPeriod": "dinner",
+      "name": "Roasted Turkey Breast",
+      "protein_g": 26.0,
+      "satFat_g": 0.0,
+      "servingSize": "2 Slices (113g)",
+      "sodium_mg": 811.0,
+      "station": "Halal",
+      "sugar_g": 0.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 227.0,
       "carbs_g": 22.0,
       "cholesterol_mg": 26.0,
       "fat_g": 9.0,
       "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-27",
-      "mealPeriod": "lunch",
+      "id": "sc-bursley-dinner-52",
+      "mealPeriod": "dinner",
       "name": "Garlic Cheese Bread",
       "protein_g": 9.0,
       "satFat_g": 5.0,
@@ -566,13 +1505,19 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 283.0,
       "carbs_g": 33.0,
       "cholesterol_mg": 21.0,
       "fat_g": 8.0,
       "fiber_g": 2.0,
-      "id": "sc-bursley-lunch-28",
-      "mealPeriod": "lunch",
+      "id": "sc-bursley-dinner-53",
+      "mealPeriod": "dinner",
       "name": "Cheese Pizza",
       "protein_g": 12.0,
       "satFat_g": 3.0,
@@ -581,19 +1526,24 @@
       "station": "Pizziti",
       "sugar_g": 2.0,
       "tags": [
-        "Vegetarian",
-        "Halal"
+        "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 311.0,
       "carbs_g": 33.0,
       "cholesterol_mg": 28.0,
       "fat_g": 11.0,
       "fiber_g": 2.0,
-      "id": "sc-bursley-lunch-29",
-      "mealPeriod": "lunch",
+      "id": "sc-bursley-dinner-54",
+      "mealPeriod": "dinner",
       "name": "Pepperoni Pizza",
       "protein_g": 13.0,
       "satFat_g": 4.0,
@@ -602,470 +1552,72 @@
       "station": "Pizziti",
       "sugar_g": 2.0,
       "tags": [
-        "Vegetarian",
         "Halal"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 203.0,
-      "carbs_g": 39.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 3.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-30",
-      "mealPeriod": "lunch",
-      "name": "Cinnamon Sugar Breadsticks",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "Breadstick (59g)",
-      "sodium_mg": 169.0,
-      "station": "Pizziti",
-      "sugar_g": 23.0,
-      "tags": [
-        "Vegetarian"
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 0.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-bursley-lunch-31",
-      "mealPeriod": "lunch",
-      "name": "Sandwiches Made to Order",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 serving",
-      "sodium_mg": 0.0,
-      "station": "Deli",
-      "sugar_g": 0.0,
+      "calories": 390.0,
+      "carbs_g": 35.0,
+      "cholesterol_mg": 50.0,
+      "fat_g": 16.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-55",
+      "mealPeriod": "dinner",
+      "name": "Cheeseburger Pizza",
+      "protein_g": 18.0,
+      "satFat_g": 7.0,
+      "servingSize": "Slice (173g)",
+      "sodium_mg": 893.0,
+      "station": "Pizziti",
+      "sugar_g": 5.0,
       "tags": [],
       "transFat_g": 0.0
     },
     {
-      "calories": 133.0,
-      "carbs_g": 20.0,
-      "cholesterol_mg": 10.0,
-      "fat_g": 6.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-32",
-      "mealPeriod": "lunch",
-      "name": "Oatmeal Raisin Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Cookie (33g)",
-      "sodium_mg": 100.0,
-      "station": "MBakery",
-      "sugar_g": 10.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
+      "allergens": [
+        "Wheat",
+        "Soy",
+        "Sesame"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 163.0,
-      "carbs_g": 20.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 9.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-lunch-33",
-      "mealPeriod": "lunch",
-      "name": "Vegan Raspberry Hazelnut Linzer Cookies",
-      "protein_g": 1.0,
-      "satFat_g": 3.0,
-      "servingSize": "Cookie (41g)",
-      "sodium_mg": 157.0,
-      "station": "MBakery",
-      "sugar_g": 11.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 322.0,
-      "carbs_g": 41.0,
-      "cholesterol_mg": 61.0,
-      "fat_g": 17.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-34",
-      "mealPeriod": "lunch",
-      "name": "Cinnamon Coffee Cake",
-      "protein_g": 4.0,
-      "satFat_g": 8.0,
-      "servingSize": "Piece (84g)",
-      "sodium_mg": 305.0,
-      "station": "MBakery",
-      "sugar_g": 25.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 152.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 5.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-35",
-      "mealPeriod": "lunch",
-      "name": "Chocolate Chunk Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Cookie (35g)",
-      "sodium_mg": 117.0,
-      "station": "MBakery",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 184.0,
-      "carbs_g": 29.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-lunch-36",
-      "mealPeriod": "lunch",
-      "name": "Banana Bread",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "Pieces (58g)",
-      "sodium_mg": 295.0,
-      "station": "MBakery",
-      "sugar_g": 11.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 223.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 37.0,
-      "fat_g": 12.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-37",
-      "mealPeriod": "dinner",
-      "name": "Hearty Vegetable Chowder",
-      "protein_g": 8.0,
-      "satFat_g": 7.0,
-      "servingSize": "8 oz Cup (227g)",
-      "sodium_mg": 455.0,
-      "station": "Soup",
-      "sugar_g": 11.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 61.0,
-      "carbs_g": 9.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 3.0,
-      "fiber_g": 0.0,
-      "id": "sc-bursley-dinner-38",
-      "mealPeriod": "dinner",
-      "name": "Oyster Crackers",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": ".5 oz Serving (14g)",
-      "sodium_mg": 142.0,
-      "station": "Soup",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "calories": 281.0,
-      "carbs_g": 14.0,
-      "cholesterol_mg": 79.0,
-      "fat_g": 16.0,
-      "fiber_g": 0.0,
-      "id": "sc-bursley-dinner-39",
+      "carbs_g": 17.0,
+      "cholesterol_mg": 73.0,
+      "fat_g": 14.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-56",
       "mealPeriod": "dinner",
-      "name": "BBQ Chicken",
-      "protein_g": 20.0,
+      "name": "Beef and Mushroom Blended Burger",
+      "protein_g": 21.0,
       "satFat_g": 5.0,
-      "servingSize": "4 oz Piece (133g)",
-      "sodium_mg": 318.0,
-      "station": "Signature Maize",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 99.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-bursley-dinner-40",
-      "mealPeriod": "dinner",
-      "name": "Corn with Cumin, Chili, and Tomato",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 314.0,
-      "station": "Signature Maize",
-      "sugar_g": 7.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 94.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 1.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-41",
-      "mealPeriod": "dinner",
-      "name": "Southwest Rice",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 275.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 162.0,
-      "carbs_g": 15.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 6.0,
-      "id": "sc-bursley-dinner-42",
-      "mealPeriod": "dinner",
-      "name": "BBQ Tempeh",
-      "protein_g": 16.0,
-      "satFat_g": 1.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 69.0,
-      "station": "24 Carrots",
-      "sugar_g": 4.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 99.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-bursley-dinner-43",
-      "mealPeriod": "dinner",
-      "name": "Corn with Cumin, Chili, and Tomato",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 314.0,
-      "station": "24 Carrots",
-      "sugar_g": 7.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 94.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 1.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-44",
-      "mealPeriod": "dinner",
-      "name": "Southwest Rice",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 275.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 300.0,
-      "carbs_g": 14.0,
-      "cholesterol_mg": 102.0,
-      "fat_g": 19.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-45",
-      "mealPeriod": "dinner",
-      "name": "Grandma Shubert's Meatloaf",
-      "protein_g": 18.0,
-      "satFat_g": 7.0,
-      "servingSize": "5 oz Piece (142g)",
-      "sodium_mg": 557.0,
-      "station": "Halal",
+      "servingSize": "Hamburger (120g)",
+      "sodium_mg": 242.0,
+      "station": "Wild Fire Maize",
       "sugar_g": 2.0,
       "tags": [
-        "Vegetarian",
-        "Halal",
-        "Gluten-Free"
+        "Halal"
       ],
       "transFat_g": 1.0
     },
     {
-      "calories": 131.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 13.0,
-      "fat_g": 5.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-46",
-      "mealPeriod": "dinner",
-      "name": "Garlicky Mashed Potatoes",
-      "protein_g": 3.0,
-      "satFat_g": 3.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 205.0,
-      "station": "Halal",
-      "sugar_g": 3.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy",
+        "Sesame"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 43.0,
-      "carbs_g": 10.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 4.0,
-      "id": "sc-bursley-dinner-47",
-      "mealPeriod": "dinner",
-      "name": "Green Beans",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 8.0,
-      "station": "Halal",
-      "sugar_g": 4.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 283.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 21.0,
-      "fat_g": 8.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-48",
-      "mealPeriod": "dinner",
-      "name": "Cheese Pizza",
-      "protein_g": 12.0,
-      "satFat_g": 3.0,
-      "servingSize": "Slice (105g)",
-      "sodium_mg": 540.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 227.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 9.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-49",
-      "mealPeriod": "dinner",
-      "name": "Garlic Cheese Bread",
-      "protein_g": 9.0,
-      "satFat_g": 5.0,
-      "servingSize": "Piece (70g)",
-      "sodium_mg": 386.0,
-      "station": "Pizziti",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegetarian",
-        "Halal"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 311.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 28.0,
-      "fat_g": 11.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-50",
-      "mealPeriod": "dinner",
-      "name": "Pepperoni Pizza",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Slice (113g)",
-      "sodium_mg": 647.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 375.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 46.0,
-      "fat_g": 17.0,
-      "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-51",
-      "mealPeriod": "dinner",
-      "name": "Three Meat Pizza",
-      "protein_g": 16.0,
-      "satFat_g": 7.0,
-      "servingSize": "Slice (128g)",
-      "sodium_mg": 933.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
       "calories": 384.0,
       "carbs_g": 21.0,
       "cholesterol_mg": 99.0,
       "fat_g": 21.0,
       "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-52",
+      "id": "sc-bursley-dinner-57",
       "mealPeriod": "dinner",
       "name": "Beef & Mushroom Blend Burger w/ American",
       "protein_g": 27.0,
@@ -1080,53 +1632,37 @@
       "transFat_g": 1.0
     },
     {
-      "calories": 281.0,
-      "carbs_g": 17.0,
-      "cholesterol_mg": 73.0,
-      "fat_g": 14.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-53",
-      "mealPeriod": "dinner",
-      "name": "Beef and Mushroom Blended Burger",
-      "protein_g": 21.0,
-      "satFat_g": 5.0,
-      "servingSize": "Hamburger (120g)",
-      "sodium_mg": 242.0,
-      "station": "Wild Fire Maize",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Halal"
-      ],
-      "transFat_g": 1.0
-    },
-    {
-      "calories": 272.0,
-      "carbs_g": 23.0,
+      "allergens": [],
+      "calories": 237.0,
+      "carbs_g": 24.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 20.0,
+      "fat_g": 17.0,
       "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-54",
+      "id": "sc-bursley-dinner-58",
       "mealPeriod": "dinner",
-      "name": "Criss Cross Fries",
+      "name": "Steak Fries",
       "protein_g": 1.0,
-      "satFat_g": 2.0,
+      "satFat_g": 1.0,
       "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 27.0,
+      "sodium_mg": 507.0,
       "station": "Wild Fire Maize",
       "sugar_g": 1.0,
       "tags": [
         "Vegan"
       ],
-      "transFat_g": 2.0
+      "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Wheat",
+        "Sesame"
+      ],
       "calories": 131.0,
       "carbs_g": 21.0,
       "cholesterol_mg": 0.0,
       "fat_g": 3.0,
       "fiber_g": 2.0,
-      "id": "sc-bursley-dinner-55",
+      "id": "sc-bursley-dinner-59",
       "mealPeriod": "dinner",
       "name": "Assorted Rolls",
       "protein_g": 5.0,
@@ -1141,58 +1677,147 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 0.0,
-      "carbs_g": 0.0,
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 267.0,
+      "carbs_g": 45.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-bursley-dinner-56",
+      "fat_g": 10.0,
+      "fiber_g": 2.0,
+      "id": "sc-bursley-dinner-60",
       "mealPeriod": "dinner",
-      "name": "Sandwiches Made to Order",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 serving",
-      "sodium_mg": 0.0,
-      "station": "Deli",
-      "sugar_g": 0.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 226.0,
-      "carbs_g": 35.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 14.0,
-      "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-57",
-      "mealPeriod": "dinner",
-      "name": "Blueberry Pie",
-      "protein_g": 2.0,
-      "satFat_g": 6.0,
-      "servingSize": "Slice (85g)",
-      "sodium_mg": 203.0,
+      "name": "Apple Cranberry Crisp",
+      "protein_g": 1.0,
+      "satFat_g": 5.0,
+      "servingSize": "Piece (147g)",
+      "sodium_mg": 271.0,
       "station": "MBakery",
-      "sugar_g": 15.0,
+      "sugar_g": 27.0,
       "tags": [
         "Vegan"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 154.0,
-      "carbs_g": 25.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 366.0,
+      "carbs_g": 49.0,
+      "cholesterol_mg": 50.0,
+      "fat_g": 17.0,
       "fiber_g": 1.0,
-      "id": "sc-bursley-dinner-58",
+      "id": "sc-bursley-dinner-61",
       "mealPeriod": "dinner",
-      "name": "Iced Oatmeal Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Cookie (40g)",
-      "sodium_mg": 150.0,
+      "name": "Caramel Apple Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Piece (111g)",
+      "sodium_mg": 355.0,
       "station": "MBakery",
-      "sugar_g": 16.0,
+      "sugar_g": 36.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 439.0,
+      "carbs_g": 63.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 20.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-62",
+      "mealPeriod": "dinner",
+      "name": "Double Vanilla Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Slice (125g)",
+      "sodium_mg": 505.0,
+      "station": "MBakery",
+      "sugar_g": 39.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 101.0,
+      "carbs_g": 23.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 1.0,
+      "fiber_g": 0.0,
+      "id": "sc-bursley-dinner-63",
+      "mealPeriod": "dinner",
+      "name": "Vanilla Icing",
+      "protein_g": 0.0,
+      "satFat_g": 1.0,
+      "servingSize": "1 oz Serving (28g)",
+      "sodium_mg": 0.0,
+      "station": "MBakery",
+      "sugar_g": 22.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 310.0,
+      "carbs_g": 36.0,
+      "cholesterol_mg": 55.0,
+      "fat_g": 16.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-64",
+      "mealPeriod": "dinner",
+      "name": "Pumpkin Spice Cream Cheese Danish",
+      "protein_g": 6.0,
+      "satFat_g": 10.0,
+      "servingSize": "Danish (88g)",
+      "sodium_mg": 330.0,
+      "station": "MBakery",
+      "sugar_g": 11.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 335.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 5.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-bursley-dinner-65",
+      "mealPeriod": "dinner",
+      "name": "Go Blue! Donuts",
+      "protein_g": 5.0,
+      "satFat_g": 8.0,
+      "servingSize": "Donut (87g)",
+      "sodium_mg": 337.0,
+      "station": "MBakery",
+      "sugar_g": 17.0,
       "tags": [
         "Vegan",
         "Vegetarian",
@@ -1202,7 +1827,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-22T15:57:53Z",
+  "lastUpdated": "2026-11-22T01:16:53Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/bursley/?menuDate=2026-11-22"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/bursley/?menuDate=2026-11-21"
 }

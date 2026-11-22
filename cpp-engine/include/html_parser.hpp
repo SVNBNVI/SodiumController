@@ -18,6 +18,12 @@ public:
     // Returns fallback Bursley menu items for offline testing or when dining is closed
     static std::vector<MenuItem> getFallbackBursleyMenu();
 
+    // Returns hall-specific fallback menu items for any M|Dining residential hall
+    static std::vector<MenuItem> getFallbackMenuForHall(const std::string& hallSlug);
+
+    // Extracts canonical FDA Big-9 allergens from an HTML block
+    static std::vector<std::string> extractAllergens(std::string_view htmlScope);
+
     // Utility methods
     static std::string stripHtml(std::string_view html);
     static std::string unescapeHtml(std::string_view input);

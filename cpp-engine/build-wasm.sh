@@ -30,11 +30,13 @@ echo "[*] Copying WASM artifacts to Angular assets (${DIST_DIR})..."
 mkdir -p "${DIST_DIR}"
 cp "${BUILD_DIR}/nutrition_engine.js" "${DIST_DIR}/"
 cp "${BUILD_DIR}/nutrition_engine.wasm" "${DIST_DIR}/"
+printf '{\n  "available": true\n}\n' > "${DIST_DIR}/wasm-manifest.json"
 
 if [ -d "${SCRIPT_DIR}/../frontend/public" ]; then
     mkdir -p "${SCRIPT_DIR}/../frontend/public/wasm"
     cp "${BUILD_DIR}/nutrition_engine.js" "${SCRIPT_DIR}/../frontend/public/wasm/"
     cp "${BUILD_DIR}/nutrition_engine.wasm" "${SCRIPT_DIR}/../frontend/public/wasm/"
+    printf '{\n  "available": true\n}\n' > "${SCRIPT_DIR}/../frontend/public/wasm/wasm-manifest.json"
 fi
 
 echo "[✓] WebAssembly engine successfully built and deployed to frontend assets!"

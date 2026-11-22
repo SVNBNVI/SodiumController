@@ -1,61 +1,151 @@
+<!-- Accessible Skip Link -->
+<a
+  href="#main-heading"
+  class="visually-hidden fixed top-3 left-3 z-50 px-4 py-2 rounded-lg bg-[#FFCB05] text-slate-950 font-bold text-xs shadow-lg"
+>
+  Skip to main content
+</a>
+
 <!-- Header & Live Sync Status -->
 <app-header-status></app-header-status>
 
-<!-- Main Application Workspace -->
-<main class="max-w-7xl mx-auto px-4 py-6 space-y-8">
-  <!-- Welcome & Information Hero Banner -->
-  <section class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-[#00274C] via-slate-900 to-slate-950 border border-slate-800 p-6 shadow-xl">
-    <div class="relative z-10 max-w-3xl space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[#FFCB05] text-xs font-semibold">
-        <span>📍 University of Michigan • Bursley Hall</span>
-      </div>
-      <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight font-display">
-        Control Your Sodium &amp; Track Daily Nutritional Ceilings
+<!-- Main Application Workspace (Zero-Scroll Split Cockpit) -->
+<main class="max-w-7xl mx-auto px-4 py-4 space-y-4">
+  <!-- Compact 1-Line Context Strip (No Tall Banner Pushing Menu Down) -->
+  <div class="flex items-center justify-between gap-3 flex-wrap px-3.5 py-2 rounded-xl bg-gradient-to-r from-[#00274C]/90 via-slate-900 to-slate-900 border border-slate-800">
+    <div class="flex items-center gap-2 flex-wrap">
+      <span aria-hidden="true" class="text-xs">📍</span>
+      <h2 id="main-heading" tabindex="-1" class="text-xs sm:text-sm font-bold text-white font-display focus:outline-none">
+        {{ menuSync.selectedHall().name }}
+        <span class="text-slate-400 font-normal">• {{ menuSync.selectedHall().campusArea }}</span>
       </h2>
-      <p class="text-sm text-slate-300 leading-relaxed">
-        Dining hall foods can easily pack over <strong>100% of your FDA recommended daily sodium (2,300 mg)</strong> into a single meal. Select your dishes from the daily Bursley breakfast, lunch, or dinner menu, add customized scoops from the salad bar, and monitor your limits on the interactive bar chart.
-      </p>
     </div>
-    <!-- Decorative background accent -->
-    <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-[#FFCB05]/10 blur-3xl pointer-events-none"></div>
-  </section>
+    <p class="text-[11px] text-slate-300 font-mono">
+      Daily ceiling: <strong class="text-[#FFCB05]">{{ cartService.sodiumLimit() | number }} mg</strong> sodium • Add dishes on the left &amp; watch limits live on the right
+    </p>
+  </div>
 
-  <!-- Interactive Grid: Menu / Salad Builder + Food Tray Cart -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-    <!-- Left Column: Menu Browser OR Salad Bar Estimator (8 of 12 cols on desktop) -->
-    <div class="lg:col-span-8 space-y-6">
+  <!-- Side-by-Side Workspace: Menu Browser (Left) + Sticky Live Limits & Tray Cockpit (Right) -->
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+    <!-- Left Column: Menu Browser OR Salad Bar Estimator (7 of 12 cols on desktop) -->
+    <div class="lg:col-span-7 space-y-5 min-w-0">
       <app-menu-browser></app-menu-browser>
-      
+
       <!-- Shows Salad Bar Estimator when the Salad tab is active -->
       <app-salad-bar-estimator *ngIf="menuSync.selectedMealPeriod() === 'salad'"></app-salad-bar-estimator>
     </div>
 
-    <!-- Right Column: Food Tray Cart (4 of 12 cols on desktop) -->
-    <div class="lg:col-span-4">
+    <!-- Right Column (Desktop): Sticky Unified Cockpit — Live Daily Limits + My Food Tray Always in View -->
+    <aside
+      aria-label="Live Daily Limits and Food Tray"
+      class="hidden lg:block lg:col-span-5 sticky top-[64px] max-h-[calc(100dvh-5rem)] overflow-y-auto sc-scroller sc-contained-scroll space-y-4 pr-0.5"
+    >
+      <app-limit-bar-chart></app-limit-bar-chart>
       <app-food-tray-cart></app-food-tray-cart>
-    </div>
+    </aside>
   </div>
-
-  <!-- Bottom Section: FDA Daily Recommended Limit Bar Chart -->
-  <section class="pt-4">
-    <app-limit-bar-chart></app-limit-bar-chart>
-  </section>
 </main>
 
-<!-- 7-Day Sodium History Modal -->
+<!-- Mobile Always-On Sticky Bottom Live HUD Bar (Tap to Open Instant Sheet Without Losing Scroll Position) -->
+<div class="lg:hidden fixed bottom-0 inset-x-0 z-30 border-t border-slate-700/90 bg-slate-950/95 backdrop-blur shadow-2xl sc-bottom-bar">
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center gap-1.5 text-xs font-mono font-bold">
+        <span
+          aria-hidden="true"
+          class="w-2 h-2 rounded-full shrink-0"
+          [ngClass]="{
+            'bg-rose-500': cartService.sodiumAlertState() === 'exceeded',
+            'bg-amber-400': cartService.sodiumAlertState() === 'warning',
+            'bg-emerald-400': cartService.sodiumAlertState() === 'ok'
+          }"
+        ></span>
+        <span
+          class="truncate"
+          [ngClass]="{
+            'text-rose-400': cartService.remainingSodium() < 0,
+            'text-amber-300': cartService.remainingSodium() >= 0 && cartService.sodiumAlertState() === 'warning',
+            'text-emerald-400': cartService.remainingSodium() >= 0 && cartService.sodiumAlertState() === 'ok'
+          }"
+        >
+          <ng-container *ngIf="cartService.remainingSodium() >= 0; else mobileOverTpl">
+            {{ cartService.remainingSodium() | number }} mg Na left
+          </ng-container>
+          <ng-template #mobileOverTpl>
+            {{ Math.abs(cartService.remainingSodium()) | number }} mg OVER
+          </ng-template>
+        </span>
+        <span class="text-[10px] text-slate-400 font-normal">
+          ({{ cartService.sodiumPercent() }}%)
+        </span>
+      </div>
+      <div class="text-[11px] text-slate-400 font-mono truncate">
+        {{ cartService.totalNutrients().calories.toFixed(0) }} kcal • {{ cartService.totalNutrients().protein_g.toFixed(0) }}g Pro
+      </div>
+    </div>
+
+    <button
+      type="button"
+      (click)="cartService.openMobileSheet()"
+      class="px-3.5 py-2 min-h-[38px] rounded-lg bg-[#FFCB05] text-slate-950 text-xs font-bold hover:bg-amber-400 transition shrink-0 shadow-sm active:scale-95 flex items-center gap-1.5"
+    >
+      <span>Tray &amp; Limits</span>
+      <span class="px-1.5 py-0.5 rounded-full bg-slate-950 text-[#FFCB05] font-mono text-[10px]">
+        {{ cartService.cartCount() }}
+      </span>
+    </button>
+  </div>
+</div>
+
+<!-- Mobile Instant Slide-Up Sheet (<dialog> Overlay — Zero Page Scrolling Required) -->
+<dialog
+  #mobileTrayDialog
+  [attr.closedby]="'any'"
+  aria-labelledby="mobile-sheet-title"
+  (close)="onMobileSheetClose()"
+  class="bg-slate-950 text-slate-100 border-t border-slate-700 rounded-t-2xl w-full max-w-full m-0 mt-auto p-4 space-y-4 shadow-2xl max-h-[88dvh] open:flex open:flex-col"
+>
+  <div class="flex items-center justify-between border-b border-slate-800 pb-3 shrink-0">
+    <h2 id="mobile-sheet-title" class="text-sm font-bold text-white font-display">
+      Tray &amp; Daily Limits
+    </h2>
+    <form method="dialog">
+      <button
+        type="submit"
+        value="done"
+        autofocus
+        class="px-3 py-1.5 min-h-[32px] rounded-lg bg-[#FFCB05] text-slate-950 text-xs font-bold"
+      >
+        Done
+      </button>
+    </form>
+  </div>
+
+  <div class="overflow-y-auto sc-scroller sc-contained-scroll space-y-4 flex-1 pb-2">
+    <ng-container *ngIf="cartService.isMobileSheetOpen()">
+      <app-limit-bar-chart></app-limit-bar-chart>
+      <app-food-tray-cart></app-food-tray-cart>
+    </ng-container>
+  </div>
+</dialog>
+
+<!-- Multi-Day Sodium History Native Modal Dialog -->
 <app-sodium-history></app-sodium-history>
 
 <!-- Footer -->
-<footer class="border-t border-slate-800/80 bg-slate-950 py-8 mt-12 text-center text-xs text-slate-500">
+<footer class="border-t border-slate-800/80 bg-slate-950 py-8 pb-24 lg:pb-8 mt-10 text-center text-xs text-slate-400">
   <div class="max-w-7xl mx-auto px-4 space-y-2">
-    <p class="font-medium text-slate-400">
-      SodiumController • Engineered with C++20 Scraper Engine &amp; Angular 19 SPA
+    <p class="font-semibold text-[#FFCB05]">
+      Made by a Wolverine, for Wolverines 〽️
+    </p>
+    <p class="font-medium text-slate-300">
+      Not officially affiliated with the University of Michigan.
     </p>
     <p>
-      Menu data sourced directly from M|Dining (<a href="https://dining.umich.edu" target="_blank" class="text-[#FFCB05] hover:underline">dining.umich.edu</a>). Daily Value limits based on FDA guidelines for a 2,000 kcal diet.
+      Public menu data sourced from <a href="https://dining.umich.edu" target="_blank" rel="noopener noreferrer" class="text-[#FFCB05] hover:underline">dining.umich.edu</a> • Active profile: <strong>{{ cartService.activeProfile().label }}</strong>.
     </p>
-    <p class="text-[11px] text-slate-600 font-mono">
-      University of Michigan Ann Arbor • Bursley Dining Hall
+    <p class="text-[11px] text-slate-500 max-w-2xl mx-auto">
+      Informational nutrition &amp; allergen tracker only — not medical advice. Always verify in-hall signage for severe food allergies.
     </p>
   </div>
 </footer>

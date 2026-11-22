@@ -1,9 +1,12 @@
 {
-  "date": "2026-11-22",
+  "date": "2026-11-21",
   "hall": "East Quad Dining Hall",
-  "itemCount": 58,
+  "hallSlug": "east-quad",
+  "isFallback": false,
+  "itemCount": 69,
   "items": [
     {
+      "allergens": [],
       "calories": 179.0,
       "carbs_g": 32.0,
       "cholesterol_mg": 0.0,
@@ -24,76 +27,16 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 19.0,
-      "carbs_g": 4.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-breakfast-2",
-      "mealPeriod": "breakfast",
-      "name": "Green Beans",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 132.0,
-      "station": "Toast",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
+      "allergens": [
+        "Eggs",
+        "Soy"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 91.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 20.0,
-      "fat_g": 7.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-breakfast-3",
-      "mealPeriod": "breakfast",
-      "name": "Cajun Andouille Sausage",
-      "protein_g": 5.0,
-      "satFat_g": 3.0,
-      "servingSize": "Ounce (28g)",
-      "sodium_mg": 313.0,
-      "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 124.0,
-      "carbs_g": 28.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-east-quad-breakfast-4",
-      "mealPeriod": "breakfast",
-      "name": "Southern Style Potatoes",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 117.0,
-      "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "calories": 163.0,
       "carbs_g": 0.0,
       "cholesterol_mg": 336.0,
       "fat_g": 12.0,
       "fiber_g": 0.0,
-      "id": "sc-east-quad-breakfast-5",
+      "id": "sc-east-quad-breakfast-2",
       "mealPeriod": "breakfast",
       "name": "Scrambled Eggs",
       "protein_g": 11.0,
@@ -103,19 +46,21 @@
       "station": "Toast",
       "sugar_g": 0.0,
       "tags": [
-        "Vegan",
         "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Soy"
+      ],
       "calories": 74.0,
       "carbs_g": 6.0,
       "cholesterol_mg": 0.0,
       "fat_g": 3.0,
       "fiber_g": 2.0,
-      "id": "sc-east-quad-breakfast-6",
+      "id": "sc-east-quad-breakfast-3",
       "mealPeriod": "breakfast",
       "name": "Garden Scrambled Tofu",
       "protein_g": 7.0,
@@ -126,99 +71,159 @@
       "sugar_g": 3.0,
       "tags": [
         "Vegan",
-        "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 83.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-breakfast-7",
+      "allergens": [],
+      "calories": 181.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 45.0,
+      "fat_g": 18.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-breakfast-4",
       "mealPeriod": "breakfast",
-      "name": "Chocolate Chip Pancakes",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "Pancake (45g)",
-      "sodium_mg": 278.0,
+      "name": "Pork Sausage Links",
+      "protein_g": 9.0,
+      "satFat_g": 6.0,
+      "servingSize": "2 Links (51g)",
+      "sodium_mg": 340.0,
       "station": "Toast",
-      "sugar_g": 4.0,
+      "sugar_g": 0.0,
+      "tags": [
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 207.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 15.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-breakfast-5",
+      "mealPeriod": "breakfast",
+      "name": "Deep Fried Hashbrowns",
+      "protein_g": 2.0,
+      "satFat_g": 2.0,
+      "servingSize": "2 Tritaters (113g)",
+      "sodium_mg": 506.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 254.0,
+      "carbs_g": 32.0,
+      "cholesterol_mg": 120.0,
+      "fat_g": 10.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-breakfast-6",
+      "mealPeriod": "breakfast",
+      "name": "Deep Fried French Toast Sticks",
+      "protein_g": 8.0,
+      "satFat_g": 2.0,
+      "servingSize": "4 Sticks (100g)",
+      "sodium_mg": 355.0,
+      "station": "Toast",
+      "sugar_g": 10.0,
       "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 184.0,
-      "carbs_g": 29.0,
-      "cholesterol_mg": 0.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 322.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 61.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-breakfast-7",
+      "mealPeriod": "breakfast",
+      "name": "Cinnamon Coffee Cake",
+      "protein_g": 4.0,
+      "satFat_g": 8.0,
+      "servingSize": "Piece (84g)",
+      "sodium_mg": 305.0,
+      "station": "MBakery",
+      "sugar_g": 25.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 163.0,
+      "carbs_g": 23.0,
+      "cholesterol_mg": 24.0,
       "fat_g": 7.0,
       "fiber_g": 1.0,
       "id": "sc-east-quad-breakfast-8",
       "mealPeriod": "breakfast",
-      "name": "Banana Bread",
-      "protein_g": 3.0,
+      "name": "Cranberry Orange Muffins",
+      "protein_g": 2.0,
       "satFat_g": 1.0,
-      "servingSize": "Pieces (58g)",
-      "sodium_mg": 295.0,
+      "servingSize": "Muffin (57g)",
+      "sodium_mg": 145.0,
       "station": "MBakery",
-      "sugar_g": 11.0,
+      "sugar_g": 14.0,
       "tags": [
-        "Vegan",
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 176.0,
-      "carbs_g": 24.0,
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 164.0,
+      "carbs_g": 23.0,
       "cholesterol_mg": 17.0,
-      "fat_g": 8.0,
+      "fat_g": 7.0,
       "fiber_g": 1.0,
       "id": "sc-east-quad-breakfast-9",
       "mealPeriod": "breakfast",
-      "name": "Chocolate Chocolate Chip Muffins",
+      "name": "Blueberry Muffins",
       "protein_g": 2.0,
-      "satFat_g": 2.0,
+      "satFat_g": 1.0,
       "servingSize": "Muffin (54g)",
-      "sodium_mg": 172.0,
+      "sodium_mg": 138.0,
       "station": "MBakery",
-      "sugar_g": 15.0,
+      "sugar_g": 13.0,
       "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 202.0,
-      "carbs_g": 27.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 9.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-breakfast-10",
-      "mealPeriod": "breakfast",
-      "name": "Cappuccino Chocolate Chip Muffins",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Muffin (54g)",
-      "sodium_mg": 145.0,
-      "station": "MBakery",
-      "sugar_g": 17.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
+      "allergens": [],
       "calories": 179.0,
       "carbs_g": 32.0,
       "cholesterol_mg": 0.0,
       "fat_g": 3.0,
       "fiber_g": 5.0,
-      "id": "sc-east-quad-lunch-11",
+      "id": "sc-east-quad-lunch-10",
       "mealPeriod": "lunch",
       "name": "Oatmeal",
       "protein_g": 6.0,
@@ -233,76 +238,16 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 19.0,
-      "carbs_g": 4.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-12",
-      "mealPeriod": "lunch",
-      "name": "Green Beans",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 132.0,
-      "station": "Toast",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
+      "allergens": [
+        "Eggs",
+        "Soy"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 182.0,
-      "carbs_g": 3.0,
-      "cholesterol_mg": 40.0,
-      "fat_g": 15.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-13",
-      "mealPeriod": "lunch",
-      "name": "Cajun Andouille Sausage",
-      "protein_g": 10.0,
-      "satFat_g": 5.0,
-      "servingSize": "2 Ounces (57g)",
-      "sodium_mg": 626.0,
-      "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 124.0,
-      "carbs_g": 28.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-east-quad-lunch-14",
-      "mealPeriod": "lunch",
-      "name": "Southern Style Potatoes",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 117.0,
-      "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "calories": 163.0,
       "carbs_g": 0.0,
       "cholesterol_mg": 336.0,
       "fat_g": 12.0,
       "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-15",
+      "id": "sc-east-quad-lunch-11",
       "mealPeriod": "lunch",
       "name": "Scrambled Eggs",
       "protein_g": 11.0,
@@ -312,19 +257,21 @@
       "station": "Toast",
       "sugar_g": 0.0,
       "tags": [
-        "Vegan",
         "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Soy"
+      ],
       "calories": 74.0,
       "carbs_g": 6.0,
       "cholesterol_mg": 0.0,
       "fat_g": 3.0,
       "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-16",
+      "id": "sc-east-quad-lunch-12",
       "mealPeriod": "lunch",
       "name": "Garden Scrambled Tofu",
       "protein_g": 7.0,
@@ -335,127 +282,138 @@
       "sugar_g": 3.0,
       "tags": [
         "Vegan",
-        "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 83.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-17",
+      "allergens": [],
+      "calories": 181.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 45.0,
+      "fat_g": 18.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-lunch-13",
       "mealPeriod": "lunch",
-      "name": "Chocolate Chip Pancakes",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "Pancake (45g)",
-      "sodium_mg": 278.0,
+      "name": "Pork Sausage Links",
+      "protein_g": 9.0,
+      "satFat_g": 6.0,
+      "servingSize": "2 Links (51g)",
+      "sodium_mg": 340.0,
       "station": "Toast",
-      "sugar_g": 4.0,
+      "sugar_g": 0.0,
+      "tags": [
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 207.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 15.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-14",
+      "mealPeriod": "lunch",
+      "name": "Deep Fried Hashbrowns",
+      "protein_g": 2.0,
+      "satFat_g": 2.0,
+      "servingSize": "2 Tritaters (113g)",
+      "sodium_mg": 506.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 191.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 91.0,
+      "fat_g": 8.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-15",
+      "mealPeriod": "lunch",
+      "name": "Deep Fried French Toast Sticks",
+      "protein_g": 6.0,
+      "satFat_g": 1.0,
+      "servingSize": "3 Sticks (75g)",
+      "sodium_mg": 267.0,
+      "station": "Toast",
+      "sugar_g": 8.0,
       "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 93.0,
-      "carbs_g": 12.0,
-      "cholesterol_mg": 9.0,
-      "fat_g": 4.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-18",
-      "mealPeriod": "lunch",
-      "name": "Italian Wedding Soup",
-      "protein_g": 4.0,
-      "satFat_g": 1.0,
-      "servingSize": "Cup (227g)",
-      "sodium_mg": 833.0,
-      "station": "Soup",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 351.0,
-      "carbs_g": 57.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 11.0,
-      "fiber_g": 8.0,
-      "id": "sc-east-quad-lunch-19",
-      "mealPeriod": "lunch",
-      "name": "Tex Mex Stuffed Potato Skins",
-      "protein_g": 7.0,
-      "satFat_g": 5.0,
-      "servingSize": "1/2 Potato (284g)",
-      "sodium_mg": 906.0,
-      "station": "24 Carrots",
-      "sugar_g": 6.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
+      "allergens": [
+        "Milk"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 42.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-20",
+      "calories": 157.0,
+      "carbs_g": 12.0,
+      "cholesterol_mg": 32.0,
+      "fat_g": 9.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-16",
       "mealPeriod": "lunch",
-      "name": "Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 64.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
+      "name": "Broccoli Cheddar Soup",
+      "protein_g": 7.0,
+      "satFat_g": 6.0,
+      "servingSize": "Cup (227g)",
+      "sodium_mg": 1037.0,
+      "station": "Soup",
+      "sugar_g": 5.0,
       "tags": [
-        "Vegan",
         "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 262.0,
-      "carbs_g": 31.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 10.0,
-      "fiber_g": 6.0,
-      "id": "sc-east-quad-lunch-21",
+      "allergens": [],
+      "calories": 96.0,
+      "carbs_g": 18.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 4.0,
+      "id": "sc-east-quad-lunch-17",
       "mealPeriod": "lunch",
-      "name": "Black Bean Enchiladas",
-      "protein_g": 11.0,
-      "satFat_g": 5.0,
-      "servingSize": "Enchilada (198g)",
-      "sodium_mg": 651.0,
+      "name": "Brazilian Vegan Feijoada",
+      "protein_g": 6.0,
+      "satFat_g": 0.0,
+      "servingSize": "4 oz Serving (113g)",
+      "sodium_mg": 145.0,
       "station": "24 Carrots",
       "sugar_g": 3.0,
       "tags": [
         "Vegan",
-        "Vegetarian",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 142.0,
-      "carbs_g": 20.0,
+      "allergens": [],
+      "calories": 23.0,
+      "carbs_g": 1.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-22",
+      "fat_g": 2.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-18",
       "mealPeriod": "lunch",
-      "name": "Tortilla Chips",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 116.0,
+      "name": "Spinach Saute",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Serving (43g)",
+      "sodium_mg": 85.0,
       "station": "24 Carrots",
       "sugar_g": 0.0,
       "tags": [
@@ -465,168 +423,71 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 8.0,
-      "carbs_g": 2.0,
+      "allergens": [
+        "Wheat",
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 244.0,
+      "carbs_g": 35.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-23",
+      "fat_g": 9.0,
+      "fiber_g": 4.0,
+      "id": "sc-east-quad-lunch-19",
       "mealPeriod": "lunch",
-      "name": "Fresh Pico De Gallo",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 1.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 55.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 15.0,
-      "fat_g": 6.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-24",
-      "mealPeriod": "lunch",
-      "name": "Sour Cream",
-      "protein_g": 1.0,
-      "satFat_g": 4.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 55.0,
-      "station": "24 Carrots",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 72.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-25",
-      "mealPeriod": "lunch",
-      "name": "Chicken Tinga",
-      "protein_g": 8.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/4 Cup (57g)",
-      "sodium_mg": 135.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Halal",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 144.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 5.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-26",
-      "mealPeriod": "lunch",
-      "name": "Black Beans and Brown Rice",
-      "protein_g": 4.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (85g)",
-      "sodium_mg": 140.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 99.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-east-quad-lunch-27",
-      "mealPeriod": "lunch",
-      "name": "Corn with Cumin, Chili, and Tomato",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 314.0,
-      "station": "Halal",
-      "sugar_g": 7.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 216.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 21.0,
-      "fat_g": 8.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-28",
-      "mealPeriod": "lunch",
-      "name": "Cheese Bread",
+      "name": "Crispy Veggie Patty on White Bun",
       "protein_g": 9.0,
-      "satFat_g": 4.0,
-      "servingSize": "Piece (51g)",
-      "sodium_mg": 389.0,
-      "station": "Pizziti",
+      "satFat_g": 1.0,
+      "servingSize": "Sandwich (106g)",
+      "sodium_mg": 465.0,
+      "station": "24 Carrots",
+      "sugar_g": 4.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 162.0,
+      "carbs_g": 13.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 11.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-20",
+      "mealPeriod": "lunch",
+      "name": "Kettle Potato Chips",
+      "protein_g": 2.0,
+      "satFat_g": 1.0,
+      "servingSize": "1 oz Serving (28g)",
+      "sodium_mg": 116.0,
+      "station": "24 Carrots",
       "sugar_g": 1.0,
       "tags": [
-        "Vegetarian",
-        "Halal"
+        "Vegan",
+        "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 311.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 28.0,
-      "fat_g": 11.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-29",
-      "mealPeriod": "lunch",
-      "name": "Pepperoni Pizza",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Slice (113g)",
-      "sodium_mg": 647.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian",
-        "Halal"
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 283.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 21.0,
-      "fat_g": 8.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-30",
+      "calories": 183.0,
+      "carbs_g": 12.0,
+      "cholesterol_mg": 27.0,
+      "fat_g": 12.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-21",
       "mealPeriod": "lunch",
-      "name": "Cheese Pizza",
-      "protein_g": 12.0,
-      "satFat_g": 3.0,
-      "servingSize": "Slice (105g)",
-      "sodium_mg": 540.0,
-      "station": "Pizziti",
+      "name": "Flatbread Pizza Con Queso",
+      "protein_g": 8.0,
+      "satFat_g": 5.0,
+      "servingSize": "Slice (84g)",
+      "sodium_mg": 394.0,
+      "station": "24 Carrots",
       "sugar_g": 2.0,
       "tags": [
         "Vegetarian"
@@ -634,12 +495,84 @@
       "transFat_g": 0.0
     },
     {
+      "allergens": [],
+      "calories": 252.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 193.0,
+      "fat_g": 10.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-lunch-22",
+      "mealPeriod": "lunch",
+      "name": "Halal Chicken Drumsticks Baked",
+      "protein_g": 36.0,
+      "satFat_g": 0.0,
+      "servingSize": "2 Drumsticks (155g)",
+      "sodium_mg": 331.0,
+      "station": "Halal",
+      "sugar_g": 0.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 199.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 1.0,
+      "fiber_g": 9.0,
+      "id": "sc-east-quad-lunch-23",
+      "mealPeriod": "lunch",
+      "name": "Roasted Beets",
+      "protein_g": 5.0,
+      "satFat_g": 0.0,
+      "servingSize": "Pound (454g)",
+      "sodium_mg": 354.0,
+      "station": "Halal",
+      "sugar_g": 27.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 42.0,
+      "carbs_g": 6.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-24",
+      "mealPeriod": "lunch",
+      "name": "Roasted Broccoli",
+      "protein_g": 2.0,
+      "satFat_g": 0.0,
+      "servingSize": "3 oz Serving (85g)",
+      "sodium_mg": 64.0,
+      "station": "Halal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 349.0,
       "carbs_g": 30.0,
       "cholesterol_mg": 36.0,
       "fat_g": 15.0,
       "fiber_g": 2.0,
-      "id": "sc-east-quad-lunch-31",
+      "id": "sc-east-quad-lunch-25",
       "mealPeriod": "lunch",
       "name": "Asparagus Bacon Pizza",
       "protein_g": 17.0,
@@ -652,429 +585,19 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 283.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 84.0,
-      "fat_g": 10.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-32",
-      "mealPeriod": "lunch",
-      "name": "Arroz con Pollo",
-      "protein_g": 26.0,
-      "satFat_g": 3.0,
-      "servingSize": "1/2 cup (181g)",
-      "sodium_mg": 501.0,
-      "station": "Wild Fire Maize",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 272.0,
-      "carbs_g": 59.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-33",
-      "mealPeriod": "lunch",
-      "name": "Mexican Rice",
-      "protein_g": 6.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 180.0,
-      "station": "Wild Fire Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 184.0,
-      "carbs_g": 14.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 15.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-lunch-34",
-      "mealPeriod": "lunch",
-      "name": "Roasted Baby Carrots",
-      "protein_g": 0.0,
-      "satFat_g": 1.0,
-      "servingSize": "6 oz serving (170g)",
-      "sodium_mg": 181.0,
-      "station": "Wild Fire Maize",
-      "sugar_g": 7.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 184.0,
-      "carbs_g": 29.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-35",
-      "mealPeriod": "lunch",
-      "name": "Banana Bread",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "Pieces (58g)",
-      "sodium_mg": 295.0,
-      "station": "MBakery",
-      "sugar_g": 11.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 154.0,
-      "carbs_g": 25.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-36",
-      "mealPeriod": "lunch",
-      "name": "Iced Oatmeal Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Cookie (40g)",
-      "sodium_mg": 150.0,
-      "station": "MBakery",
-      "sugar_g": 16.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 176.0,
-      "carbs_g": 24.0,
-      "cholesterol_mg": 17.0,
-      "fat_g": 8.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-37",
-      "mealPeriod": "lunch",
-      "name": "Chocolate Chocolate Chip Muffins",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Muffin (54g)",
-      "sodium_mg": 172.0,
-      "station": "MBakery",
-      "sugar_g": 15.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 202.0,
-      "carbs_g": 27.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 9.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-lunch-38",
-      "mealPeriod": "lunch",
-      "name": "Cappuccino Chocolate Chip Muffins",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Muffin (54g)",
-      "sodium_mg": 145.0,
-      "station": "MBakery",
-      "sugar_g": 17.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 0.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-39",
-      "mealPeriod": "dinner",
-      "name": "UNIT CHOICE MEAL",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 serving",
-      "sodium_mg": 0.0,
-      "station": "Soup",
-      "sugar_g": 0.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 0.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-40",
-      "mealPeriod": "dinner",
-      "name": "UNIT CHOICE MEAL",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 serving",
-      "sodium_mg": 0.0,
-      "station": "Signature Maize",
-      "sugar_g": 0.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 93.0,
-      "carbs_g": 14.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 3.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-41",
-      "mealPeriod": "dinner",
-      "name": "Hoppin' John Black Eyed Peas and Rice",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 338.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 45.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-dinner-42",
-      "mealPeriod": "dinner",
-      "name": "Gumbo Z'Herbs",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (85g)",
-      "sodium_mg": 135.0,
-      "station": "24 Carrots",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 262.0,
-      "carbs_g": 31.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 10.0,
-      "fiber_g": 6.0,
-      "id": "sc-east-quad-dinner-43",
-      "mealPeriod": "dinner",
-      "name": "Black Bean Enchiladas",
-      "protein_g": 11.0,
-      "satFat_g": 5.0,
-      "servingSize": "Enchilada (198g)",
-      "sodium_mg": 651.0,
-      "station": "24 Carrots",
-      "sugar_g": 3.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 142.0,
-      "carbs_g": 20.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-dinner-44",
-      "mealPeriod": "dinner",
-      "name": "Tortilla Chips",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 116.0,
-      "station": "24 Carrots",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 8.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-45",
-      "mealPeriod": "dinner",
-      "name": "Fresh Pico De Gallo",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 1.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 55.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 15.0,
-      "fat_g": 6.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-46",
-      "mealPeriod": "dinner",
-      "name": "Sour Cream",
-      "protein_g": 1.0,
-      "satFat_g": 4.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 55.0,
-      "station": "24 Carrots",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 140.0,
-      "carbs_g": 11.0,
-      "cholesterol_mg": 20.0,
-      "fat_g": 7.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-dinner-47",
-      "mealPeriod": "dinner",
-      "name": "Mushroom Flatbread Pizza",
-      "protein_g": 8.0,
-      "satFat_g": 3.0,
-      "servingSize": "Slice (79g)",
-      "sodium_mg": 393.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 145.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 60.0,
-      "fat_g": 7.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-48",
-      "mealPeriod": "dinner",
-      "name": "Ancho Flank Steak",
-      "protein_g": 20.0,
-      "satFat_g": 3.0,
-      "servingSize": "3 oz Portion (94g)",
-      "sodium_mg": 81.0,
-      "station": "Halal",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Halal",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 53.0,
-      "carbs_g": 12.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 2.0,
-      "id": "sc-east-quad-dinner-49",
-      "mealPeriod": "dinner",
-      "name": "Baked Sweet Potatoes",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Potato (61g)",
-      "sodium_mg": 34.0,
-      "station": "Halal",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 123.0,
-      "carbs_g": 34.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-50",
-      "mealPeriod": "dinner",
-      "name": "Jalapeno Honey Glaze",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (45g)",
-      "sodium_mg": 2.0,
-      "station": "Halal",
-      "sugar_g": 31.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 88.0,
-      "carbs_g": 11.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 3.0,
-      "id": "sc-east-quad-dinner-51",
-      "mealPeriod": "dinner",
-      "name": "Southwest Salad",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 286.0,
-      "station": "Halal",
-      "sugar_g": 4.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "calories": 216.0,
       "carbs_g": 22.0,
       "cholesterol_mg": 21.0,
       "fat_g": 8.0,
       "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-52",
-      "mealPeriod": "dinner",
+      "id": "sc-east-quad-lunch-26",
+      "mealPeriod": "lunch",
       "name": "Cheese Bread",
       "protein_g": 9.0,
       "satFat_g": 4.0,
@@ -1083,18 +606,751 @@
       "station": "Pizziti",
       "sugar_g": 1.0,
       "tags": [
-        "Vegetarian",
-        "Halal"
+        "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 311.0,
       "carbs_g": 33.0,
       "cholesterol_mg": 28.0,
       "fat_g": 11.0,
       "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-27",
+      "mealPeriod": "lunch",
+      "name": "Pepperoni Pizza",
+      "protein_g": 13.0,
+      "satFat_g": 4.0,
+      "servingSize": "Slice (113g)",
+      "sodium_mg": 647.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 283.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 21.0,
+      "fat_g": 8.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-28",
+      "mealPeriod": "lunch",
+      "name": "Cheese Pizza",
+      "protein_g": 12.0,
+      "satFat_g": 3.0,
+      "servingSize": "Slice (105g)",
+      "sodium_mg": 540.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 281.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 73.0,
+      "fat_g": 14.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-29",
+      "mealPeriod": "lunch",
+      "name": "Beef and Mushroom Blended Burger",
+      "protein_g": 21.0,
+      "satFat_g": 5.0,
+      "servingSize": "Hamburger (120g)",
+      "sodium_mg": 242.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 331.0,
+      "carbs_g": 18.0,
+      "cholesterol_mg": 86.0,
+      "fat_g": 18.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-30",
+      "mealPeriod": "lunch",
+      "name": "Beef & Mushroom Blend Burger w/ American",
+      "protein_g": 24.0,
+      "satFat_g": 8.0,
+      "servingSize": "Hamburger (134g)",
+      "sodium_mg": 495.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [],
+      "calories": 297.0,
+      "carbs_g": 25.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 21.0,
+      "fiber_g": 3.0,
+      "id": "sc-east-quad-lunch-31",
+      "mealPeriod": "lunch",
+      "name": "Potato Frips",
+      "protein_g": 3.0,
+      "satFat_g": 3.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 307.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 30.0,
+      "carbs_g": 7.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 1.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-32",
+      "mealPeriod": "lunch",
+      "name": "Carolina Rub",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1 oz Serving (14g)",
+      "sodium_mg": 707.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 6.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 225.0,
+      "carbs_g": 21.0,
+      "cholesterol_mg": 28.0,
+      "fat_g": 8.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-33",
+      "mealPeriod": "lunch",
+      "name": "Corned Beef & Swiss w/ Rye Bread",
+      "protein_g": 14.0,
+      "satFat_g": 3.0,
+      "servingSize": "1/2 Sandwich (89g)",
+      "sodium_mg": 451.0,
+      "station": "Deli",
+      "sugar_g": 1.0,
+      "tags": [],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat"
+      ],
+      "calories": 327.0,
+      "carbs_g": 39.0,
+      "cholesterol_mg": 45.0,
+      "fat_g": 12.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-34",
+      "mealPeriod": "lunch",
+      "name": "Turkey Club on Ciabatta",
+      "protein_g": 16.0,
+      "satFat_g": 5.0,
+      "servingSize": "Sandwich (148g)",
+      "sodium_mg": 924.0,
+      "station": "Deli",
+      "sugar_g": 1.0,
+      "tags": [],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 67.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-lunch-35",
+      "mealPeriod": "lunch",
+      "name": "Sparkling White Grape Juice",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "5 Ounces (142g)",
+      "sodium_mg": 9.0,
+      "station": "Beverages",
+      "sugar_g": 17.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 163.0,
+      "carbs_g": 23.0,
+      "cholesterol_mg": 24.0,
+      "fat_g": 7.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-36",
+      "mealPeriod": "lunch",
+      "name": "Cranberry Orange Muffins",
+      "protein_g": 2.0,
+      "satFat_g": 1.0,
+      "servingSize": "Muffin (57g)",
+      "sodium_mg": 145.0,
+      "station": "MBakery",
+      "sugar_g": 14.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 164.0,
+      "carbs_g": 23.0,
+      "cholesterol_mg": 17.0,
+      "fat_g": 7.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-37",
+      "mealPeriod": "lunch",
+      "name": "Blueberry Muffins",
+      "protein_g": 2.0,
+      "satFat_g": 1.0,
+      "servingSize": "Muffin (54g)",
+      "sodium_mg": 138.0,
+      "station": "MBakery",
+      "sugar_g": 13.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 366.0,
+      "carbs_g": 49.0,
+      "cholesterol_mg": 50.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-38",
+      "mealPeriod": "lunch",
+      "name": "Caramel Apple Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Piece (111g)",
+      "sodium_mg": 355.0,
+      "station": "MBakery",
+      "sugar_g": 36.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 267.0,
+      "carbs_g": 45.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 10.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-39",
+      "mealPeriod": "lunch",
+      "name": "Apple Cranberry Crisp",
+      "protein_g": 1.0,
+      "satFat_g": 5.0,
+      "servingSize": "Piece (147g)",
+      "sodium_mg": 271.0,
+      "station": "MBakery",
+      "sugar_g": 27.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 439.0,
+      "carbs_g": 63.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 20.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-40",
+      "mealPeriod": "lunch",
+      "name": "Double Vanilla Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Slice (125g)",
+      "sodium_mg": 505.0,
+      "station": "MBakery",
+      "sugar_g": 39.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 322.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 61.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-lunch-41",
+      "mealPeriod": "lunch",
+      "name": "Cinnamon Coffee Cake",
+      "protein_g": 4.0,
+      "satFat_g": 8.0,
+      "servingSize": "Piece (84g)",
+      "sodium_mg": 305.0,
+      "station": "MBakery",
+      "sugar_g": 25.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Tree Nuts",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 163.0,
+      "carbs_g": 20.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-lunch-42",
+      "mealPeriod": "lunch",
+      "name": "Vegan Raspberry Hazelnut Linzer Cookies",
+      "protein_g": 1.0,
+      "satFat_g": 3.0,
+      "servingSize": "Cookie (41g)",
+      "sodium_mg": 157.0,
+      "station": "MBakery",
+      "sugar_g": 11.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk"
+      ],
+      "calories": 157.0,
+      "carbs_g": 12.0,
+      "cholesterol_mg": 32.0,
+      "fat_g": 9.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-43",
+      "mealPeriod": "dinner",
+      "name": "Broccoli Cheddar Soup",
+      "protein_g": 7.0,
+      "satFat_g": 6.0,
+      "servingSize": "Cup (227g)",
+      "sodium_mg": 1037.0,
+      "station": "Soup",
+      "sugar_g": 5.0,
+      "tags": [
+        "Vegetarian",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 141.0,
+      "carbs_g": 1.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-dinner-44",
+      "mealPeriod": "dinner",
+      "name": "Blackened Chicken Thigh",
+      "protein_g": 16.0,
+      "satFat_g": 3.0,
+      "servingSize": "3 oz Piece (85g)",
+      "sodium_mg": 511.0,
+      "station": "Signature Maize",
+      "sugar_g": 0.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 210.0,
+      "carbs_g": 24.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 13.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-45",
+      "mealPeriod": "dinner",
+      "name": "Sweet Potato Fries",
+      "protein_g": 1.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 Cup (78g)",
+      "sodium_mg": 227.0,
+      "station": "Signature Maize",
+      "sugar_g": 7.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 25.0,
+      "carbs_g": 6.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-46",
+      "mealPeriod": "dinner",
+      "name": "Carrot Radish Slaw",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "2 Ounces (57g)",
+      "sodium_mg": 145.0,
+      "station": "Signature Maize",
+      "sugar_g": 5.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 96.0,
+      "carbs_g": 18.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 4.0,
+      "id": "sc-east-quad-dinner-47",
+      "mealPeriod": "dinner",
+      "name": "Brazilian Vegan Feijoada",
+      "protein_g": 6.0,
+      "satFat_g": 0.0,
+      "servingSize": "4 oz Serving (113g)",
+      "sodium_mg": 145.0,
+      "station": "24 Carrots",
+      "sugar_g": 3.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 23.0,
+      "carbs_g": 1.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-48",
+      "mealPeriod": "dinner",
+      "name": "Spinach Saute",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Serving (43g)",
+      "sodium_mg": 85.0,
+      "station": "24 Carrots",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Tree Nuts",
+        "Soy"
+      ],
+      "calories": 157.0,
+      "carbs_g": 19.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 8.0,
+      "fiber_g": 3.0,
+      "id": "sc-east-quad-dinner-49",
+      "mealPeriod": "dinner",
+      "name": "Mushroom Street Taco w/Cashew Sour Cream",
+      "protein_g": 5.0,
+      "satFat_g": 1.0,
+      "servingSize": "5 Oz Serving (142g)",
+      "sodium_mg": 446.0,
+      "station": "24 Carrots",
+      "sugar_g": 3.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 127.0,
+      "carbs_g": 9.0,
+      "cholesterol_mg": 13.0,
+      "fat_g": 7.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-50",
+      "mealPeriod": "dinner",
+      "name": "Spinach Feta Flatbread Pizza",
+      "protein_g": 6.0,
+      "satFat_g": 3.0,
+      "servingSize": "Slices (58g)",
+      "sodium_mg": 224.0,
+      "station": "24 Carrots",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs"
+      ],
+      "calories": 167.0,
+      "carbs_g": 10.0,
+      "cholesterol_mg": 19.0,
+      "fat_g": 12.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-51",
+      "mealPeriod": "dinner",
+      "name": "Spinach Artichoke Dip",
+      "protein_g": 5.0,
+      "satFat_g": 4.0,
+      "servingSize": "1/4 Cup (57g)",
+      "sodium_mg": 420.0,
+      "station": "24 Carrots",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 144.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 5.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-dinner-52",
+      "mealPeriod": "dinner",
+      "name": "Black Beans and Brown Rice",
+      "protein_g": 4.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (85g)",
+      "sodium_mg": 140.0,
+      "station": "24 Carrots",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 272.0,
+      "carbs_g": 6.0,
+      "cholesterol_mg": 130.0,
+      "fat_g": 18.0,
+      "fiber_g": 0.0,
       "id": "sc-east-quad-dinner-53",
+      "mealPeriod": "dinner",
+      "name": "Chicken Biryani",
+      "protein_g": 22.0,
+      "satFat_g": 4.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 200.0,
+      "station": "Halal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 9.0,
+      "carbs_g": 2.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-dinner-54",
+      "mealPeriod": "dinner",
+      "name": "Quick Pickled Cucumber",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "1 oz Serving (28g)",
+      "sodium_mg": 355.0,
+      "station": "Halal",
+      "sugar_g": 2.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 62.0,
+      "carbs_g": 15.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-dinner-55",
+      "mealPeriod": "dinner",
+      "name": "Pickled Red Onion",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "1 oz Serving (28g)",
+      "sodium_mg": 1394.0,
+      "station": "Halal",
+      "sugar_g": 14.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 0.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 0.0,
+      "id": "sc-east-quad-dinner-56",
+      "mealPeriod": "dinner",
+      "name": "Mint Garnish",
+      "protein_g": 0.0,
+      "satFat_g": 0.0,
+      "servingSize": "Tablespoon (14g)",
+      "sodium_mg": 0.0,
+      "station": "Halal",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 349.0,
+      "carbs_g": 30.0,
+      "cholesterol_mg": 36.0,
+      "fat_g": 15.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-dinner-57",
+      "mealPeriod": "dinner",
+      "name": "Asparagus Bacon Pizza",
+      "protein_g": 17.0,
+      "satFat_g": 6.0,
+      "servingSize": "Slice (141g)",
+      "sodium_mg": 643.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 311.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 28.0,
+      "fat_g": 11.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-dinner-58",
       "mealPeriod": "dinner",
       "name": "Pepperoni Pizza",
       "protein_g": 13.0,
@@ -1104,18 +1360,49 @@
       "station": "Pizziti",
       "sugar_g": 2.0,
       "tags": [
-        "Vegetarian",
         "Halal"
       ],
       "transFat_g": 0.0
     },
     {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 216.0,
+      "carbs_g": 22.0,
+      "cholesterol_mg": 21.0,
+      "fat_g": 8.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-59",
+      "mealPeriod": "dinner",
+      "name": "Cheese Bread",
+      "protein_g": 9.0,
+      "satFat_g": 4.0,
+      "servingSize": "Piece (51g)",
+      "sodium_mg": 389.0,
+      "station": "Pizziti",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
       "calories": 283.0,
       "carbs_g": 33.0,
       "cholesterol_mg": 21.0,
       "fat_g": 8.0,
       "fiber_g": 2.0,
-      "id": "sc-east-quad-dinner-54",
+      "id": "sc-east-quad-dinner-60",
       "mealPeriod": "dinner",
       "name": "Cheese Pizza",
       "protein_g": 12.0,
@@ -1130,79 +1417,222 @@
       "transFat_g": 0.0
     },
     {
-      "calories": 0.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-55",
-      "mealPeriod": "dinner",
-      "name": "UNIT CHOICE MEAL",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 serving",
-      "sodium_mg": 0.0,
-      "station": "Wild Fire Maize",
-      "sugar_g": 0.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 152.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 10.0,
-      "fat_g": 7.0,
-      "fiber_g": 0.0,
-      "id": "sc-east-quad-dinner-56",
-      "mealPeriod": "dinner",
-      "name": "Maize and Blue Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Cookie (35g)",
-      "sodium_mg": 117.0,
-      "station": "MBakery",
-      "sugar_g": 14.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian"
+      "allergens": [
+        "Wheat",
+        "Soy",
+        "Sesame"
       ],
-      "transFat_g": 0.0
-    },
-    {
-      "calories": 226.0,
-      "carbs_g": 35.0,
-      "cholesterol_mg": 0.0,
+      "calories": 281.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 73.0,
       "fat_g": 14.0,
       "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-57",
+      "id": "sc-east-quad-dinner-61",
       "mealPeriod": "dinner",
-      "name": "Blueberry Pie",
-      "protein_g": 2.0,
-      "satFat_g": 6.0,
-      "servingSize": "Slice (85g)",
-      "sodium_mg": 203.0,
-      "station": "MBakery",
-      "sugar_g": 15.0,
+      "name": "Beef and Mushroom Blended Burger",
+      "protein_g": 21.0,
+      "satFat_g": 5.0,
+      "servingSize": "Hamburger (120g)",
+      "sodium_mg": 242.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Wheat",
+        "Soy",
+        "Sesame"
+      ],
+      "calories": 331.0,
+      "carbs_g": 18.0,
+      "cholesterol_mg": 86.0,
+      "fat_g": 18.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-62",
+      "mealPeriod": "dinner",
+      "name": "Beef & Mushroom Blend Burger w/ American",
+      "protein_g": 24.0,
+      "satFat_g": 8.0,
+      "servingSize": "Hamburger (134g)",
+      "sodium_mg": 495.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [],
+      "calories": 186.0,
+      "carbs_g": 25.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 10.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-63",
+      "mealPeriod": "dinner",
+      "name": "French Fries",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 470.0,
+      "station": "Wild Fire Maize",
+      "sugar_g": 1.0,
       "tags": [
         "Vegan"
       ],
       "transFat_g": 0.0
     },
     {
-      "calories": 154.0,
-      "carbs_g": 25.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 322.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 61.0,
+      "fat_g": 17.0,
       "fiber_g": 1.0,
-      "id": "sc-east-quad-dinner-58",
+      "id": "sc-east-quad-dinner-64",
       "mealPeriod": "dinner",
-      "name": "Iced Oatmeal Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Cookie (40g)",
-      "sodium_mg": 150.0,
+      "name": "Cinnamon Coffee Cake",
+      "protein_g": 4.0,
+      "satFat_g": 8.0,
+      "servingSize": "Piece (84g)",
+      "sodium_mg": 305.0,
       "station": "MBakery",
-      "sugar_g": 16.0,
+      "sugar_g": 25.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 267.0,
+      "carbs_g": 45.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 10.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-dinner-65",
+      "mealPeriod": "dinner",
+      "name": "Apple Cranberry Crisp",
+      "protein_g": 1.0,
+      "satFat_g": 5.0,
+      "servingSize": "Piece (147g)",
+      "sodium_mg": 271.0,
+      "station": "MBakery",
+      "sugar_g": 27.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 439.0,
+      "carbs_g": 63.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 20.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-66",
+      "mealPeriod": "dinner",
+      "name": "Double Vanilla Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Slice (125g)",
+      "sodium_mg": 505.0,
+      "station": "MBakery",
+      "sugar_g": 39.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 366.0,
+      "carbs_g": 49.0,
+      "cholesterol_mg": 50.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-67",
+      "mealPeriod": "dinner",
+      "name": "Caramel Apple Cake",
+      "protein_g": 4.0,
+      "satFat_g": 9.0,
+      "servingSize": "Piece (111g)",
+      "sodium_mg": 355.0,
+      "station": "MBakery",
+      "sugar_g": 36.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Tree Nuts",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 163.0,
+      "carbs_g": 20.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 2.0,
+      "id": "sc-east-quad-dinner-68",
+      "mealPeriod": "dinner",
+      "name": "Vegan Raspberry Hazelnut Linzer Cookies",
+      "protein_g": 1.0,
+      "satFat_g": 3.0,
+      "servingSize": "Cookie (41g)",
+      "sodium_mg": 157.0,
+      "station": "MBakery",
+      "sugar_g": 11.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 335.0,
+      "carbs_g": 41.0,
+      "cholesterol_mg": 5.0,
+      "fat_g": 17.0,
+      "fiber_g": 1.0,
+      "id": "sc-east-quad-dinner-69",
+      "mealPeriod": "dinner",
+      "name": "Go Blue! Donuts",
+      "protein_g": 5.0,
+      "satFat_g": 8.0,
+      "servingSize": "Donut (87g)",
+      "sodium_mg": 337.0,
+      "station": "MBakery",
+      "sugar_g": 17.0,
       "tags": [
         "Vegan",
         "Vegetarian",
@@ -1212,7 +1642,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-22T15:57:55Z",
+  "lastUpdated": "2026-11-22T01:16:56Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/east-quad/?menuDate=2026-11-22"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/east-quad/?menuDate=2026-11-21"
 }

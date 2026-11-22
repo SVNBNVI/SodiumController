@@ -9,6 +9,7 @@
 #include <vector>
 #include <ctime>
 #include <cstdlib>
+#include <cctype>
 #include <filesystem>
 #include <curl/curl.h>
 
@@ -29,10 +30,24 @@ size_t curlWriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
     return totalSize;
 }
 
+bool isValidDateFormat(const std::string& d) {
+    if (d.size() != 10 || d[4] != '-' || d[7] != '-') return false;
+    for (size_t i = 0; i < d.size(); ++i) {
+        if (i == 4 || i == 7) continue;
+        if (!std::isdigit(static_cast<unsigned char>(d[i]))) return false;
+    }
+    return true;
+}
+
 std::string getDetroitDate() {
     // Lock timezone to America/Detroit (Ann Arbor, MI)
+#if defined(_WIN32)
+    _putenv_s("TZ", "EST5EDT");
+    _tzset();
+#else
     setenv("TZ", "America/Detroit", 1);
     tzset();
+#endif
 
     std::time_t now = std::time(nullptr);
     std::tm tmNow{};
@@ -75,6 +90,7 @@ bool fetchUrl(const std::string& url, std::string& responseOut, long& httpCode) 
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, curlWriteCallback);
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &responseOut);
     curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(curl, CURLOPT_MAXREDIRS, 5L);
     curl_easy_setopt(curl, CURLOPT_TIMEOUT, 15L);
     curl_easy_setopt(curl, CURLOPT_CONNECTTIMEOUT, 10L);
     curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
@@ -94,7 +110,7 @@ bool fetchUrl(const std::string& url, std::string& responseOut, long& httpCode) 
     return (httpCode == 200);
 }
 
-void writeJsonFile(const fs::path& filePath, const nlohmann::json& j) {
+bool writeJsonFile(const fs::path& filePath, const nlohmann::json& j) {
     if (filePath.has_parent_path()) {
         fs::create_directories(filePath.parent_path());
     }
@@ -102,10 +118,24 @@ void writeJsonFile(const fs::path& filePath, const nlohmann::json& j) {
     if (!out) {
         std::cerr << "[SodiumController ERROR] Could not open file for writing: "
                   << filePath.string() << "\n";
-        return;
+        return false;
     }
     out << j.dump(2) << "\n";
     std::cout << "[SodiumController] Successfully wrote: " << filePath.string() << "\n";
+    return true;
+}
+
+bool hasExistingLiveMenuForToday(const fs::path& filePath, const std::string& today) {
+    if (!fs::exists(filePath)) return false;
+    try {
+        std::ifstream in(filePath);
+        if (!in) return false;
+        nlohmann::json j = nlohmann::json::parse(in);
+        sodium::DailyMenuPayload existing = j.get<sodium::DailyMenuPayload>();
+        return (existing.date == today && !existing.isFallback && !existing.items.empty());
+    } catch (...) {
+        return false;
+    }
 }
 
 struct HallInfo {
@@ -134,30 +164,34 @@ bool scrapeHall(const HallInfo& hall,
                 const std::string& inputHtmlFile,
                 const std::string& outputPath,
                 const std::string& frontendOutputPath,
-                bool isAllHallsMode) {
+                bool isAllHallsMode,
+                bool offlineFallbackOnly) {
     std::string targetUrl = "https://dining.umich.edu/menus-locations/dining-halls/" + hall.slug + "/?menuDate=" + today;
+    std::string hallAssetPath = "frontend/src/assets/menus/" + hall.slug + "-today.json";
     std::string html;
 
-    if (!inputHtmlFile.empty()) {
-        std::cout << "[SodiumController] Reading offline HTML from: " << inputHtmlFile << " for " << hall.name << "\n";
-        std::ifstream f(inputHtmlFile);
-        if (!f) {
-            std::cerr << "[SodiumController ERROR] Cannot open " << inputHtmlFile << "\n";
-            return false;
-        }
-        std::stringstream ss;
-        ss << f.rdbuf();
-        html = ss.str();
-    } else {
-        std::cout << "[SodiumController] Fetching " << hall.name << " menu for Detroit date: " << today << "...\n";
-        std::cout << "[SodiumController] Target URL: " << targetUrl << "\n";
+    if (!offlineFallbackOnly) {
+        if (!inputHtmlFile.empty()) {
+            std::cout << "[SodiumController] Reading offline HTML from: " << inputHtmlFile << " for " << hall.name << "\n";
+            std::ifstream f(inputHtmlFile);
+            if (!f) {
+                std::cerr << "[SodiumController ERROR] Cannot open " << inputHtmlFile << "\n";
+                return false;
+            }
+            std::stringstream ss;
+            ss << f.rdbuf();
+            html = ss.str();
+        } else {
+            std::cout << "[SodiumController] Fetching " << hall.name << " menu for Detroit date: " << today << "...\n";
+            std::cout << "[SodiumController] Target URL: " << targetUrl << "\n";
 
-        long httpCode = 0;
-        bool ok = fetchUrl(targetUrl, html, httpCode);
+            long httpCode = 0;
+            bool ok = fetchUrl(targetUrl, html, httpCode);
 
-        if (!ok || html.empty()) {
-            std::cerr << "[SodiumController WARNING] Live fetch failed for " << hall.name
-                      << " (HTTP " << httpCode << ").\n";
+            if (!ok || html.empty()) {
+                std::cerr << "[SodiumController WARNING] Live fetch failed for " << hall.name
+                          << " (HTTP " << httpCode << ").\n";
+            }
         }
     }
 
@@ -166,12 +200,22 @@ bool scrapeHall(const HallInfo& hall,
         items = sodium::HtmlParser::parseDiningHallHtml(html, hall.slug);
     }
 
-    if (items.empty() && hall.slug == "bursley") {
-        std::cout << "[SodiumController WARNING] Parsed 0 items from HTML. Loading verified Bursley fallback menu.\n";
-        items = sodium::HtmlParser::getFallbackBursleyMenu();
+    bool usingFallback = false;
+    if (items.empty()) {
+        // Never overwrite an already-valid live menu for today on transient network failure
+        if (inputHtmlFile.empty() && !offlineFallbackOnly && hasExistingLiveMenuForToday(hallAssetPath, today)) {
+            std::cout << "[SodiumController] Preserving existing live menu for " << hall.name
+                      << " (" << today << ") rather than overwriting with fallback.\n";
+            return true;
+        }
+        std::cout << "[SodiumController WARNING] 0 live items for " << hall.name
+                  << "; loading verified " << hall.name << " fallback menu.\n";
+        items = sodium::HtmlParser::getFallbackMenuForHall(hall.slug);
+        usingFallback = true;
     }
 
-    std::cout << "[SodiumController] Parsed " << items.size() << " items from " << hall.name << ".\n";
+    std::cout << "[SodiumController] Loaded " << items.size() << " items for " << hall.name
+              << (usingFallback ? " (fallback)" : " (live)") << ".\n";
 
     // Meal breakdown
     int bCount = 0, lCount = 0, dCount = 0;
@@ -188,34 +232,34 @@ bool scrapeHall(const HallInfo& hall,
     payload.date = today;
     payload.lastUpdated = getIsoUtcTimestamp();
     payload.hall = hall.name;
+    payload.hallSlug = hall.slug;
     payload.sourceUrl = targetUrl;
+    payload.isFallback = usingFallback;
     payload.itemCount = static_cast<int>(items.size());
-    payload.items = items;
+    payload.items = std::move(items);
 
     nlohmann::json payloadJson = payload;
 
     // 1. Write hall-specific file in frontend assets/menus/
-    std::string hallAssetPath = "frontend/src/assets/menus/" + hall.slug + "-today.json";
-    writeJsonFile(hallAssetPath, payloadJson);
+    bool wroteOk = writeJsonFile(hallAssetPath, payloadJson);
 
     // 2. If bursley (default), also write root sodium-today.json and frontend/src/assets/sodium-today.json
     if (hall.slug == "bursley") {
         std::string primaryOut = outputPath.empty() ? "sodium-today.json" : outputPath;
-        writeJsonFile(primaryOut, payloadJson);
+        wroteOk = writeJsonFile(primaryOut, payloadJson) && wroteOk;
 
         std::string feOut = frontendOutputPath.empty() ? "frontend/src/assets/sodium-today.json" : frontendOutputPath;
-        writeJsonFile(feOut, payloadJson);
+        wroteOk = writeJsonFile(feOut, payloadJson) && wroteOk;
     } else if (!isAllHallsMode) {
-        // If single non-bursley hall run, also honor explicit output flags if specified
         if (!outputPath.empty()) {
-            writeJsonFile(outputPath, payloadJson);
+            wroteOk = writeJsonFile(outputPath, payloadJson) && wroteOk;
         }
         if (!frontendOutputPath.empty()) {
-            writeJsonFile(frontendOutputPath, payloadJson);
+            wroteOk = writeJsonFile(frontendOutputPath, payloadJson) && wroteOk;
         }
     }
 
-    return true;
+    return wroteOk;
 }
 
 } // namespace
@@ -224,6 +268,7 @@ int main(int argc, char* argv[]) {
     std::string customDate;
     std::string targetHall = "bursley";
     bool allHalls = false;
+    bool offlineFallbackOnly = false;
     std::string outputPath;
     std::string frontendOutputPath;
     std::string inputHtmlFile;
@@ -233,10 +278,17 @@ int main(int argc, char* argv[]) {
         std::string arg = argv[i];
         if (arg == "--date" && i + 1 < argc) {
             customDate = argv[++i];
+            if (!isValidDateFormat(customDate)) {
+                std::cerr << "[SodiumController ERROR] Invalid --date '" << customDate
+                          << "'. Expected YYYY-MM-DD.\n";
+                return 1;
+            }
         } else if (arg == "--hall" && i + 1 < argc) {
             targetHall = argv[++i];
         } else if (arg == "--all-halls") {
             allHalls = true;
+        } else if (arg == "--offline-fallback") {
+            offlineFallbackOnly = true;
         } else if (arg == "--output" && i + 1 < argc) {
             outputPath = argv[++i];
         } else if (arg == "--frontend-output" && i + 1 < argc) {
@@ -253,6 +305,7 @@ int main(int argc, char* argv[]) {
                       << "  --output <path>           Primary output path (default: sodium-today.json)\n"
                       << "  --frontend-output <path>  Secondary output path for Angular assets\n"
                       << "  --input-html <path>       Parse from a local HTML file instead of network\n"
+                      << "  --offline-fallback        Write verified hall fallback menus without network\n"
                       << "  --test-calc               Run nutrition calculator sanity check\n"
                       << "\nAvailable dining halls:\n";
             for (const auto& h : ALL_HALLS) {
@@ -266,7 +319,7 @@ int main(int argc, char* argv[]) {
         std::cout << "[SodiumController] Running Nutrition Calculator Sanity Check...\n";
         auto sampleMenu = sodium::HtmlParser::getFallbackBursleyMenu();
         std::vector<sodium::TrayItem> sampleCart;
-        if (sampleMenu.size() >= 2) {
+        if (sampleMenu.size() >= 3) {
             sampleCart.emplace_back(sampleMenu[1], 1.5); // Deep Fried Hashbrowns
             sampleCart.emplace_back(sampleMenu[2], 2.0); // Pork Sausage Patty
         }
@@ -278,18 +331,22 @@ int main(int argc, char* argv[]) {
 
     std::string today = customDate.empty() ? getDetroitDate() : customDate;
 
-    curl_global_init(CURL_GLOBAL_DEFAULT);
+    if (!offlineFallbackOnly && inputHtmlFile.empty()) {
+        curl_global_init(CURL_GLOBAL_DEFAULT);
+    }
 
+    bool overallOk = true;
     if (allHalls) {
-        std::cout << "[SodiumController] Scraping ALL dining halls for Detroit date: " << today << "\n";
+        std::cout << "[SodiumController] Syncing ALL dining halls for Detroit date: " << today << "\n";
         int successCount = 0;
         for (const auto& hall : ALL_HALLS) {
             std::cout << "\n----------------------------------------\n";
-            bool ok = scrapeHall(hall, today, inputHtmlFile, outputPath, frontendOutputPath, true);
+            bool ok = scrapeHall(hall, today, inputHtmlFile, outputPath, frontendOutputPath, true, offlineFallbackOnly);
             if (ok) successCount++;
         }
         std::cout << "\n----------------------------------------\n";
         std::cout << "[SodiumController] Completed " << successCount << "/" << ALL_HALLS.size() << " dining halls.\n";
+        overallOk = (successCount == static_cast<int>(ALL_HALLS.size()));
     } else {
         const HallInfo* hall = findHall(targetHall);
         HallInfo customHallInfo;
@@ -298,11 +355,13 @@ int main(int argc, char* argv[]) {
             customHallInfo = {targetHall, targetHall + " Dining Hall"};
             hall = &customHallInfo;
         }
-        scrapeHall(*hall, today, inputHtmlFile, outputPath, frontendOutputPath, false);
+        overallOk = scrapeHall(*hall, today, inputHtmlFile, outputPath, frontendOutputPath, false, offlineFallbackOnly);
     }
 
-    curl_global_cleanup();
+    if (!offlineFallbackOnly && inputHtmlFile.empty()) {
+        curl_global_cleanup();
+    }
 
-    std::cout << "[SodiumController] Scrape & sync completed successfully.\n";
-    return 0;
+    std::cout << "[SodiumController] Scrape & sync completed.\n";
+    return overallOk ? 0 : 1;
 }

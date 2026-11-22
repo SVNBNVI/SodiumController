@@ -22,27 +22,33 @@ const std::vector<FDABenchmark>& NutritionCalculator::getFDABenchmarks() {
 TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem>& cart,
                                                       const std::vector<FDABenchmark>& benchmarks) {
     TraySummary summary;
-    summary.totalItemsCount = static_cast<int>(cart.size());
 
+    int activeItems = 0;
     double totalServings = 0.0;
     NutrientTotals& t = summary.totals;
 
+    auto safeVal = [](double v) -> double {
+        return (std::isfinite(v) && v > 0.0) ? v : 0.0;
+    };
+
     for (const auto& item : cart) {
-        if (item.qty <= 0.0) continue;
+        if (!std::isfinite(item.qty) || item.qty <= 0.0) continue;
+        activeItems++;
         totalServings += item.qty;
 
-        t.calories += item.calories * item.qty;
-        t.sodium_mg += item.sodium_mg * item.qty;
-        t.satFat_g += item.satFat_g * item.qty;
-        t.sugar_g += item.sugar_g * item.qty;
-        t.fat_g += item.fat_g * item.qty;
-        t.carbs_g += item.carbs_g * item.qty;
-        t.fiber_g += item.fiber_g * item.qty;
-        t.protein_g += item.protein_g * item.qty;
-        t.cholesterol_mg += item.cholesterol_mg * item.qty;
-        t.transFat_g += item.transFat_g * item.qty;
+        t.calories += safeVal(item.calories) * item.qty;
+        t.sodium_mg += safeVal(item.sodium_mg) * item.qty;
+        t.satFat_g += safeVal(item.satFat_g) * item.qty;
+        t.sugar_g += safeVal(item.sugar_g) * item.qty;
+        t.fat_g += safeVal(item.fat_g) * item.qty;
+        t.carbs_g += safeVal(item.carbs_g) * item.qty;
+        t.fiber_g += safeVal(item.fiber_g) * item.qty;
+        t.protein_g += safeVal(item.protein_g) * item.qty;
+        t.cholesterol_mg += safeVal(item.cholesterol_mg) * item.qty;
+        t.transFat_g += safeVal(item.transFat_g) * item.qty;
     }
-    summary.totalServingsCount = totalServings;
+    summary.totalItemsCount = activeItems;
+    summary.totalServingsCount = std::round(totalServings * 10.0) / 10.0;
 
     const auto& activeBenchmarks = benchmarks.empty() ? getFDABenchmarks() : benchmarks;
     for (const auto& bm : activeBenchmarks) {
@@ -76,6 +82,7 @@ TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem
         pdv.limit = bm.limit;
         pdv.unit = bm.unit;
         pdv.percent = std::round(pct * 10.0) / 10.0;
+        pdv.visualHeightPct = std::min(100.0, std::max(0.0, std::round((pct / 150.0) * 1000.0) / 10.0));
         pdv.isCeiling = bm.isCeiling;
         pdv.status = status;
 
@@ -88,17 +95,18 @@ TraySummary NutritionCalculator::calculateTraySummary(const std::vector<TrayItem
         }
 
         // Rank top offender if ceiling metric is near or over limit
-        if (bm.isCeiling && pct >= 80.0 && !cart.empty()) {
+        if (bm.isCeiling && pct >= 80.0 && activeItems > 0) {
             const TrayItem* worstItem = nullptr;
             double maxContribution = -1.0;
 
             for (const auto& item : cart) {
+                if (!std::isfinite(item.qty) || item.qty <= 0.0) continue;
                 double itemVal = 0.0;
-                if (bm.key == "sodium_mg") itemVal = item.sodium_mg * item.qty;
-                else if (bm.key == "satFat_g") itemVal = item.satFat_g * item.qty;
-                else if (bm.key == "sugar_g") itemVal = item.sugar_g * item.qty;
-                else if (bm.key == "fat_g") itemVal = item.fat_g * item.qty;
-                else if (bm.key == "cholesterol_mg") itemVal = item.cholesterol_mg * item.qty;
+                if (bm.key == "sodium_mg") itemVal = safeVal(item.sodium_mg) * item.qty;
+                else if (bm.key == "satFat_g") itemVal = safeVal(item.satFat_g) * item.qty;
+                else if (bm.key == "sugar_g") itemVal = safeVal(item.sugar_g) * item.qty;
+                else if (bm.key == "fat_g") itemVal = safeVal(item.fat_g) * item.qty;
+                else if (bm.key == "cholesterol_mg") itemVal = safeVal(item.cholesterol_mg) * item.qty;
 
                 if (itemVal > maxContribution) {
                     maxContribution = itemVal;
@@ -182,6 +190,7 @@ void to_json(nlohmann::json& j, const PercentDailyValue& p) {
         {"limit", p.limit},
         {"unit", p.unit},
         {"percent", p.percent},
+        {"visualHeightPct", p.visualHeightPct},
         {"isCeiling", p.isCeiling},
         {"status", p.status}
     };
@@ -194,6 +203,7 @@ void from_json(const nlohmann::json& j, PercentDailyValue& p) {
     p.limit = j.value("limit", 0.0);
     p.unit = j.value("unit", "");
     p.percent = j.value("percent", 0.0);
+    p.visualHeightPct = j.value("visualHeightPct", std::min(100.0, std::max(0.0, std::round((p.percent / 150.0) * 1000.0) / 10.0)));
     p.isCeiling = j.value("isCeiling", false);
     p.status = j.value("status", "ok");
 }
