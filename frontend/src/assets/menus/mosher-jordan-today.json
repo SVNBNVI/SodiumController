@@ -1,9 +1,9 @@
 {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "hall": "Mosher-Jordan Dining Hall",
   "hallSlug": "mosher-jordan",
   "isFallback": false,
-  "itemCount": 61,
+  "itemCount": 35,
   "items": [
     {
       "allergens": [],
@@ -28,44 +28,20 @@
     },
     {
       "allergens": [],
-      "calories": 46.0,
-      "carbs_g": 2.0,
+      "calories": 69.0,
+      "carbs_g": 8.0,
       "cholesterol_mg": 0.0,
       "fat_g": 4.0,
-      "fiber_g": 1.0,
+      "fiber_g": 2.0,
       "id": "sc-mosher-jordan-breakfast-2",
       "mealPeriod": "breakfast",
-      "name": "Sauteed Peppers and Onions",
-      "protein_g": 0.0,
+      "name": "Kale Saute",
+      "protein_g": 3.0,
       "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 1.0,
+      "servingSize": "3 oz serving (85g)",
+      "sodium_mg": 142.0,
       "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Soy"
-      ],
-      "calories": 134.0,
-      "carbs_g": 7.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 8.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-breakfast-3",
-      "mealPeriod": "breakfast",
-      "name": "Bruschetta Tofu Scramble",
-      "protein_g": 11.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 cup (95g)",
-      "sodium_mg": 368.0,
-      "station": "Toast",
-      "sugar_g": 2.0,
+      "sugar_g": 0.0,
       "tags": [
         "Vegan",
         "Gluten-Free"
@@ -74,20 +50,20 @@
     },
     {
       "allergens": [],
-      "calories": 103.0,
-      "carbs_g": 11.0,
+      "calories": 149.0,
+      "carbs_g": 16.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 8.0,
+      "fat_g": 9.0,
       "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-breakfast-4",
+      "id": "sc-mosher-jordan-breakfast-3",
       "mealPeriod": "breakfast",
-      "name": "Deep Fried Hashbrowns",
+      "name": "Potato Tots",
       "protein_g": 1.0,
       "satFat_g": 1.0,
-      "servingSize": "Tritator (57g)",
-      "sodium_mg": 253.0,
+      "servingSize": "1/2 Cup (85g)",
+      "sodium_mg": 382.0,
       "station": "Toast",
-      "sugar_g": 0.0,
+      "sugar_g": 1.0,
       "tags": [
         "Vegan"
       ],
@@ -103,7 +79,7 @@
       "cholesterol_mg": 336.0,
       "fat_g": 12.0,
       "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-breakfast-5",
+      "id": "sc-mosher-jordan-breakfast-4",
       "mealPeriod": "breakfast",
       "name": "Scrambled Eggs",
       "protein_g": 11.0,
@@ -119,48 +95,47 @@
       "transFat_g": 0.0
     },
     {
-      "allergens": [],
-      "calories": 120.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 80.0,
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 122.0,
+      "carbs_g": 4.0,
+      "cholesterol_mg": 0.0,
       "fat_g": 7.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-breakfast-6",
+      "fiber_g": 2.0,
+      "id": "sc-mosher-jordan-breakfast-5",
       "mealPeriod": "breakfast",
-      "name": "Halal Chicken Sausage Links",
-      "protein_g": 13.0,
-      "satFat_g": 3.0,
-      "servingSize": "2 Links (72g)",
-      "sodium_mg": 630.0,
+      "name": "Southwest Tofu Scramble",
+      "protein_g": 11.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 cup (95g)",
+      "sodium_mg": 373.0,
       "station": "Toast",
       "sugar_g": 1.0,
       "tags": [
-        "Halal",
+        "Vegan",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
-      "allergens": [
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 183.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 9.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-breakfast-7",
+      "allergens": [],
+      "calories": 204.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 51.0,
+      "fat_g": 18.0,
+      "fiber_g": 0.0,
+      "id": "sc-mosher-jordan-breakfast-6",
       "mealPeriod": "breakfast",
-      "name": "Vegan Pancakes",
-      "protein_g": 5.0,
-      "satFat_g": 1.0,
-      "servingSize": "2 Pancake (68g)",
-      "sodium_mg": 361.0,
+      "name": "Bacon",
+      "protein_g": 13.0,
+      "satFat_g": 6.0,
+      "servingSize": "4 Slices (41g)",
+      "sodium_mg": 638.0,
       "station": "Toast",
-      "sugar_g": 3.0,
+      "sugar_g": 0.0,
       "tags": [
-        "Vegan"
+        "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
@@ -171,20 +146,44 @@
         "Wheat",
         "Soy"
       ],
-      "calories": 202.0,
-      "carbs_g": 27.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 9.0,
+      "calories": 142.0,
+      "carbs_g": 17.0,
+      "cholesterol_mg": 52.0,
+      "fat_g": 6.0,
+      "fiber_g": 1.0,
+      "id": "sc-mosher-jordan-breakfast-7",
+      "mealPeriod": "breakfast",
+      "name": "Cinnamon Swirl French Toast",
+      "protein_g": 5.0,
+      "satFat_g": 1.0,
+      "servingSize": "1 Slice (50g)",
+      "sodium_mg": 131.0,
+      "station": "Toast",
+      "sugar_g": 5.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Wheat"
+      ],
+      "calories": 164.0,
+      "carbs_g": 23.0,
+      "cholesterol_mg": 17.0,
+      "fat_g": 7.0,
       "fiber_g": 1.0,
       "id": "sc-mosher-jordan-breakfast-8",
       "mealPeriod": "breakfast",
-      "name": "Cappuccino Chocolate Chip Muffins",
+      "name": "Blueberry Muffins",
       "protein_g": 2.0,
-      "satFat_g": 3.0,
+      "satFat_g": 1.0,
       "servingSize": "Muffin (54g)",
-      "sodium_mg": 145.0,
+      "sodium_mg": 138.0,
       "station": "MBakery",
-      "sugar_g": 17.0,
+      "sugar_g": 13.0,
       "tags": [
         "Vegetarian"
       ],
@@ -217,23 +216,182 @@
     {
       "allergens": [
         "Milk",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 97.0,
+      "carbs_g": 13.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 4.0,
+      "fiber_g": 0.0,
+      "id": "sc-mosher-jordan-breakfast-10",
+      "mealPeriod": "breakfast",
+      "name": "Assorted Mini Scones",
+      "protein_g": 1.0,
+      "satFat_g": 2.0,
+      "servingSize": "Scone (27g)",
+      "sodium_mg": 85.0,
+      "station": "MBakery",
+      "sugar_g": 7.0,
+      "tags": [
+        "Vegetarian"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 179.0,
+      "carbs_g": 32.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 5.0,
+      "id": "sc-mosher-jordan-lunch-11",
+      "mealPeriod": "lunch",
+      "name": "Oatmeal",
+      "protein_g": 6.0,
+      "satFat_g": 1.0,
+      "servingSize": "Cup (227g)",
+      "sodium_mg": 3.0,
+      "station": "Hot Cereal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 46.0,
+      "carbs_g": 5.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 1.0,
+      "id": "sc-mosher-jordan-lunch-12",
+      "mealPeriod": "lunch",
+      "name": "Kale Saute",
+      "protein_g": 2.0,
+      "satFat_g": 0.0,
+      "servingSize": "2 oz serving (57g)",
+      "sodium_mg": 95.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 149.0,
+      "carbs_g": 16.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 9.0,
+      "fiber_g": 1.0,
+      "id": "sc-mosher-jordan-lunch-13",
+      "mealPeriod": "lunch",
+      "name": "Potato Tots",
+      "protein_g": 1.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 Cup (85g)",
+      "sodium_mg": 382.0,
+      "station": "Toast",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Soy"
+      ],
+      "calories": 163.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 336.0,
+      "fat_g": 12.0,
+      "fiber_g": 0.0,
+      "id": "sc-mosher-jordan-lunch-14",
+      "mealPeriod": "lunch",
+      "name": "Scrambled Eggs",
+      "protein_g": 11.0,
+      "satFat_g": 4.0,
+      "servingSize": "1/2 Cup (84g)",
+      "sodium_mg": 116.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Vegetarian",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 122.0,
+      "carbs_g": 4.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 7.0,
+      "fiber_g": 2.0,
+      "id": "sc-mosher-jordan-lunch-15",
+      "mealPeriod": "lunch",
+      "name": "Southwest Tofu Scramble",
+      "protein_g": 11.0,
+      "satFat_g": 1.0,
+      "servingSize": "1/2 cup (95g)",
+      "sodium_mg": 373.0,
+      "station": "Toast",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 204.0,
+      "carbs_g": 0.0,
+      "cholesterol_mg": 51.0,
+      "fat_g": 18.0,
+      "fiber_g": 0.0,
+      "id": "sc-mosher-jordan-lunch-16",
+      "mealPeriod": "lunch",
+      "name": "Bacon",
+      "protein_g": 13.0,
+      "satFat_g": 6.0,
+      "servingSize": "4 Slices (41g)",
+      "sodium_mg": 638.0,
+      "station": "Toast",
+      "sugar_g": 0.0,
+      "tags": [
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
         "Eggs",
         "Wheat",
         "Soy"
       ],
-      "calories": 150.0,
+      "calories": 142.0,
       "carbs_g": 17.0,
-      "cholesterol_mg": 20.0,
-      "fat_g": 8.0,
+      "cholesterol_mg": 52.0,
+      "fat_g": 6.0,
       "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-breakfast-10",
-      "mealPeriod": "breakfast",
-      "name": "Chocolate Croissant",
-      "protein_g": 3.0,
-      "satFat_g": 4.0,
-      "servingSize": "Each (43g)",
-      "sodium_mg": 150.0,
-      "station": "MBakery",
+      "id": "sc-mosher-jordan-lunch-17",
+      "mealPeriod": "lunch",
+      "name": "Cinnamon Swirl French Toast",
+      "protein_g": 5.0,
+      "satFat_g": 1.0,
+      "servingSize": "1 Slice (50g)",
+      "sodium_mg": 131.0,
+      "station": "Toast",
       "sugar_g": 5.0,
       "tags": [
         "Vegetarian"
@@ -242,210 +400,136 @@
     },
     {
       "allergens": [
-        "Wheat"
+        "Milk"
       ],
-      "calories": 141.0,
-      "carbs_g": 22.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 5.0,
-      "fiber_g": 3.0,
-      "id": "sc-mosher-jordan-lunch-11",
+      "calories": 157.0,
+      "carbs_g": 12.0,
+      "cholesterol_mg": 32.0,
+      "fat_g": 9.0,
+      "fiber_g": 1.0,
+      "id": "sc-mosher-jordan-lunch-18",
       "mealPeriod": "lunch",
-      "name": "Minestrone Soup",
-      "protein_g": 4.0,
-      "satFat_g": 1.0,
-      "servingSize": "Cup (237g)",
-      "sodium_mg": 373.0,
+      "name": "Broccoli Cheddar Soup",
+      "protein_g": 7.0,
+      "satFat_g": 6.0,
+      "servingSize": "Cup (227g)",
+      "sodium_mg": 1037.0,
       "station": "Soup",
-      "sugar_g": 4.0,
+      "sugar_g": 5.0,
       "tags": [
-        "Vegan"
+        "Vegetarian",
+        "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
       "allergens": [
-        "Milk",
-        "Eggs",
         "Wheat",
         "Soy",
         "Sesame"
       ],
-      "calories": 206.0,
-      "carbs_g": 14.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 11.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-lunch-12",
+      "calories": 326.0,
+      "carbs_g": 44.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 12.0,
+      "fiber_g": 6.0,
+      "id": "sc-mosher-jordan-lunch-19",
       "mealPeriod": "lunch",
-      "name": "Halal Georgia Reuben",
-      "protein_g": 11.0,
-      "satFat_g": 4.0,
-      "servingSize": "1/2 Sandwich (86g)",
-      "sodium_mg": 478.0,
-      "station": "Signature Maize",
-      "sugar_g": 2.0,
+      "name": "Vegetable Chirashi",
+      "protein_g": 8.0,
+      "satFat_g": 1.0,
+      "servingSize": "8 ounce Serving (227g)",
+      "sodium_mg": 574.0,
+      "station": "24 Carrots",
+      "sugar_g": 9.0,
       "tags": [
-        "Halal"
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Soy"
+      ],
+      "calories": 67.0,
+      "carbs_g": 5.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 3.0,
+      "fiber_g": 3.0,
+      "id": "sc-mosher-jordan-lunch-20",
+      "mealPeriod": "lunch",
+      "name": "Edamame",
+      "protein_g": 7.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/4 Cup (57g)",
+      "sodium_mg": 23.0,
+      "station": "24 Carrots",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
       ],
       "transFat_g": 0.0
     },
     {
       "allergens": [],
-      "calories": 162.0,
-      "carbs_g": 13.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 11.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-lunch-13",
+      "calories": 131.0,
+      "carbs_g": 1.0,
+      "cholesterol_mg": 35.0,
+      "fat_g": 10.0,
+      "fiber_g": 0.0,
+      "id": "sc-mosher-jordan-lunch-21",
       "mealPeriod": "lunch",
-      "name": "Kettle Potato Chips",
+      "name": "Taco Beef",
+      "protein_g": 9.0,
+      "satFat_g": 4.0,
+      "servingSize": "1/4 Cup (57g)",
+      "sodium_mg": 256.0,
+      "station": "Halal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [],
+      "calories": 53.0,
+      "carbs_g": 10.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 0.0,
+      "fiber_g": 4.0,
+      "id": "sc-mosher-jordan-lunch-22",
+      "mealPeriod": "lunch",
+      "name": "Spicy Pinto Beans",
+      "protein_g": 3.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (85g)",
+      "sodium_mg": 160.0,
+      "station": "Halal",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 142.0,
+      "carbs_g": 20.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 6.0,
+      "fiber_g": 2.0,
+      "id": "sc-mosher-jordan-lunch-23",
+      "mealPeriod": "lunch",
+      "name": "Tortilla Chips",
       "protein_g": 2.0,
       "satFat_g": 1.0,
       "servingSize": "1 oz Serving (28g)",
       "sodium_mg": 116.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 5.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 1.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-14",
-      "mealPeriod": "lunch",
-      "name": "Pepperoncini",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 557.0,
-      "station": "Signature Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk"
-      ],
-      "calories": 166.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 46.0,
-      "fat_g": 13.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-15",
-      "mealPeriod": "lunch",
-      "name": "Smoked Kielbasa Polish Sausage",
-      "protein_g": 11.0,
-      "satFat_g": 4.0,
-      "servingSize": "Sausage (76g)",
-      "sodium_mg": 579.0,
-      "station": "World Palate Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 388.0,
-      "carbs_g": 43.0,
-      "cholesterol_mg": 57.0,
-      "fat_g": 19.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-16",
-      "mealPeriod": "lunch",
-      "name": "Potato Cheese Pierogi",
-      "protein_g": 9.0,
-      "satFat_g": 8.0,
-      "servingSize": "3 Pierogies (130g)",
-      "sodium_mg": 480.0,
-      "station": "World Palate Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 32.0,
-      "carbs_g": 3.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-lunch-17",
-      "mealPeriod": "lunch",
-      "name": "Caramelized Onions",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Portion (28g)",
-      "sodium_mg": 1.0,
-      "station": "World Palate Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk"
-      ],
-      "calories": 55.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 15.0,
-      "fat_g": 6.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-18",
-      "mealPeriod": "lunch",
-      "name": "Sour Cream",
-      "protein_g": 1.0,
-      "satFat_g": 4.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 55.0,
-      "station": "World Palate Maize",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Soy"
-      ],
-      "calories": 112.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-19",
-      "mealPeriod": "lunch",
-      "name": "Mojito Tofu",
-      "protein_g": 12.0,
-      "satFat_g": 1.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 25.0,
-      "station": "24 Carrots",
+      "station": "Halal",
       "sugar_g": 0.0,
       "tags": [
         "Vegan",
@@ -455,128 +539,18 @@
     },
     {
       "allergens": [],
-      "calories": 105.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-20",
-      "mealPeriod": "lunch",
-      "name": "Chili Roasted Potatoes",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Portion (85g)",
-      "sodium_mg": 187.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 42.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-21",
-      "mealPeriod": "lunch",
-      "name": "Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 64.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 3.0,
-      "carbs_g": 1.0,
+      "calories": 272.0,
+      "carbs_g": 59.0,
       "cholesterol_mg": 0.0,
       "fat_g": 0.0,
       "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-22",
-      "mealPeriod": "lunch",
-      "name": "Cilantro",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "Tablespoon (14g)",
-      "sodium_mg": 7.0,
-      "station": "24 Carrots",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 182.0,
-      "carbs_g": 5.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 10.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-23",
-      "mealPeriod": "lunch",
-      "name": "Halal BBQ Chicken Thigh",
-      "protein_g": 15.0,
-      "satFat_g": 3.0,
-      "servingSize": "3 oz Piece (72g)",
-      "sodium_mg": 560.0,
-      "station": "Halal",
-      "sugar_g": 2.0,
-      "tags": [
-        "Halal",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 105.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 2.0,
       "id": "sc-mosher-jordan-lunch-24",
       "mealPeriod": "lunch",
-      "name": "Chili Roasted Potatoes",
-      "protein_g": 2.0,
+      "name": "Mexican Rice",
+      "protein_g": 6.0,
       "satFat_g": 0.0,
-      "servingSize": "3 oz Portion (85g)",
-      "sodium_mg": 187.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 42.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-25",
-      "mealPeriod": "lunch",
-      "name": "Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 64.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 180.0,
       "station": "Halal",
       "sugar_g": 1.0,
       "tags": [
@@ -592,7 +566,7 @@
       "cholesterol_mg": 0.0,
       "fat_g": 0.0,
       "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-lunch-26",
+      "id": "sc-mosher-jordan-lunch-25",
       "mealPeriod": "lunch",
       "name": "Cilantro",
       "protein_g": 0.0,
@@ -618,35 +592,35 @@
       "carbs_g": 33.0,
       "cholesterol_mg": 28.0,
       "fat_g": 11.0,
+      "fiber_g": 2.0,
+      "id": "sc-mosher-jordan-lunch-26",
+      "mealPeriod": "lunch",
+      "name": "Pepperoni Pizza",
+      "protein_g": 13.0,
+      "satFat_g": 4.0,
+      "servingSize": "Slice (113g)",
+      "sodium_mg": 647.0,
+      "station": "Pizziti",
+      "sugar_g": 2.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 283.0,
+      "carbs_g": 33.0,
+      "cholesterol_mg": 21.0,
+      "fat_g": 8.0,
       "fiber_g": 2.0,
       "id": "sc-mosher-jordan-lunch-27",
       "mealPeriod": "lunch",
-      "name": "Pepperoni Pizza",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Slice (113g)",
-      "sodium_mg": 647.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 283.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 21.0,
-      "fat_g": 8.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-lunch-28",
-      "mealPeriod": "lunch",
       "name": "Cheese Pizza",
       "protein_g": 12.0,
       "satFat_g": 3.0,
@@ -671,7 +645,7 @@
       "cholesterol_mg": 93.0,
       "fat_g": 15.0,
       "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-lunch-29",
+      "id": "sc-mosher-jordan-lunch-28",
       "mealPeriod": "lunch",
       "name": "Beef and Mushroom Blended Burger",
       "protein_g": 25.0,
@@ -696,39 +670,42 @@
       "carbs_g": 25.0,
       "cholesterol_mg": 125.0,
       "fat_g": 27.0,
+      "fiber_g": 2.0,
+      "id": "sc-mosher-jordan-lunch-29",
+      "mealPeriod": "lunch",
+      "name": "Beef & Mushroom Blended Burger w/ Cheese",
+      "protein_g": 31.0,
+      "satFat_g": 13.0,
+      "servingSize": "Hamburger (166g)",
+      "sodium_mg": 818.0,
+      "station": "Kings Hawaiian Grill",
+      "sugar_g": 9.0,
+      "tags": [
+        "Halal"
+      ],
+      "transFat_g": 1.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 508.0,
+      "carbs_g": 40.0,
+      "cholesterol_mg": 70.0,
+      "fat_g": 28.0,
       "fiber_g": 2.0,
       "id": "sc-mosher-jordan-lunch-30",
       "mealPeriod": "lunch",
-      "name": "Beef & Mushroom Blended Burger w/ Cheese",
-      "protein_g": 31.0,
-      "satFat_g": 13.0,
-      "servingSize": "Hamburger (166g)",
-      "sodium_mg": 818.0,
+      "name": "Chicken Patty w/ King's Hawaiian Bun",
+      "protein_g": 25.0,
+      "satFat_g": 5.0,
+      "servingSize": "Sandwich (168g)",
+      "sodium_mg": 827.0,
       "station": "Kings Hawaiian Grill",
       "sugar_g": 9.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 1.0
-    },
-    {
-      "allergens": [
-        "Wheat"
-      ],
-      "calories": 215.0,
-      "carbs_g": 12.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 13.0,
-      "fiber_g": 3.0,
-      "id": "sc-mosher-jordan-lunch-31",
-      "mealPeriod": "lunch",
-      "name": "Homestyle Chicken Tenders",
-      "protein_g": 12.0,
-      "satFat_g": 1.0,
-      "servingSize": "2 Pieces (85g)",
-      "sodium_mg": 306.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 2.0,
       "tags": [],
       "transFat_g": 0.0
     },
@@ -739,20 +716,20 @@
         "Wheat",
         "Soy"
       ],
-      "calories": 390.0,
-      "carbs_g": 41.0,
+      "calories": 279.0,
+      "carbs_g": 47.0,
       "cholesterol_mg": 20.0,
-      "fat_g": 21.0,
-      "fiber_g": 4.0,
-      "id": "sc-mosher-jordan-lunch-32",
+      "fat_g": 6.0,
+      "fiber_g": 6.0,
+      "id": "sc-mosher-jordan-lunch-31",
       "mealPeriod": "lunch",
-      "name": "Crispy Veggie Patty on Hawaiian Bun",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Sandwich (120g)",
-      "sodium_mg": 408.0,
+      "name": "Sweet Potato Quinoa Burger",
+      "protein_g": 11.0,
+      "satFat_g": 2.0,
+      "servingSize": "Burger (159g)",
+      "sodium_mg": 450.0,
       "station": "Kings Hawaiian Grill",
-      "sugar_g": 10.0,
+      "sugar_g": 11.0,
       "tags": [
         "Vegetarian"
       ],
@@ -760,667 +737,88 @@
     },
     {
       "allergens": [],
-      "calories": 170.0,
-      "carbs_g": 15.0,
+      "calories": 186.0,
+      "carbs_g": 25.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 12.0,
+      "fat_g": 10.0,
+      "fiber_g": 1.0,
+      "id": "sc-mosher-jordan-lunch-32",
+      "mealPeriod": "lunch",
+      "name": "French Fries",
+      "protein_g": 1.0,
+      "satFat_g": 0.0,
+      "servingSize": "1/2 Cup (113g)",
+      "sodium_mg": 470.0,
+      "station": "Kings Hawaiian Grill",
+      "sugar_g": 1.0,
+      "tags": [
+        "Vegan"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Milk",
+        "Eggs",
+        "Wheat",
+        "Soy"
+      ],
+      "calories": 310.0,
+      "carbs_g": 36.0,
+      "cholesterol_mg": 55.0,
+      "fat_g": 16.0,
       "fiber_g": 1.0,
       "id": "sc-mosher-jordan-lunch-33",
       "mealPeriod": "lunch",
-      "name": "Seasoned Fries",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (77g)",
-      "sodium_mg": 147.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 0.0,
+      "name": "Pumpkin Spice Cream Cheese Danish",
+      "protein_g": 6.0,
+      "satFat_g": 10.0,
+      "servingSize": "Danish (88g)",
+      "sodium_mg": 330.0,
+      "station": "MBakery",
+      "sugar_g": 11.0,
       "tags": [
-        "Vegan"
+        "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
       "allergens": [
-        "Milk",
-        "Eggs",
         "Wheat"
       ],
-      "calories": 474.0,
-      "carbs_g": 60.0,
-      "cholesterol_mg": 73.0,
-      "fat_g": 26.0,
+      "calories": 381.0,
+      "carbs_g": 55.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 16.0,
       "fiber_g": 1.0,
       "id": "sc-mosher-jordan-lunch-34",
       "mealPeriod": "lunch",
-      "name": "Carrot Cake w/Cream Cheese Frosting",
+      "name": "Vegan Tuxedo Cake",
       "protein_g": 4.0,
-      "satFat_g": 9.0,
-      "servingSize": "Pieces (133g)",
-      "sodium_mg": 576.0,
+      "satFat_g": 4.0,
+      "servingSize": "Piece (123g)",
+      "sodium_mg": 538.0,
       "station": "MBakery",
-      "sugar_g": 46.0,
+      "sugar_g": 41.0,
       "tags": [
-        "Vegetarian"
+        "Vegan"
       ],
       "transFat_g": 0.0
     },
     {
       "allergens": [
+        "Milk",
+        "Eggs",
         "Wheat",
         "Soy"
       ],
-      "calories": 372.0,
-      "carbs_g": 54.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 17.0,
+      "calories": 152.0,
+      "carbs_g": 21.0,
+      "cholesterol_mg": 5.0,
+      "fat_g": 7.0,
       "fiber_g": 1.0,
       "id": "sc-mosher-jordan-lunch-35",
       "mealPeriod": "lunch",
-      "name": "Vegan Eclair Cake",
-      "protein_g": 2.0,
-      "satFat_g": 12.0,
-      "servingSize": "Pieces (125g)",
-      "sodium_mg": 306.0,
-      "station": "MBakery",
-      "sugar_g": 36.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 152.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 5.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-lunch-36",
-      "mealPeriod": "lunch",
-      "name": "Chocolate Chunk Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Cookie (35g)",
-      "sodium_mg": 117.0,
-      "station": "MBakery",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 243.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 61.0,
-      "fat_g": 20.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-37",
-      "mealPeriod": "dinner",
-      "name": "Italian Sausage",
-      "protein_g": 15.0,
-      "satFat_g": 6.0,
-      "servingSize": "3 Ounces (85g)",
-      "sodium_mg": 745.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Eggs",
-        "Wheat"
-      ],
-      "calories": 154.0,
-      "carbs_g": 32.0,
-      "cholesterol_mg": 8.0,
-      "fat_g": 1.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-38",
-      "mealPeriod": "dinner",
-      "name": "Potato Gnocchi",
-      "protein_g": 5.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 373.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 46.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-39",
-      "mealPeriod": "dinner",
-      "name": "Sauteed Peppers and Onions",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 1.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk"
-      ],
-      "calories": 113.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 45.0,
-      "fat_g": 11.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-40",
-      "mealPeriod": "dinner",
-      "name": "Garlic Cream Sauce",
-      "protein_g": 0.0,
-      "satFat_g": 7.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 5.0,
-      "station": "Signature Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 5.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-41",
-      "mealPeriod": "dinner",
-      "name": "Parsley",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "Tablespoon (14g)",
-      "sodium_mg": 8.0,
-      "station": "Signature Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Fish"
-      ],
-      "calories": 142.0,
-      "carbs_g": 1.0,
-      "cholesterol_mg": 45.0,
-      "fat_g": 12.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-42",
-      "mealPeriod": "dinner",
-      "name": "Herbed Catfish Fillets",
-      "protein_g": 9.0,
-      "satFat_g": 2.0,
-      "servingSize": "3 oz Piece (85g)",
-      "sodium_mg": 185.0,
-      "station": "World Palate Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Halal",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 167.0,
-      "carbs_g": 24.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 7.0,
-      "fiber_g": 4.0,
-      "id": "sc-mosher-jordan-dinner-43",
-      "mealPeriod": "dinner",
-      "name": "White Bean & Potato Hash",
-      "protein_g": 4.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (125g)",
-      "sodium_mg": 108.0,
-      "station": "World Palate Maize",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 37.0,
-      "carbs_g": 5.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-44",
-      "mealPeriod": "dinner",
-      "name": "Roasted Green Beans",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 41.0,
-      "station": "World Palate Maize",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 3.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-45",
-      "mealPeriod": "dinner",
-      "name": "Lemon Wedges",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "Wedge (15g)",
-      "sodium_mg": 0.0,
-      "station": "World Palate Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 120.0,
-      "carbs_g": 19.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 5.0,
-      "id": "sc-mosher-jordan-dinner-46",
-      "mealPeriod": "dinner",
-      "name": "Homemade Refried Beans",
-      "protein_g": 6.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/4 Cup (71g)",
-      "sodium_mg": 175.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 55.0,
-      "carbs_g": 12.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 1.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-47",
-      "mealPeriod": "dinner",
-      "name": "White Corn Tortillas",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "Tortilla (25g)",
-      "sodium_mg": 8.0,
-      "station": "24 Carrots",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 117.0,
-      "carbs_g": 26.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-48",
-      "mealPeriod": "dinner",
-      "name": "Cilantro Lime White Rice",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (85g)",
-      "sodium_mg": 243.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 70.0,
-      "carbs_g": 3.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 6.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-49",
-      "mealPeriod": "dinner",
-      "name": "Guacamole",
-      "protein_g": 0.0,
-      "satFat_g": 1.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 120.0,
-      "station": "24 Carrots",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 8.0,
-      "carbs_g": 2.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-50",
-      "mealPeriod": "dinner",
-      "name": "Fresh Pico De Gallo",
-      "protein_g": 0.0,
-      "satFat_g": 0.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 1.0,
-      "station": "24 Carrots",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk"
-      ],
-      "calories": 202.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 17.0,
-      "fiber_g": 0.0,
-      "id": "sc-mosher-jordan-dinner-51",
-      "mealPeriod": "dinner",
-      "name": "Parmesan Herb Grilled Chicken Thighs",
-      "protein_g": 14.0,
-      "satFat_g": 3.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 279.0,
-      "station": "Halal",
-      "sugar_g": 0.0,
-      "tags": [
-        "Halal",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 154.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 8.0,
-      "fiber_g": 3.0,
-      "id": "sc-mosher-jordan-dinner-52",
-      "mealPeriod": "dinner",
-      "name": "Sweet Potato Wedges",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 252.0,
-      "station": "Halal",
-      "sugar_g": 4.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 42.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-53",
-      "mealPeriod": "dinner",
-      "name": "Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 64.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 311.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 28.0,
-      "fat_g": 11.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-54",
-      "mealPeriod": "dinner",
-      "name": "Pepperoni Pizza",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Slice (113g)",
-      "sodium_mg": 647.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 283.0,
-      "carbs_g": 33.0,
-      "cholesterol_mg": 21.0,
-      "fat_g": 8.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-55",
-      "mealPeriod": "dinner",
-      "name": "Cheese Pizza",
-      "protein_g": 12.0,
-      "satFat_g": 3.0,
-      "servingSize": "Slice (105g)",
-      "sodium_mg": 540.0,
-      "station": "Pizziti",
-      "sugar_g": 2.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 335.0,
-      "carbs_g": 23.0,
-      "cholesterol_mg": 93.0,
-      "fat_g": 15.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-56",
-      "mealPeriod": "dinner",
-      "name": "Beef and Mushroom Blended Burger",
-      "protein_g": 25.0,
-      "satFat_g": 7.0,
-      "servingSize": "Hamburger (130g)",
-      "sodium_mg": 186.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 8.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 1.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 462.0,
-      "carbs_g": 25.0,
-      "cholesterol_mg": 125.0,
-      "fat_g": 27.0,
-      "fiber_g": 2.0,
-      "id": "sc-mosher-jordan-dinner-57",
-      "mealPeriod": "dinner",
-      "name": "Beef & Mushroom Blended Burger w/ Cheese",
-      "protein_g": 31.0,
-      "satFat_g": 13.0,
-      "servingSize": "Hamburger (166g)",
-      "sodium_mg": 818.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 9.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 1.0
-    },
-    {
-      "allergens": [
-        "Wheat"
-      ],
-      "calories": 215.0,
-      "carbs_g": 12.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 13.0,
-      "fiber_g": 3.0,
-      "id": "sc-mosher-jordan-dinner-58",
-      "mealPeriod": "dinner",
-      "name": "Homestyle Chicken Tenders",
-      "protein_g": 12.0,
-      "satFat_g": 1.0,
-      "servingSize": "2 Pieces (85g)",
-      "sodium_mg": 306.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 390.0,
-      "carbs_g": 41.0,
-      "cholesterol_mg": 20.0,
-      "fat_g": 21.0,
-      "fiber_g": 4.0,
-      "id": "sc-mosher-jordan-dinner-59",
-      "mealPeriod": "dinner",
-      "name": "Crispy Veggie Patty on Hawaiian Bun",
-      "protein_g": 13.0,
-      "satFat_g": 4.0,
-      "servingSize": "Sandwich (120g)",
-      "sodium_mg": 408.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 10.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 170.0,
-      "carbs_g": 15.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 12.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-60",
-      "mealPeriod": "dinner",
-      "name": "Seasoned Fries",
-      "protein_g": 2.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (77g)",
-      "sodium_mg": 147.0,
-      "station": "Kings Hawaiian Grill",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 152.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 5.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-mosher-jordan-dinner-61",
-      "mealPeriod": "dinner",
       "name": "Chocolate Chunk Cookies",
       "protein_g": 2.0,
       "satFat_g": 3.0,
@@ -1437,7 +835,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-24T19:22:54Z",
+  "lastUpdated": "2026-11-25T18:28:05Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/mosher-jordan/?menuDate=2026-11-24"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/mosher-jordan/?menuDate=2026-11-25"
 }

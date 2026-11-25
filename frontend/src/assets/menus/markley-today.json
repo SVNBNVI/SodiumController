@@ -1,119 +1,27 @@
 {
-  "date": "2026-11-24",
+  "date": "2026-11-25",
   "hall": "Markley Dining Hall",
   "hallSlug": "markley",
-  "isFallback": false,
-  "itemCount": 32,
+  "isFallback": true,
+  "itemCount": 6,
   "items": [
     {
       "allergens": [
-        "Milk"
+        "Eggs"
       ],
-      "calories": 144.0,
-      "carbs_g": 13.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 9.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-breakfast-1",
-      "mealPeriod": "breakfast",
-      "name": "Cheese Grits",
-      "protein_g": 2.0,
-      "satFat_g": 6.0,
-      "servingSize": "4 oz Cup (113g)",
-      "sodium_mg": 165.0,
-      "station": "Hot Cereal",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Soy"
-      ],
-      "calories": 74.0,
-      "carbs_g": 6.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 3.0,
-      "fiber_g": 2.0,
-      "id": "sc-markley-breakfast-2",
-      "mealPeriod": "breakfast",
-      "name": "Garden Scrambled Tofu",
-      "protein_g": 7.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 470.0,
-      "station": "Toast",
-      "sugar_g": 3.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 23.0,
+      "calories": 170.0,
       "carbs_g": 1.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-breakfast-3",
-      "mealPeriod": "breakfast",
-      "name": "Spinach Saute",
-      "protein_g": 1.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Serving (43g)",
-      "sodium_mg": 85.0,
-      "station": "Toast",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 124.0,
-      "carbs_g": 28.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 3.0,
-      "id": "sc-markley-breakfast-4",
-      "mealPeriod": "breakfast",
-      "name": "Southern Style Potatoes",
-      "protein_g": 3.0,
-      "satFat_g": 1.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 117.0,
-      "station": "Toast",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Eggs",
-        "Soy"
-      ],
-      "calories": 163.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 336.0,
+      "cholesterol_mg": 355.0,
       "fat_g": 12.0,
       "fiber_g": 0.0,
-      "id": "sc-markley-breakfast-5",
+      "id": "mk-b-1",
       "mealPeriod": "breakfast",
-      "name": "Scrambled Eggs",
-      "protein_g": 11.0,
+      "name": "Scrambled Eggs with Chives",
+      "protein_g": 12.0,
       "satFat_g": 4.0,
-      "servingSize": "1/2 cup Serving (84g)",
-      "sodium_mg": 116.0,
-      "station": "Toast",
+      "servingSize": "1/2 Cup (90g)",
+      "sodium_mg": 135.0,
+      "station": "Homestyle",
       "sugar_g": 0.0,
       "tags": [
         "Vegetarian",
@@ -122,270 +30,23 @@
       "transFat_g": 0.0
     },
     {
-      "allergens": [],
-      "calories": 81.0,
-      "carbs_g": 0.0,
-      "cholesterol_mg": 41.0,
-      "fat_g": 6.0,
-      "fiber_g": 0.0,
-      "id": "sc-markley-breakfast-6",
-      "mealPeriod": "breakfast",
-      "name": "Chicken Sausage Patties",
-      "protein_g": 6.0,
-      "satFat_g": 2.0,
-      "servingSize": "Patty (43g)",
-      "sodium_mg": 273.0,
-      "station": "Toast",
-      "sugar_g": 0.0,
-      "tags": [
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "allergens": [
-        "Milk",
-        "Eggs",
         "Wheat",
-        "Soy"
+        "Sesame"
       ],
-      "calories": 191.0,
-      "carbs_g": 24.0,
-      "cholesterol_mg": 91.0,
-      "fat_g": 8.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-breakfast-7",
-      "mealPeriod": "breakfast",
-      "name": "Deep Fried French Toast Sticks",
-      "protein_g": 6.0,
-      "satFat_g": 1.0,
-      "servingSize": "3 Sticks (75g)",
-      "sodium_mg": 267.0,
-      "station": "Toast",
-      "sugar_g": 8.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk"
-      ],
-      "calories": 96.0,
-      "carbs_g": 15.0,
-      "cholesterol_mg": 10.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-breakfast-8",
-      "mealPeriod": "breakfast",
-      "name": "Creamy Strawberry Banana Smoothie",
-      "protein_g": 8.0,
-      "satFat_g": 0.0,
-      "servingSize": "6 oz (170g)",
-      "sodium_mg": 32.0,
-      "station": "Beverages",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegetarian",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Tree Nuts",
-        "Wheat"
-      ],
-      "calories": 168.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 6.0,
-      "fat_g": 9.0,
-      "fiber_g": 0.0,
-      "id": "sc-markley-breakfast-9",
-      "mealPeriod": "breakfast",
-      "name": "Assorted Mini Danishes with Nuts",
-      "protein_g": 2.0,
-      "satFat_g": 4.0,
-      "servingSize": "Danish (43g)",
-      "sodium_mg": 45.0,
-      "station": "MBakery",
-      "sugar_g": 9.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 176.0,
-      "carbs_g": 24.0,
-      "cholesterol_mg": 17.0,
-      "fat_g": 8.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-breakfast-10",
-      "mealPeriod": "breakfast",
-      "name": "Chocolate Chocolate Chip Muffins",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "Muffin (54g)",
-      "sodium_mg": 172.0,
-      "station": "MBakery",
-      "sugar_g": 15.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 162.0,
-      "carbs_g": 16.0,
+      "calories": 250.0,
+      "carbs_g": 49.0,
       "cholesterol_mg": 0.0,
-      "fat_g": 10.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-11",
-      "mealPeriod": "lunch",
-      "name": "Corn Chips",
-      "protein_g": 2.0,
-      "satFat_g": 2.0,
-      "servingSize": "1 oz Serving (28g)",
-      "sodium_mg": 172.0,
-      "station": "Grill",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 282.0,
-      "carbs_g": 17.0,
-      "cholesterol_mg": 74.0,
-      "fat_g": 14.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-12",
-      "mealPeriod": "lunch",
-      "name": "Beef and Mushroom Blended Burger",
-      "protein_g": 21.0,
-      "satFat_g": 5.0,
-      "servingSize": "Each (121g)",
-      "sodium_mg": 243.0,
-      "station": "Grill",
-      "sugar_g": 2.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 1.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 255.0,
-      "carbs_g": 35.0,
-      "cholesterol_mg": 6.0,
-      "fat_g": 7.0,
-      "fiber_g": 7.0,
-      "id": "sc-markley-lunch-13",
-      "mealPeriod": "lunch",
-      "name": "Black Bean Burger w/ White Bun",
-      "protein_g": 16.0,
-      "satFat_g": 2.0,
-      "servingSize": "Sandwich (145g)",
-      "sodium_mg": 540.0,
-      "station": "Grill",
-      "sugar_g": 4.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 355.0,
-      "carbs_g": 26.0,
-      "cholesterol_mg": 26.0,
-      "fat_g": 23.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-14",
-      "mealPeriod": "lunch",
-      "name": "Grilled Cheese",
-      "protein_g": 9.0,
-      "satFat_g": 7.0,
-      "servingSize": "Each (98g)",
-      "sodium_mg": 782.0,
-      "station": "Grill",
-      "sugar_g": 3.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 264.0,
-      "carbs_g": 17.0,
-      "cholesterol_mg": 100.0,
-      "fat_g": 11.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-15",
-      "mealPeriod": "lunch",
-      "name": "Turkey Burger on White Bun",
-      "protein_g": 23.0,
-      "satFat_g": 4.0,
-      "servingSize": "Burger (165g)",
-      "sodium_mg": 717.0,
-      "station": "Grill",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 224.0,
-      "carbs_g": 41.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 4.0,
+      "fat_g": 2.0,
       "fiber_g": 6.0,
-      "id": "sc-markley-lunch-16",
-      "mealPeriod": "lunch",
-      "name": "Sweet Potato Quinoa Burger on White Bun",
-      "protein_g": 7.0,
-      "satFat_g": 0.0,
-      "servingSize": "Burger (148g)",
-      "sodium_mg": 506.0,
-      "station": "Grill",
+      "id": "mk-b-2",
+      "mealPeriod": "breakfast",
+      "name": "Whole Wheat Bagel",
+      "protein_g": 10.0,
+      "satFat_g": 0.4,
+      "servingSize": "1 Bagel (95g)",
+      "sodium_mg": 430.0,
+      "station": "MBakery",
       "sugar_g": 5.0,
       "tags": [
         "Vegan"
@@ -393,387 +54,98 @@
       "transFat_g": 0.0
     },
     {
-      "allergens": [],
-      "calories": 87.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 2.0,
-      "id": "sc-markley-lunch-17",
+      "allergens": [
+        "Milk",
+        "Wheat"
+      ],
+      "calories": 490.0,
+      "carbs_g": 58.0,
+      "cholesterol_mg": 40.0,
+      "fat_g": 19.0,
+      "fiber_g": 4.0,
+      "id": "mk-l-1",
       "mealPeriod": "lunch",
-      "name": "Tomato Rice Soup",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "8 oz Cup (227g)",
-      "sodium_mg": 497.0,
-      "station": "Soup",
+      "name": "Build-Your-Own Personal Veggie Pizza",
+      "protein_g": 21.0,
+      "satFat_g": 8.0,
+      "servingSize": "1 Personal Pie (210g)",
+      "sodium_mg": 940.0,
+      "station": "Make Your Own Pizza",
       "sugar_g": 6.0,
       "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 192.0,
-      "carbs_g": 5.0,
-      "cholesterol_mg": 61.0,
-      "fat_g": 13.0,
-      "fiber_g": 0.0,
-      "id": "sc-markley-lunch-18",
-      "mealPeriod": "lunch",
-      "name": "Chicken & Beef Meatballs",
-      "protein_g": 13.0,
-      "satFat_g": 5.0,
-      "servingSize": "3 Meatballs (85g)",
-      "sodium_mg": 597.0,
-      "station": "Signature Maize",
-      "sugar_g": 0.0,
-      "tags": [
-        "Halal"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 64.0,
-      "carbs_g": 10.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 3.0,
-      "fiber_g": 2.0,
-      "id": "sc-markley-lunch-19",
-      "mealPeriod": "lunch",
-      "name": "Marinara Sauce",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 345.0,
-      "station": "Signature Maize",
-      "sugar_g": 5.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 34.0,
-      "carbs_g": 4.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-20",
-      "mealPeriod": "lunch",
-      "name": "Garlic Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "2 oz Serving (57g)",
-      "sodium_mg": 47.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat"
-      ],
-      "calories": 232.0,
-      "carbs_g": 40.0,
-      "cholesterol_mg": 18.0,
-      "fat_g": 4.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-21",
-      "mealPeriod": "lunch",
-      "name": "Cheese Ravioli",
-      "protein_g": 10.0,
-      "satFat_g": 2.0,
-      "servingSize": "3 Pieces (128g)",
-      "sodium_mg": 187.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
         "Vegetarian"
       ],
       "transFat_g": 0.0
     },
     {
-      "allergens": [
-        "Wheat"
-      ],
-      "calories": 78.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-22",
-      "mealPeriod": "lunch",
-      "name": "Cavatappi",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "3 oz Serving (50g)",
-      "sodium_mg": 0.0,
-      "station": "Signature Maize",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Wheat",
-        "Soy",
-        "Sesame"
-      ],
-      "calories": 185.0,
-      "carbs_g": 17.0,
-      "cholesterol_mg": 10.0,
-      "fat_g": 10.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-23",
-      "mealPeriod": "lunch",
-      "name": "Cheesy Garlic Bread",
-      "protein_g": 6.0,
-      "satFat_g": 5.0,
-      "servingSize": "Piece (54g)",
-      "sodium_mg": 320.0,
-      "station": "Signature Maize",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Soy"
-      ],
-      "calories": 136.0,
-      "carbs_g": 16.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 5.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-24",
-      "mealPeriod": "lunch",
-      "name": "Orange Tofu Stir Fry",
-      "protein_g": 9.0,
-      "satFat_g": 1.0,
-      "servingSize": "3 oz Serving (85g)",
-      "sodium_mg": 115.0,
-      "station": "24 Carrots",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
       "allergens": [],
-      "calories": 167.0,
-      "carbs_g": 39.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-25",
+      "calories": 220.0,
+      "carbs_g": 1.0,
+      "cholesterol_mg": 90.0,
+      "fat_g": 5.5,
+      "fiber_g": 0.0,
+      "id": "mk-l-2",
       "mealPeriod": "lunch",
-      "name": "Medium Grain Rice",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 379.0,
-      "station": "24 Carrots",
+      "name": "Grilled Lemon Pepper Chicken",
+      "protein_g": 39.0,
+      "satFat_g": 1.3,
+      "servingSize": "1 Breast (135g)",
+      "sodium_mg": 380.0,
+      "station": "Homestyle",
       "sugar_g": 0.0,
       "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 232.0,
-      "carbs_g": 34.0,
-      "cholesterol_mg": 24.0,
-      "fat_g": 6.0,
-      "fiber_g": 0.0,
-      "id": "sc-markley-lunch-26",
-      "mealPeriod": "lunch",
-      "name": "Orange Chicken",
-      "protein_g": 11.0,
-      "satFat_g": 1.0,
-      "servingSize": "4 oz Serving (121g)",
-      "sodium_mg": 632.0,
-      "station": "Halal",
-      "sugar_g": 21.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 34.0,
-      "carbs_g": 4.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 2.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-27",
-      "mealPeriod": "lunch",
-      "name": "Garlic Roasted Broccoli",
-      "protein_g": 2.0,
-      "satFat_g": 0.0,
-      "servingSize": "2 oz Serving (57g)",
-      "sodium_mg": 47.0,
-      "station": "Halal",
-      "sugar_g": 1.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [],
-      "calories": 167.0,
-      "carbs_g": 39.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 0.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-28",
-      "mealPeriod": "lunch",
-      "name": "Medium Grain Rice",
-      "protein_g": 3.0,
-      "satFat_g": 0.0,
-      "servingSize": "1/2 Cup (113g)",
-      "sodium_mg": 379.0,
-      "station": "Halal",
-      "sugar_g": 0.0,
-      "tags": [
-        "Vegan",
-        "Gluten-Free"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Eggs",
-        "Shellfish",
-        "Fish",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 146.0,
-      "carbs_g": 8.0,
-      "cholesterol_mg": 44.0,
-      "fat_g": 9.0,
-      "fiber_g": 0.0,
-      "id": "sc-markley-lunch-29",
-      "mealPeriod": "lunch",
-      "name": "Seafood Salad",
-      "protein_g": 7.0,
-      "satFat_g": 1.0,
-      "servingSize": "4 oz Serving (113g)",
-      "sodium_mg": 633.0,
-      "station": "Deli",
-      "sugar_g": 2.0,
-      "tags": [],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Wheat"
-      ],
-      "calories": 369.0,
-      "carbs_g": 55.0,
-      "cholesterol_mg": 0.0,
-      "fat_g": 15.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-30",
-      "mealPeriod": "lunch",
-      "name": "Chocolate Raspberry Cake",
-      "protein_g": 3.0,
-      "satFat_g": 4.0,
-      "servingSize": "Piece (118g)",
-      "sodium_mg": 533.0,
-      "station": "MBakery",
-      "sugar_g": 42.0,
-      "tags": [
-        "Vegan"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 235.0,
-      "carbs_g": 35.0,
-      "cholesterol_mg": 36.0,
-      "fat_g": 10.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-31",
-      "mealPeriod": "lunch",
-      "name": "Platinum Blondies",
-      "protein_g": 3.0,
-      "satFat_g": 6.0,
-      "servingSize": "Pieces (56g)",
-      "sodium_mg": 152.0,
-      "station": "MBakery",
-      "sugar_g": 23.0,
-      "tags": [
-        "Vegetarian"
-      ],
-      "transFat_g": 0.0
-    },
-    {
-      "allergens": [
-        "Milk",
-        "Eggs",
-        "Wheat",
-        "Soy"
-      ],
-      "calories": 152.0,
-      "carbs_g": 21.0,
-      "cholesterol_mg": 5.0,
-      "fat_g": 7.0,
-      "fiber_g": 1.0,
-      "id": "sc-markley-lunch-32",
-      "mealPeriod": "lunch",
-      "name": "Chocolate Chunk Cookies",
-      "protein_g": 2.0,
-      "satFat_g": 3.0,
-      "servingSize": "Cookie (35g)",
-      "sodium_mg": 117.0,
-      "station": "MBakery",
-      "sugar_g": 13.0,
-      "tags": [
-        "Vegan",
-        "Vegetarian",
         "Halal",
+        "Gluten-Free"
+      ],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [
+        "Eggs",
+        "Milk",
+        "Wheat"
+      ],
+      "calories": 290.0,
+      "carbs_g": 14.0,
+      "cholesterol_mg": 85.0,
+      "fat_g": 15.0,
+      "fiber_g": 2.0,
+      "id": "mk-d-1",
+      "mealPeriod": "dinner",
+      "name": "Turkey Meatballs Marinara",
+      "protein_g": 24.0,
+      "satFat_g": 4.0,
+      "servingSize": "4 Meatballs (150g)",
+      "sodium_mg": 690.0,
+      "station": "Homestyle",
+      "sugar_g": 6.0,
+      "tags": [],
+      "transFat_g": 0.0
+    },
+    {
+      "allergens": [],
+      "calories": 48.0,
+      "carbs_g": 5.0,
+      "cholesterol_mg": 0.0,
+      "fat_g": 2.5,
+      "fiber_g": 1.8,
+      "id": "mk-d-2",
+      "mealPeriod": "dinner",
+      "name": "Roasted Zucchini & Summer Squash",
+      "protein_g": 1.5,
+      "satFat_g": 0.3,
+      "servingSize": "1/2 Cup (95g)",
+      "sodium_mg": 65.0,
+      "station": "Homestyle",
+      "sugar_g": 3.0,
+      "tags": [
+        "Vegan",
         "Gluten-Free"
       ],
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-24T19:22:55Z",
+  "lastUpdated": "2026-11-25T18:28:06Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/markley/?menuDate=2026-11-24"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/markley/?menuDate=2026-11-25"
 }
