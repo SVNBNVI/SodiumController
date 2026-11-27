@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "hall": "Mosher-Jordan Dining Hall",
   "hallSlug": "mosher-jordan",
   "isFallback": true,
@@ -144,7 +144,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-26T18:10:21Z",
+  "lastUpdated": "2026-11-27T17:52:48Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/mosher-jordan/?menuDate=2026-11-26"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/mosher-jordan/?menuDate=2026-11-27"
 }

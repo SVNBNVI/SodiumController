@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "hall": "Markley Dining Hall",
   "hallSlug": "markley",
   "isFallback": true,
@@ -145,7 +145,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-26T18:10:23Z",
+  "lastUpdated": "2026-11-27T17:52:49Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/markley/?menuDate=2026-11-26"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/markley/?menuDate=2026-11-27"
 }
