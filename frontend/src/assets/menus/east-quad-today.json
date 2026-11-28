@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-27",
+  "date": "2026-11-28",
   "hall": "East Quad Dining Hall",
   "hallSlug": "east-quad",
   "isFallback": true,
@@ -147,7 +147,7 @@
       "transFat_g": 0.0
     }
   ],
-  "lastUpdated": "2026-11-27T17:52:48Z",
+  "lastUpdated": "2026-11-28T16:40:09Z",
   "project": "SodiumController",
-  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/east-quad/?menuDate=2026-11-27"
+  "sourceUrl": "https://dining.umich.edu/menus-locations/dining-halls/east-quad/?menuDate=2026-11-28"
 }
